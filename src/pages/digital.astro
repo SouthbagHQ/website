@@ -1,0 +1,551 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+
+const products = [
+  {
+    code: 'SB-DIG-001',
+    name: 'Broadband',
+    description: 'Fixed-line internet access infrastructure. Traffic monitoring enabled by default. Deep packet inspection is operational. Cannot be disabled without a written policy exception.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-DIG-002',
+    name: 'Mobile',
+    description: 'Mobile network services. Location data collected at 15-minute intervals and retained for 36 months. Roaming subject to enhanced monitoring policy. Device IMEI logged.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-DIG-003',
+    name: 'Firewall',
+    description: 'Network perimeter protection. Southbag Firewall policies take precedence over customer-defined rules. Rule changes subject to a 48-hour review period.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-DIG-004',
+    name: 'VPN',
+    description: 'Encrypted network tunnelling. Connection logs retained for 36 months. Southbag may provide connection records to regulators upon request without client notification.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-DIG-005',
+    name: 'Code',
+    description: 'AI-assisted development environment. Generated code may be reviewed for policy compliance. All repository contents are accessible to Southbag infrastructure teams.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: 'reviewed' as const,
+  },
+  {
+    code: 'SB-DIG-006',
+    name: 'AI',
+    description: 'General-purpose language model access. Inputs retained for 90 days. Outputs may be reviewed. Do not submit personal, regulated, or confidential data. Southbag is not liable for outputs.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: 'escalated' as const,
+    kevinLabel: 'Account escalated',
+  },
+  {
+    code: 'SB-DIG-007',
+    name: 'DNS',
+    description: 'Domain name resolution services. Query logs retained indefinitely. Southbag reserves the right to block resolution of domains flagged under policy SB-DNS-POL-03.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: 'cleared' as const,
+    kevinLabel: 'Cleared by Kevin',
+  },
+  {
+    code: 'SB-DIG-008',
+    name: 'CSS',
+    description: 'Managed stylesheet delivery and transformation services. Southbag may update your styles during scheduled maintenance windows. Brand compliance checks applied automatically.',
+    status: 'beta' as const,
+    tier: 'personal' as const,
+    kevinStatus: 'reviewed' as const,
+  },
+];
+---
+
+<Layout title="Digital Services" currentPage="digital">
+
+  <!-- ── Page header ── -->
+  <div class="page-header">
+    <div class="sb-container page-header-inner">
+      <div class="breadcrumb sb-code">
+        <a href="/">SOUTHBAG</a>
+        <span>›</span>
+        <span>DIGITAL SERVICES</span>
+      </div>
+      <div class="page-header-body" data-reveal>
+        <div>
+          <h1 class="page-title">Southbag Digital</h1>
+          <p class="page-desc">
+            Broadband, mobile, security infrastructure, and developer tooling.
+            All network traffic is subject to monitoring. Encryption does not
+            prevent compliance access. Traffic data is retained per policy SB-NET-2022.
+          </p>
+        </div>
+        <div class="page-meta">
+          <div class="meta-stat">
+            <span class="meta-value">{products.length}</span>
+            <span class="meta-label">Services</span>
+          </div>
+          <div class="meta-stat">
+            <span class="meta-value">99.4%</span>
+            <span class="meta-label">Uptime (30d)</span>
+          </div>
+          <div class="meta-status">
+            <span class="sb-badge sb-badge-active">Operational</span>
+            <span class="sb-kevin sb-kevin-pending">Approval pending</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Infrastructure status bar ── -->
+  <div class="infra-band">
+    <div class="sb-container infra-band-inner">
+      <span class="sb-label" style="flex-shrink:0;">Infrastructure Status</span>
+      <div class="infra-items">
+        <div class="infra-item">
+          <span class="sb-badge sb-badge-active">Core Network</span>
+        </div>
+        <div class="infra-item">
+          <span class="sb-badge sb-badge-active">DNS Resolvers</span>
+        </div>
+        <div class="infra-item">
+          <span class="sb-badge sb-badge-reviewing">VPN Nodes</span>
+        </div>
+        <div class="infra-item">
+          <span class="sb-badge sb-badge-active">AI Inference</span>
+        </div>
+        <div class="infra-item">
+          <span class="sb-badge sb-badge-pending">CSS CDN</span>
+        </div>
+      </div>
+      <span class="sb-code" style="flex-shrink:0;color:var(--sb-text-dimmer);">Last updated 2 min ago</span>
+    </div>
+  </div>
+
+  <!-- ── Monitoring notice ── -->
+  <div class="monitoring-notice">
+    <div class="sb-container monitoring-notice-inner">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;">
+        <rect x="1" y="1" width="12" height="12" stroke="currentColor" stroke-width="1"/>
+        <path d="M7 4v4M7 10v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+      </svg>
+      <p class="monitoring-text">
+        All Southbag Digital services operate under continuous monitoring under policy SB-NET-2022.
+        Traffic analysis, device identification, and behavioural profiling are standard operating
+        procedures. Monitoring cannot be disabled. Contact your account manager for compliance documentation.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── Products grid ── -->
+  <section class="products-section">
+    <div class="sb-container">
+      <div class="service-group-header" data-reveal>
+        <div class="sb-section-label">Digital Service Registry</div>
+        <span class="sb-code">{products.length} services · SB-DIG-001 to SB-DIG-00{products.length}</span>
+      </div>
+      <div class="product-grid">
+        {products.map((product, i) => (
+          <div data-delay={String((i % 4) + 1)} data-reveal>
+            <ProductCard {...product} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Monitoring details ── -->
+  <section class="monitoring-section">
+    <div class="sb-container">
+      <div class="monitoring-grid" data-reveal>
+        <div class="mon-panel sb-panel">
+          <div class="sb-panel-header">
+            <span class="sb-label">Data Retention Schedule</span>
+          </div>
+          <table class="sb-ledger">
+            <thead>
+              <tr>
+                <th>Data Type</th>
+                <th>Retention</th>
+                <th>Deletion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Connection logs</td>
+                <td style="color:var(--sb-red-text)">36 months</td>
+                <td>Not guaranteed</td>
+              </tr>
+              <tr>
+                <td>DNS query logs</td>
+                <td style="color:var(--sb-red-text)">Indefinite</td>
+                <td>Not available</td>
+              </tr>
+              <tr>
+                <td>Location data</td>
+                <td style="color:var(--sb-red-text)">36 months</td>
+                <td>Upon request (14d)</td>
+              </tr>
+              <tr>
+                <td>AI input/output</td>
+                <td style="color:var(--sb-amber-text)">90 days</td>
+                <td>Automated</td>
+              </tr>
+              <tr>
+                <td>Device identifiers</td>
+                <td style="color:var(--sb-red-text)">Indefinite</td>
+                <td>Not available</td>
+              </tr>
+              <tr>
+                <td>Traffic metadata</td>
+                <td style="color:var(--sb-red-text)">Indefinite</td>
+                <td>Not available</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mon-panel sb-panel">
+          <div class="sb-panel-header">
+            <span class="sb-label">Policy Exceptions</span>
+            <span class="sb-badge sb-badge-pending">Requires Kevin</span>
+          </div>
+          <div class="sb-panel-body" style="display:flex;flex-direction:column;gap:12px;">
+            <p class="exception-desc">
+              Exemptions from standard monitoring policies require written application,
+              director-level sign-off, and executive approval. Applications are reviewed
+              by Kevin and processed in the order they are received.
+            </p>
+            <div class="exception-stats">
+              <div class="exception-stat">
+                <span class="ex-val">247</span>
+                <span class="ex-label">Applications received</span>
+              </div>
+              <div class="exception-stat">
+                <span class="ex-val">3</span>
+                <span class="ex-label">Granted this year</span>
+              </div>
+              <div class="exception-stat">
+                <span class="ex-val">244</span>
+                <span class="ex-label">Denied or pending</span>
+              </div>
+            </div>
+            <a href="#" class="sb-btn sb-btn-ghost" style="width:fit-content;font-size:10px;padding:8px 14px;">
+              Submit Exception Request
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Regulatory footer ── -->
+  <div class="regulatory-footer">
+    <div class="sb-container regulatory-footer-inner">
+      <div class="reg-item">
+        <span class="sb-label">Framework</span>
+        <span class="reg-value">SB-NET-2022 (Digital Services Act)</span>
+      </div>
+      <div class="reg-item">
+        <span class="sb-label">Data Controller</span>
+        <span class="reg-value">Southbag Digital Infrastructure Ltd.</span>
+      </div>
+      <div class="reg-item">
+        <span class="sb-label">Executive Review</span>
+        <span class="sb-kevin sb-kevin-pending">Approval pending</span>
+      </div>
+    </div>
+  </div>
+
+</Layout>
+
+<style>
+  .page-header {
+    background: var(--sb-surface);
+    border-bottom: 1px solid var(--sb-border);
+    padding: 40px 0;
+  }
+
+  .page-header-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    color: var(--sb-text-dimmer);
+    letter-spacing: 0.1em;
+  }
+
+  .breadcrumb a {
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--sb-text);
+  }
+
+  .page-header-body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 300;
+    color: var(--sb-heading);
+    margin: 0 0 12px;
+    line-height: 1.05;
+  }
+
+  .page-desc {
+    font-size: 14px;
+    color: var(--sb-text-dim);
+    line-height: 1.65;
+    margin: 0;
+    max-width: 520px;
+  }
+
+  .page-meta {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    padding-top: 8px;
+  }
+
+  .meta-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .meta-value {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--sb-heading);
+    line-height: 1;
+  }
+
+  .meta-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sb-text-dimmer);
+    margin-top: 3px;
+  }
+
+  .meta-status {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  /* ── Infra band ── */
+  .infra-band {
+    background: var(--sb-surface);
+    border-bottom: 1px solid var(--sb-border);
+    padding: 10px 0;
+  }
+
+  .infra-band-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .infra-items {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+
+  .infra-item {}
+
+  /* ── Monitoring notice ── */
+  .monitoring-notice {
+    background: var(--sb-red-bg);
+    border-bottom: 1px solid var(--sb-red-border);
+    padding: 12px 0;
+  }
+
+  .monitoring-notice-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--sb-red-text);
+  }
+
+  .monitoring-text {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  /* ── Products ── */
+  .products-section {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  .service-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--sb-border);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--sb-border);
+    border: 1px solid var(--sb-border);
+  }
+
+  .product-grid > div {
+    background: var(--sb-card);
+  }
+
+  /* ── Monitoring section ── */
+  .monitoring-section {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  .monitoring-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--sb-border);
+    border: 1px solid var(--sb-border);
+  }
+
+  .mon-panel {
+    border: none;
+  }
+
+  .exception-desc {
+    font-size: 13px;
+    color: var(--sb-text-dim);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .exception-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--sb-border);
+    border: 1px solid var(--sb-border);
+  }
+
+  .exception-stat {
+    background: var(--sb-card);
+    padding: 12px;
+    text-align: center;
+  }
+
+  .ex-val {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--sb-heading);
+    line-height: 1;
+  }
+
+  .ex-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sb-text-dimmer);
+    margin-top: 4px;
+  }
+
+  /* ── Regulatory footer ── */
+  .regulatory-footer {
+    background: var(--sb-surface);
+    border-top: 1px solid var(--sb-border);
+    padding: 20px 0;
+  }
+
+  .regulatory-footer-inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .reg-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .reg-value {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--sb-text-dim);
+  }
+
+  @media (max-width: 1100px) {
+    .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .product-grid,
+    .monitoring-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .monitoring-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

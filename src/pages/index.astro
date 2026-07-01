@@ -1,11 +1,768 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import KevinPanel from '../components/KevinPanel.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Southbag" currentPage="home">
+
+  <!-- ── Hero ── -->
+  <section class="hero sb-grid-bg">
+    <div class="hero-inner sb-container">
+      <div class="hero-eyebrow" data-reveal>
+        <span class="sb-badge sb-badge-active">Operational</span>
+        <span class="hero-sep">·</span>
+        <span class="sb-code">EST. 2009 · INCORPORATED BERMUDA · REGULATED UNDER SB-ACT-2018</span>
+      </div>
+
+      <h1 class="hero-headline" data-reveal data-delay="1">
+        An ecosystem of services<br>
+        <em>you do not fully control.</em>
+      </h1>
+
+      <p class="hero-subtext" data-reveal data-delay="2">
+        Southbag provides integrated financial infrastructure, digital network services,
+        and enterprise business software to 4.2 million registered accounts across
+        62 jurisdictions. Access to services is conditional. Your usage is monitored.
+        Continued use constitutes acceptance.
+      </p>
+
+      <div class="hero-actions" data-reveal data-delay="3">
+        <a href="/financial" class="sb-btn sb-btn-primary">
+          Get Started
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+          </svg>
+        </a>
+        <a href="#services" class="sb-btn sb-btn-ghost">View Services Registry</a>
+      </div>
+
+      <div class="hero-stats" data-reveal data-delay="4">
+        <div class="hero-stat">
+          <span class="hero-stat-value">4.2M</span>
+          <span class="hero-stat-label">Registered Accounts</span>
+        </div>
+        <div class="hero-stat-div"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-value">34</span>
+          <span class="hero-stat-label">Active Services</span>
+        </div>
+        <div class="hero-stat-div"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-value">62</span>
+          <span class="hero-stat-label">Jurisdictions</span>
+        </div>
+        <div class="hero-stat-div"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-value">1</span>
+          <span class="hero-stat-label">Kevin</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-indicator">
+      <span class="sb-code">SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ── Notice band ── -->
+  <div class="notice-band">
+    <div class="sb-container notice-band-inner">
+      <span class="sb-label">Regulatory Notice</span>
+      <p class="notice-text">
+        Southbag is a regulated multi-service institution. Use of any Southbag
+        service is subject to identity verification, compliance screening, and
+        ongoing monitoring. Southbag may suspend, restrict, or terminate services
+        at its discretion without prior notice.
+      </p>
+      <a href="#" class="notice-link sb-mono" style="font-size:11px;color:var(--sb-text-dimmer);">
+        Full Terms →
+      </a>
+    </div>
+  </div>
+
+  <!-- ── Services registry ── -->
+  <section class="pillars-section" id="services">
+    <div class="sb-container">
+      <div class="section-head" data-reveal>
+        <div class="sb-section-label">Services Registry</div>
+        <h2 class="section-title">Three divisions. One institution.</h2>
+        <p class="section-desc">
+          Southbag operates as a unified entity across financial services, digital
+          infrastructure, and business software. Each division maintains separate
+          compliance frameworks but reports to a single authority.
+        </p>
+      </div>
+
+      <div class="pillars-grid">
+
+        <!-- Financial -->
+        <a href="/financial" class="pillar-card" data-reveal data-delay="1">
+          <div class="pillar-card-top">
+            <div class="pillar-header">
+              <span class="pillar-code">SB-FIN</span>
+              <span class="sb-badge sb-badge-active">16 Services</span>
+            </div>
+            <h3 class="pillar-name">Financial</h3>
+            <p class="pillar-desc">
+              Deposit banking, investment infrastructure, payment systems, compliance
+              tooling, and business financial operations. Regulated. Monitored.
+              All transactions subject to review.
+            </p>
+          </div>
+          <div class="pillar-services">
+            <span>Online Banking</span>
+            <span>Invest</span>
+            <span>Crypto Exchange</span>
+            <span>Tax</span>
+            <span>Insurance</span>
+            <span>Compliance</span>
+            <span>Payroll</span>
+            <span class="pillar-more">+9 more</span>
+          </div>
+          <div class="pillar-footer">
+            <span class="sb-kevin sb-kevin-reviewed">Reviewed by Kevin</span>
+            <span class="pillar-arrow">→</span>
+          </div>
+        </a>
+
+        <!-- Digital -->
+        <a href="/digital" class="pillar-card" data-reveal data-delay="2">
+          <div class="pillar-card-top">
+            <div class="pillar-header">
+              <span class="pillar-code">SB-DIG</span>
+              <span class="sb-badge sb-badge-active">8 Services</span>
+            </div>
+            <h3 class="pillar-name">Digital</h3>
+            <p class="pillar-desc">
+              Broadband and mobile networks, security infrastructure, AI development
+              tools, and managed DNS. Traffic monitoring enabled by default.
+              Cannot be disabled without policy exception.
+            </p>
+          </div>
+          <div class="pillar-services">
+            <span>Broadband</span>
+            <span>Mobile</span>
+            <span>Firewall</span>
+            <span>VPN</span>
+            <span>Code (AI)</span>
+            <span>AI</span>
+            <span>DNS</span>
+            <span>CSS</span>
+          </div>
+          <div class="pillar-footer">
+            <span class="sb-kevin sb-kevin-pending">Approval pending</span>
+            <span class="pillar-arrow">→</span>
+          </div>
+        </a>
+
+        <!-- Business -->
+        <a href="/business" class="pillar-card" data-reveal data-delay="3">
+          <div class="pillar-card-top">
+            <div class="pillar-header">
+              <span class="pillar-code">SB-BIZ</span>
+              <span class="sb-badge sb-badge-active">10 Services</span>
+            </div>
+            <h3 class="pillar-name">Business</h3>
+            <p class="pillar-desc">
+              Identity management, device control, version control, data infrastructure,
+              analytics, and commerce tooling for regulated enterprise environments.
+              All deployments are subject to Southbag access policies.
+            </p>
+          </div>
+          <div class="pillar-services">
+            <span>Secure Access</span>
+            <span>MDM</span>
+            <span>CRM</span>
+            <span>Version Control</span>
+            <span>Data Lake</span>
+            <span>Analytics</span>
+            <span>Edge Compute</span>
+            <span class="pillar-more">+3 more</span>
+          </div>
+          <div class="pillar-footer">
+            <span class="sb-kevin sb-kevin-reviewed">Reviewed by Kevin</span>
+            <span class="pillar-arrow">→</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Kevin Panel ── -->
+  <KevinPanel />
+
+  <!-- ── Institutional features ── -->
+  <section class="features-section">
+    <div class="sb-container">
+      <div class="section-head" data-reveal>
+        <div class="sb-section-label">Why Southbag</div>
+        <h2 class="section-title">Built for institutions. Imposed on everyone else.</h2>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card" data-reveal data-delay="1">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="2" width="16" height="16" stroke="currentColor" stroke-width="1"/>
+              <path d="M6 10h8M10 6v8" stroke="currentColor" stroke-width="1"/>
+            </svg>
+          </div>
+          <h4 class="feature-name">Unified Account</h4>
+          <p class="feature-desc">
+            One account. All services. Your financial, digital, and business operations
+            consolidated under a single Southbag identifier. Centralised by design.
+          </p>
+        </div>
+
+        <div class="feature-card" data-reveal data-delay="2">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="3" y="7" width="14" height="10" stroke="currentColor" stroke-width="1"/>
+              <path d="M6 7V5a4 4 0 018 0v2" stroke="currentColor" stroke-width="1"/>
+            </svg>
+          </div>
+          <h4 class="feature-name">Institutional Security</h4>
+          <p class="feature-desc">
+            AML monitoring, fraud detection, and compliance screening across all
+            service lines. Security is non-optional and cannot be downgraded.
+          </p>
+        </div>
+
+        <div class="feature-card" data-reveal data-delay="3">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 2L3 6v4c0 4.4 3 8.5 7 9.5C17 18.5 20 14.4 20 10V6l-7-4H10z" stroke="currentColor" stroke-width="1"/>
+            </svg>
+          </div>
+          <h4 class="feature-name">Regulatory Compliance</h4>
+          <p class="feature-desc">
+            Southbag maintains compliance across 62 regulatory frameworks.
+            Your operations are documented. Retention periods apply. Kevin reviews exceptions.
+          </p>
+        </div>
+
+        <div class="feature-card" data-reveal data-delay="4">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1"/>
+              <path d="M10 6v4l3 3" stroke="currentColor" stroke-width="1" stroke-linecap="square"/>
+            </svg>
+          </div>
+          <h4 class="feature-name">Continuous Monitoring</h4>
+          <p class="feature-desc">
+            All account activity is monitored continuously. Anomalous patterns
+            are flagged, escalated, and reviewed. Decisions are made at Kevin's discretion.
+          </p>
+        </div>
+
+        <div class="feature-card" data-reveal data-delay="5">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="4" width="16" height="12" stroke="currentColor" stroke-width="1"/>
+              <path d="M2 8h16" stroke="currentColor" stroke-width="1"/>
+              <path d="M6 12h3M13 12h1" stroke="currentColor" stroke-width="1" stroke-linecap="square"/>
+            </svg>
+          </div>
+          <h4 class="feature-name">Enterprise Billing</h4>
+          <p class="feature-desc">
+            Consolidated invoicing across all services. Usage-based pricing with
+            institutional rate structures. All billing disputes are reviewed in writing.
+          </p>
+        </div>
+
+        <div class="feature-card" data-reveal data-delay="6">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 4h12v8H4zM7 16h6" stroke="currentColor" stroke-width="1" stroke-linecap="square"/>
+            </svg>
+          </div>
+          <h4 class="feature-name">Executive Oversight</h4>
+          <p class="feature-desc">
+            All policy exceptions, compliance waivers, and service escalations are
+            reviewed personally by Kevin. Response times are not guaranteed.
+          </p>
+          <div style="margin-top: 8px;">
+            <span class="sb-kevin sb-kevin-reviewed">Reviewed by Kevin</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Bottom CTA ── -->
+  <section class="cta-section">
+    <div class="sb-container">
+      <div class="cta-inner sb-grid-bg" data-reveal>
+        <div class="cta-content">
+          <div class="sb-section-label">Account Registration</div>
+          <h2 class="cta-headline">Ready to begin?</h2>
+          <p class="cta-desc">
+            Account registration requires valid government-issued identification,
+            proof of address, and acceptance of all applicable Southbag terms.
+            Processing time is 3–14 business days. Kevin may request additional documentation.
+          </p>
+        </div>
+        <div class="cta-actions">
+          <a href="#" class="sb-btn sb-btn-primary">
+            Begin Registration
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+            </svg>
+          </a>
+          <div class="cta-note sb-code" style="margin-top:12px;color:var(--sb-text-dimmer);">
+            By continuing, you agree to all Southbag terms, policies, and data
+            retention schedules. Your consent is non-revocable during the hold period.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </Layout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: 820px;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .hero-sep {
+    color: var(--sb-text-dimmer);
+    font-family: var(--font-mono);
+  }
+
+  .hero-headline {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 300;
+    color: var(--sb-heading);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--sb-text);
+  }
+
+  .hero-subtext {
+    font-size: 15px;
+    color: var(--sb-text-dim);
+    line-height: 1.7;
+    max-width: 600px;
+    margin: 0;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    border: 1px solid var(--sb-border);
+    width: fit-content;
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 28px;
+    border-right: 1px solid var(--sb-border);
+  }
+
+  .hero-stat:last-child {
+    border-right: none;
+  }
+
+  .hero-stat-div {
+    display: none;
+  }
+
+  .hero-stat-value {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--sb-heading);
+    line-height: 1;
+  }
+
+  .hero-stat-label {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sb-text-dimmer);
+    margin-top: 4px;
+  }
+
+  .hero-scroll-indicator {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: var(--sb-border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--sb-border-active);
+    animation: scrollDown 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollDown {
+    0% { top: -100%; }
+    100% { top: 100%; }
+  }
+
+  /* ── Notice band ── */
+  .notice-band {
+    background: var(--sb-amber-bg);
+    border-bottom: 1px solid var(--sb-amber-border);
+    padding: 14px 0;
+  }
+
+  .notice-band-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .notice-text {
+    flex: 1;
+    font-size: 12px;
+    color: var(--sb-amber-text);
+    line-height: 1.6;
+    margin: 0;
+    min-width: 200px;
+  }
+
+  .notice-link {
+    white-space: nowrap;
+    text-decoration: none;
+    transition: color 0.15s;
+    color: var(--sb-amber-text) !important;
+  }
+
+  .notice-link:hover {
+    color: var(--sb-text-dim) !important;
+  }
+
+  /* ── Services / Pillars ── */
+  .pillars-section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  .section-head {
+    margin-bottom: 40px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 300;
+    color: var(--sb-heading);
+    margin: 8px 0 12px;
+    line-height: 1.15;
+  }
+
+  .section-desc {
+    font-size: 14px;
+    color: var(--sb-text-dim);
+    line-height: 1.65;
+    max-width: 580px;
+    margin: 0;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--sb-border);
+    border: 1px solid var(--sb-border);
+  }
+
+  .pillar-card {
+    background: var(--sb-card);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    cursor: pointer;
+  }
+
+  .pillar-card:hover {
+    background: var(--sb-card-hover);
+  }
+
+  .pillar-card-top {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+  }
+
+  .pillar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .pillar-code {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--sb-text-dimmer);
+  }
+
+  .pillar-name {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--sb-heading);
+    margin: 0;
+    line-height: 1;
+  }
+
+  .pillar-desc {
+    font-size: 13px;
+    color: var(--sb-text-dim);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .pillar-services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 14px 0;
+    border-top: 1px solid var(--sb-border);
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  .pillar-services span {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--sb-text-dimmer);
+    padding: 3px 7px;
+    border: 1px solid var(--sb-border);
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .pillar-card:hover .pillar-services span {
+    border-color: var(--sb-border-hover);
+    color: var(--sb-text-dim);
+  }
+
+  .pillar-more {
+    border-color: transparent !important;
+    color: var(--sb-accent-text) !important;
+  }
+
+  .pillar-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .pillar-arrow {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: var(--sb-text-dimmer);
+    transition: color 0.15s ease, transform 0.15s ease;
+    display: inline-block;
+  }
+
+  .pillar-card:hover .pillar-arrow {
+    color: var(--sb-text);
+    transform: translateX(4px);
+  }
+
+  /* ── Features ── */
+  .features-section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--sb-border);
+    border: 1px solid var(--sb-border);
+    margin-top: 40px;
+  }
+
+  .feature-card {
+    background: var(--sb-card);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: background 0.2s ease;
+  }
+
+  .feature-card:hover {
+    background: var(--sb-card-hover);
+  }
+
+  .feature-icon {
+    color: var(--sb-text-dimmer);
+    transition: color 0.15s ease;
+  }
+
+  .feature-card:hover .feature-icon {
+    color: var(--sb-accent-text);
+  }
+
+  .feature-name {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--sb-heading);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .feature-desc {
+    font-size: 13px;
+    color: var(--sb-text-dim);
+    line-height: 1.65;
+    margin: 0;
+    flex: 1;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 72px 0;
+  }
+
+  .cta-inner {
+    border: 1px solid var(--sb-border);
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 60px;
+    align-items: start;
+    padding: 40px;
+  }
+
+  .cta-headline {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--sb-heading);
+    margin: 8px 0 14px;
+    line-height: 1.1;
+  }
+
+  .cta-desc {
+    font-size: 13px;
+    color: var(--sb-text-dim);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .cta-actions {
+    padding-top: 32px;
+  }
+
+  .cta-note {
+    font-size: 10.5px;
+    color: var(--sb-text-dimmer);
+    line-height: 1.6;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .pillars-grid,
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-inner {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .hero-stats {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .hero-stat {
+      border-right: none;
+      border-bottom: 1px solid var(--sb-border);
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+    }
+
+    .hero-stat:last-child {
+      border-bottom: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 60px 0 40px;
+    }
+
+    .hero-scroll-indicator {
+      display: none;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

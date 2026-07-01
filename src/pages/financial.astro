@@ -1,0 +1,456 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+
+const products = [
+  {
+    code: 'SB-FIN-001',
+    name: 'Online Banking',
+    description: 'Deposit and withdrawal services. All transactions subject to a minimum 1–3 business day review period. Funds may be held pending AML verification.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: 'cleared' as const,
+  },
+  {
+    code: 'SB-FIN-002',
+    name: 'Invest',
+    description: 'Equity, fixed income, and managed portfolio products. Historical performance is not indicative of future results. Southbag assumes no liability for market conditions.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-FIN-003',
+    name: 'Crypto Exchange',
+    description: 'Digital asset trading infrastructure. All transactions are irreversible. Enhanced monitoring applied to all accounts. Withdrawal limits enforced without warning.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: 'denied' as const,
+    kevinLabel: 'Policy override denied',
+  },
+  {
+    code: 'SB-FIN-004',
+    name: 'Pay Later',
+    description: 'Deferred payment infrastructure. Creditworthiness assessed continuously and without notice. Terms subject to change. Default interest rates applied retroactively.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-FIN-005',
+    name: 'Tax',
+    description: 'Automated tax filing and preparation services. Southbag retains copies of all submissions for 10 years. Filing errors are the client\'s responsibility.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-FIN-006',
+    name: 'Rewards',
+    description: 'Points-based recognition programme. Points have no cash value and expire at Southbag\'s discretion. Redemption categories may be modified without notice.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-FIN-007',
+    name: 'Insurance',
+    description: 'Coverage products underwritten by Southbag Insurance Partners Ltd. Claims subject to approval. Processing time: 30–90 days. Certain claims escalated to Kevin.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: 'reviewed' as const,
+  },
+  {
+    code: 'SB-FIN-008',
+    name: 'International Transfer',
+    description: 'Cross-border payment services. Subject to sanctions screening, enhanced compliance review, and additional hold periods up to 14 days. All recipients are logged.',
+    status: 'active' as const,
+    tier: 'personal' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-FIN-009',
+    name: 'For Businesses',
+    description: 'Business account infrastructure. Director KYC required. Beneficial ownership reporting mandatory under SB-ACT-2018. Entity verification processing: 5–10 days.',
+    status: 'active' as const,
+    tier: 'business' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-FIN-010',
+    name: 'PoS',
+    description: 'Physical and digital point-of-sale terminals. Transaction data retained indefinitely. Network connectivity SLA: 99.2%. Downtime compensation is not guaranteed.',
+    status: 'active' as const,
+    tier: 'business' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-FIN-011',
+    name: 'Compliance',
+    description: 'Regulatory adherence tools and reporting infrastructure. Usage of this product is itself subject to compliance review. Output reports are not legal opinions.',
+    status: 'active' as const,
+    tier: 'business' as const,
+    kevinStatus: 'reviewed' as const,
+  },
+  {
+    code: 'SB-FIN-012',
+    name: 'Payroll',
+    description: 'Employee disbursement services. Worker data classification is the client\'s responsibility. Southbag assumes no liability for misclassification penalties.',
+    status: 'active' as const,
+    tier: 'business' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-FIN-013',
+    name: 'Invoicing',
+    description: 'Billing management and accounts receivable platform. Invoice data may be used for Southbag internal analytics and credit risk modelling.',
+    status: 'active' as const,
+    tier: 'business' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-FIN-014',
+    name: 'API for Business',
+    description: 'Programmatic access to Southbag financial infrastructure. Rate limits enforced without warning. API keys may be revoked for compliance violations.',
+    status: 'active' as const,
+    tier: 'business' as const,
+    kevinStatus: 'pending' as const,
+    kevinLabel: 'Approval pending',
+  },
+  {
+    code: 'SB-FIN-015',
+    name: 'Pay Later for Business',
+    description: 'Commercial deferred payment services. Director personal guarantees required above the $50,000 threshold. Terms assessed at account level.',
+    status: 'active' as const,
+    tier: 'business' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-FIN-016',
+    name: 'Slack Banking for Business',
+    description: 'Banking operations conducted via Slack integration. Message history is retained in full. Southbag cannot be held responsible for decisions made via chat.',
+    status: 'beta' as const,
+    tier: 'business' as const,
+    kevinStatus: null,
+  },
+];
+
+const personalCount = products.filter(p => p.tier === 'personal').length;
+const businessCount = products.filter(p => p.tier === 'business').length;
+---
+
+<Layout title="Financial Services" currentPage="financial">
+
+  <!-- ── Page header ── -->
+  <div class="page-header">
+    <div class="sb-container page-header-inner">
+      <div class="breadcrumb sb-code">
+        <a href="/">SOUTHBAG</a>
+        <span>›</span>
+        <span>FINANCIAL SERVICES</span>
+      </div>
+      <div class="page-header-body" data-reveal>
+        <div>
+          <h1 class="page-title">Southbag Financial</h1>
+          <p class="page-desc">
+            Financial infrastructure, payment systems, investment products, and
+            compliance tooling. All products are subject to ongoing regulatory
+            oversight, Southbag internal policy, and executive review.
+          </p>
+        </div>
+        <div class="page-meta">
+          <div class="meta-stat">
+            <span class="meta-value">{products.length}</span>
+            <span class="meta-label">Total Services</span>
+          </div>
+          <div class="meta-stat">
+            <span class="meta-value">{personalCount}</span>
+            <span class="meta-label">Personal</span>
+          </div>
+          <div class="meta-stat">
+            <span class="meta-value">{businessCount}</span>
+            <span class="meta-label">Business</span>
+          </div>
+          <div class="meta-status">
+            <span class="sb-badge sb-badge-active">Regulated</span>
+            <span class="sb-kevin sb-kevin-reviewed">Reviewed by Kevin</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Regulatory notice ── -->
+  <div class="reg-band">
+    <div class="sb-container reg-band-inner">
+      <span class="sb-label" style="flex-shrink:0;">Notice</span>
+      <span class="reg-text">
+        Southbag Financial is a regulated financial institution. All products are subject to identity
+        verification, AML screening, and ongoing compliance monitoring. Access may be restricted,
+        suspended, or terminated at any time. Kevin reviews all policy exceptions.
+      </span>
+      <span class="sb-code" style="flex-shrink:0;color:var(--sb-text-dimmer);">REF: SB-REG-2018-14</span>
+    </div>
+  </div>
+
+  <!-- ── Products grid ── -->
+  <section class="products-section">
+    <div class="sb-container">
+
+      <!-- Personal services -->
+      <div class="service-group" data-reveal>
+        <div class="service-group-header">
+          <div class="sb-section-label">Personal Financial Services</div>
+          <span class="sb-code">{personalCount} services · SB-FIN-001 to SB-FIN-00{personalCount}</span>
+        </div>
+        <div class="product-grid">
+          {products.filter(p => p.tier === 'personal').map((product, i) => (
+            <div data-delay={String((i % 4) + 1)}>
+              <ProductCard {...product} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Business services -->
+      <div class="service-group" data-reveal>
+        <div class="service-group-header">
+          <div class="sb-section-label">Business Financial Services</div>
+          <span class="sb-code">{businessCount} services · Director verification required</span>
+        </div>
+        <div class="product-grid">
+          {products.filter(p => p.tier === 'business').map((product, i) => (
+            <div data-delay={String((i % 4) + 1)}>
+              <ProductCard {...product} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Regulatory footer ── -->
+  <div class="regulatory-footer">
+    <div class="sb-container regulatory-footer-inner">
+      <div class="reg-item">
+        <span class="sb-label">Regulator</span>
+        <span class="reg-value">Southbag Financial Authority (SFA)</span>
+      </div>
+      <div class="reg-item">
+        <span class="sb-label">Licence No.</span>
+        <span class="reg-value">SB-FIN-LIC-00924</span>
+      </div>
+      <div class="reg-item">
+        <span class="sb-label">Policy Version</span>
+        <span class="reg-value">14.7.2 (effective 01 Jan 2026)</span>
+      </div>
+      <div class="reg-item">
+        <span class="sb-label">Executive Sign-off</span>
+        <span class="sb-kevin sb-kevin-reviewed">Reviewed by Kevin</span>
+      </div>
+    </div>
+  </div>
+
+</Layout>
+
+<style>
+  .page-header {
+    background: var(--sb-surface);
+    border-bottom: 1px solid var(--sb-border);
+    padding: 40px 0;
+  }
+
+  .page-header-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    color: var(--sb-text-dimmer);
+    letter-spacing: 0.1em;
+  }
+
+  .breadcrumb a {
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--sb-text);
+  }
+
+  .page-header-body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 300;
+    color: var(--sb-heading);
+    margin: 0 0 12px;
+    line-height: 1.05;
+  }
+
+  .page-desc {
+    font-size: 14px;
+    color: var(--sb-text-dim);
+    line-height: 1.65;
+    margin: 0;
+    max-width: 520px;
+  }
+
+  .page-meta {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    padding-top: 8px;
+  }
+
+  .meta-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .meta-value {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--sb-heading);
+    line-height: 1;
+  }
+
+  .meta-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sb-text-dimmer);
+    margin-top: 3px;
+  }
+
+  .meta-status {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  /* ── Reg band ── */
+  .reg-band {
+    background: rgba(26, 66, 128, 0.08);
+    border-bottom: 1px solid var(--sb-accent-border);
+    padding: 10px 0;
+  }
+
+  .reg-band-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .reg-text {
+    flex: 1;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    color: var(--sb-accent-text);
+    line-height: 1.5;
+    opacity: 0.8;
+    min-width: 200px;
+  }
+
+  /* ── Products ── */
+  .products-section {
+    padding: 56px 0;
+  }
+
+  .service-group {
+    margin-bottom: 56px;
+  }
+
+  .service-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .service-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--sb-border);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--sb-border);
+    border: 1px solid var(--sb-border);
+  }
+
+  .product-grid > div {
+    background: var(--sb-card);
+  }
+
+  /* ── Regulatory footer ── */
+  .regulatory-footer {
+    background: var(--sb-surface);
+    border-top: 1px solid var(--sb-border);
+    padding: 20px 0;
+  }
+
+  .regulatory-footer-inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .reg-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .reg-value {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--sb-text-dim);
+  }
+
+  @media (max-width: 1100px) {
+    .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

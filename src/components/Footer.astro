@@ -1,0 +1,213 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="sb-footer">
+  <div class="sb-footer-inner sb-container">
+
+    <div class="sb-footer-grid">
+      <div class="sb-footer-brand">
+        <div class="sb-footer-wordmark">SOUTHBAG</div>
+        <p class="sb-footer-tagline">
+          Integrated financial, digital, and business services. All operations
+          are monitored. Southbag assumes no liability for consequential losses
+          arising from service availability, policy enforcement, or compliance holds.
+        </p>
+        <div class="sb-footer-reg">
+          <span class="sb-label">Reg. No.</span>
+          <span class="sb-mono" style="font-size:11px;color:var(--sb-text-dimmer)">SB-INS-00-1924</span>
+        </div>
+      </div>
+
+      <div class="sb-footer-col">
+        <div class="sb-footer-col-head">Financial</div>
+        <ul class="sb-footer-links">
+          <li><a href="/financial">Online Banking</a></li>
+          <li><a href="/financial">Invest</a></li>
+          <li><a href="/financial">Crypto Exchange</a></li>
+          <li><a href="/financial">Pay Later</a></li>
+          <li><a href="/financial">Tax</a></li>
+          <li><a href="/financial">Insurance</a></li>
+          <li><a href="/financial">Compliance</a></li>
+          <li><a href="/financial">Payroll</a></li>
+        </ul>
+      </div>
+
+      <div class="sb-footer-col">
+        <div class="sb-footer-col-head">Digital</div>
+        <ul class="sb-footer-links">
+          <li><a href="/digital">Broadband</a></li>
+          <li><a href="/digital">Mobile</a></li>
+          <li><a href="/digital">Firewall</a></li>
+          <li><a href="/digital">VPN</a></li>
+          <li><a href="/digital">Code</a></li>
+          <li><a href="/digital">AI</a></li>
+          <li><a href="/digital">DNS</a></li>
+          <li><a href="/digital">CSS</a></li>
+        </ul>
+      </div>
+
+      <div class="sb-footer-col">
+        <div class="sb-footer-col-head">Business</div>
+        <ul class="sb-footer-links">
+          <li><a href="/business">Secure Access</a></li>
+          <li><a href="/business">MDM</a></li>
+          <li><a href="/business">CRM</a></li>
+          <li><a href="/business">Version Control</a></li>
+          <li><a href="/business">Data Lake</a></li>
+          <li><a href="/business">Analytics</a></li>
+          <li><a href="/business">Edge Compute</a></li>
+          <li><a href="/business">Ecommerce</a></li>
+        </ul>
+      </div>
+
+      <div class="sb-footer-col">
+        <div class="sb-footer-col-head">Legal &amp; Policy</div>
+        <ul class="sb-footer-links">
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Acceptable Use</a></li>
+          <li><a href="#">Data Residency</a></li>
+          <li><a href="#">Compliance Framework</a></li>
+          <li><a href="#">Appeals Process</a></li>
+          <li><a href="#">Kevin: Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sb-footer-bottom">
+      <div class="sb-footer-bottom-left">
+        <span>© {currentYear} Southbag Institutional Services Ltd.</span>
+        <span class="sb-footer-sep">·</span>
+        <span>All rights reserved.</span>
+        <span class="sb-footer-sep">·</span>
+        <span>All policy decisions are final and reviewed by Kevin.</span>
+      </div>
+      <div class="sb-footer-bottom-right">
+        <span class="sb-kevin sb-kevin-reviewed">Reviewed by Kevin</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .sb-footer {
+    border-top: 1px solid var(--sb-border);
+    background: var(--sb-surface);
+    margin-top: 80px;
+  }
+
+  .sb-footer-inner {
+    padding-top: 56px;
+    padding-bottom: 0;
+  }
+
+  .sb-footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  .sb-footer-wordmark {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    color: var(--sb-heading);
+    margin-bottom: 14px;
+  }
+
+  .sb-footer-tagline {
+    font-size: 12px;
+    color: var(--sb-text-dimmer);
+    line-height: 1.65;
+    margin: 0 0 16px;
+    max-width: 280px;
+  }
+
+  .sb-footer-reg {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sb-footer-col-head {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sb-text-dimmer);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  .sb-footer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sb-footer-links a {
+    font-size: 12px;
+    color: var(--sb-text-dimmer);
+    text-decoration: none;
+    transition: color 0.15s ease;
+    font-family: var(--font-sans);
+  }
+
+  .sb-footer-links a:hover {
+    color: var(--sb-text);
+  }
+
+  .sb-footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .sb-footer-bottom-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--sb-text-dimmer);
+    letter-spacing: 0.06em;
+  }
+
+  .sb-footer-sep {
+    color: var(--sb-border-hover);
+  }
+
+  @media (max-width: 1024px) {
+    .sb-footer-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .sb-footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .sb-footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .sb-footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

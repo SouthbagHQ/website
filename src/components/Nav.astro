@@ -1,0 +1,339 @@
+---
+interface Props {
+  currentPage?: string;
+}
+const { currentPage = '' } = Astro.props;
+
+const navLinks = [
+  { label: 'Financial', href: '/financial', key: 'financial' },
+  { label: 'Digital', href: '/digital', key: 'digital' },
+  { label: 'Business', href: '/business', key: 'business' },
+];
+---
+
+<header class="sb-nav">
+  <div class="sb-ticker">
+    <div class="sb-ticker-track">
+      <span>SYSTEM: OPERATIONAL</span>
+      <span class="sep">·</span>
+      <span>KEVIN: REVIEWING</span>
+      <span class="sep">·</span>
+      <span>4,287,331 ACTIVE ACCOUNTS</span>
+      <span class="sep">·</span>
+      <span>COMPLIANCE QUEUE: 47 ITEMS</span>
+      <span class="sep">·</span>
+      <span>AML MONITORING: ACTIVE</span>
+      <span class="sep">·</span>
+      <span>POLICY VERSION 14.7.2</span>
+      <span class="sep">·</span>
+      <span>KEVIN: REVIEWING</span>
+      <span class="sep">·</span>
+      <span>SYSTEM: OPERATIONAL</span>
+      <span class="sep">·</span>
+      <span>4,287,331 ACTIVE ACCOUNTS</span>
+      <span class="sep">·</span>
+      <span>COMPLIANCE QUEUE: 47 ITEMS</span>
+      <span class="sep">·</span>
+      <span>AML MONITORING: ACTIVE</span>
+      <span class="sep">·</span>
+    </div>
+  </div>
+
+  <nav class="sb-nav-bar">
+    <div class="sb-nav-inner">
+      <a href="/" class="sb-wordmark">
+        <span class="sb-wordmark-text">SOUTHBAG</span>
+        <span class="sb-wordmark-tag">Institutional Services</span>
+      </a>
+
+      <ul class="sb-nav-links">
+        {navLinks.map(link => (
+          <li>
+            <a
+              href={link.href}
+              class:list={['sb-nav-link', { 'is-active': currentPage === link.key }]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="sb-nav-right">
+        <div class="kevin-indicator">
+          <span class="kevin-dot"></span>
+          <span class="kevin-text">Kevin: Reviewing</span>
+        </div>
+        <a href="#" class="sb-btn sb-btn-ghost sb-signin">Sign In</a>
+      </div>
+
+      <button class="sb-mobile-menu-btn" id="menuToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div class="sb-mobile-menu" id="mobileMenu">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class:list={['sb-mobile-link', { 'is-active': currentPage === link.key }]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a href="#" class="sb-mobile-link sb-mobile-signin">Sign In</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById('menuToggle');
+  const menu = document.getElementById('mobileMenu');
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('is-open');
+    btn.classList.toggle('is-open');
+  });
+</script>
+
+<style>
+  .sb-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--sb-surface);
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  /* ── Ticker ── */
+  .sb-ticker {
+    height: var(--ticker-height);
+    overflow: hidden;
+    border-bottom: 1px solid var(--sb-border);
+    background: var(--sb-bg);
+  }
+
+  .sb-ticker-track {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 100%;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--sb-text-dimmer);
+    white-space: nowrap;
+    animation: ticker 40s linear infinite;
+    padding-left: 100%;
+  }
+
+  .sb-ticker-track .sep {
+    color: var(--sb-border-hover);
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── Nav bar ── */
+  .sb-nav-bar {
+    background: var(--sb-surface);
+  }
+
+  .sb-nav-inner {
+    display: flex;
+    align-items: center;
+    height: var(--nav-height);
+    padding: 0 24px;
+    max-width: 1280px;
+    margin: 0 auto;
+    gap: 32px;
+  }
+
+  /* ── Wordmark ── */
+  .sb-wordmark {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .sb-wordmark-text {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    color: var(--sb-heading);
+    line-height: 1;
+  }
+
+  .sb-wordmark-tag {
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sb-text-dimmer);
+    line-height: 1;
+  }
+
+  /* ── Nav links ── */
+  .sb-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+  }
+
+  .sb-nav-link {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sb-text-dim);
+    padding: 0 16px;
+    height: var(--nav-height);
+    line-height: var(--nav-height);
+    border-right: 1px solid var(--sb-border);
+    transition: color 0.15s ease, background 0.15s ease;
+    text-decoration: none;
+  }
+
+  .sb-nav-link:first-child {
+    border-left: 1px solid var(--sb-border);
+  }
+
+  .sb-nav-link:hover {
+    color: var(--sb-text);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .sb-nav-link.is-active {
+    color: var(--sb-heading);
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--sb-border-active);
+  }
+
+  /* ── Right side ── */
+  .sb-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: auto;
+  }
+
+  .kevin-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--sb-text-dimmer);
+  }
+
+  .kevin-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50% !important;
+    background: var(--sb-amber-text);
+    animation: badge-pulse 2.5s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  .kevin-text {
+    text-transform: uppercase;
+  }
+
+  .sb-signin {
+    font-size: 10px;
+    padding: 6px 14px;
+  }
+
+  /* ── Mobile button ── */
+  .sb-mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: auto;
+  }
+
+  .sb-mobile-menu-btn span {
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--sb-text-dim);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .sb-mobile-menu-btn.is-open span:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+  }
+  .sb-mobile-menu-btn.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+  .sb-mobile-menu-btn.is-open span:nth-child(3) {
+    transform: translateY(-5px) rotate(-45deg);
+  }
+
+  /* ── Mobile menu ── */
+  .sb-mobile-menu {
+    display: none;
+    flex-direction: column;
+    border-top: 1px solid var(--sb-border);
+    background: var(--sb-surface);
+  }
+
+  .sb-mobile-menu.is-open {
+    display: flex;
+  }
+
+  .sb-mobile-link {
+    padding: 14px 24px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sb-text-dim);
+    border-bottom: 1px solid var(--sb-border);
+    text-decoration: none;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .sb-mobile-link:hover,
+  .sb-mobile-link.is-active {
+    color: var(--sb-heading);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .sb-mobile-signin {
+    color: var(--sb-accent-text);
+  }
+
+  @media (max-width: 768px) {
+    .sb-nav-links,
+    .sb-nav-right {
+      display: none;
+    }
+
+    .sb-mobile-menu-btn {
+      display: flex;
+    }
+
+    .sb-nav-inner {
+      padding: 0 16px;
+    }
+  }
+</style>

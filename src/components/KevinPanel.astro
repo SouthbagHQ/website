@@ -1,0 +1,252 @@
+---
+interface AuditEntry {
+  ref: string;
+  date: string;
+  item: string;
+  status: 'cleared' | 'reviewed' | 'pending' | 'denied' | 'escalated';
+}
+
+const auditLog: AuditEntry[] = [
+  { ref: 'CE-1847',   date: '28 Jun 2026', item: 'Compliance Exception — Crypto Withdrawal Limit', status: 'cleared' },
+  { ref: 'ACC-29301', date: '25 Jun 2026', item: 'Account Escalation — Commercial Entity Review',  status: 'reviewed' },
+  { ref: 'POL-014',   date: '22 Jun 2026', item: 'Policy Override Request — International Transfer', status: 'denied' },
+  { ref: 'CE-1845',   date: '18 Jun 2026', item: 'Compliance Exception — Tax Filing Extension',    status: 'cleared' },
+  { ref: 'INS-7201',  date: '15 Jun 2026', item: 'Insurance Claim Override — Commercial Property', status: 'escalated' },
+  { ref: 'ACC-29244', date: '10 Jun 2026', item: 'Account Escalation — AML Flag Review',           status: 'reviewed' },
+];
+
+const statusClass: Record<string, string> = {
+  cleared: 'sb-kevin-cleared',
+  reviewed: 'sb-kevin-reviewed',
+  pending: 'sb-kevin-pending',
+  denied: 'sb-kevin-denied',
+  escalated: 'sb-kevin-escalated',
+};
+
+const statusLabel: Record<string, string> = {
+  cleared: 'Cleared',
+  reviewed: 'Reviewed',
+  pending: 'Pending',
+  denied: 'Denied',
+  escalated: 'Escalated',
+};
+---
+
+<section class="kevin-section" data-reveal>
+  <div class="sb-container">
+    <div class="kevin-grid">
+
+      <div class="kevin-authority sb-panel">
+        <div class="sb-panel-header">
+          <span class="sb-label">Executive Authority</span>
+          <span class="sb-badge sb-badge-reviewing">Reviewing</span>
+        </div>
+        <div class="kevin-authority-body">
+          <div class="kevin-identity">
+            <div class="kevin-avatar">K</div>
+            <div class="kevin-info">
+              <div class="kevin-name">Kevin</div>
+              <div class="kevin-title">Chief Executive Officer</div>
+            </div>
+          </div>
+          <div class="kevin-stats">
+            <div class="kevin-stat">
+              <div class="kevin-stat-value">47</div>
+              <div class="kevin-stat-label">Items Pending Review</div>
+            </div>
+            <div class="kevin-stat">
+              <div class="kevin-stat-value">3</div>
+              <div class="kevin-stat-label">Cleared Today</div>
+            </div>
+            <div class="kevin-stat">
+              <div class="kevin-stat-value">0</div>
+              <div class="kevin-stat-label">Active Overrides</div>
+            </div>
+          </div>
+          <div class="kevin-current">
+            <span class="sb-label">Current Item</span>
+            <p class="kevin-current-item">"Compliance Exception #1847 — Crypto Withdrawal Limit Override"</p>
+            <span class="kevin-time">Since 08:42 UTC · Est. completion: unknown</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kevin-log sb-panel">
+        <div class="sb-panel-header">
+          <span class="sb-label">Executive Decision Log</span>
+          <span class="sb-code" style="color:var(--sb-text-dimmer)">Last 30 days</span>
+        </div>
+        <table class="sb-ledger">
+          <thead>
+            <tr>
+              <th>Ref</th>
+              <th>Date</th>
+              <th>Matter</th>
+              <th>Decision</th>
+            </tr>
+          </thead>
+          <tbody>
+            {auditLog.map(entry => (
+              <tr>
+                <td class="ref-cell">{entry.ref}</td>
+                <td class="date-cell">{entry.date}</td>
+                <td class="item-cell">{entry.item}</td>
+                <td>
+                  <span class:list={['sb-kevin', statusClass[entry.status]]}>
+                    {statusLabel[entry.status]}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .kevin-section {
+    padding: 60px 0;
+    background: var(--sb-surface);
+    border-top: 1px solid var(--sb-border);
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  .kevin-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1px;
+    border: 1px solid var(--sb-border);
+    background: var(--sb-border);
+  }
+
+  .kevin-authority,
+  .kevin-log {
+    background: var(--sb-panel);
+    border: none;
+  }
+
+  .kevin-authority-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .kevin-identity {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .kevin-avatar {
+    width: 44px;
+    height: 44px;
+    background: var(--sb-accent-bg);
+    border: 1px solid var(--sb-accent-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--sb-accent-text);
+    flex-shrink: 0;
+  }
+
+  .kevin-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--sb-heading);
+    line-height: 1.1;
+  }
+
+  .kevin-title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sb-text-dimmer);
+    margin-top: 2px;
+  }
+
+  .kevin-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--sb-border);
+    border: 1px solid var(--sb-border);
+  }
+
+  .kevin-stat {
+    background: var(--sb-card);
+    padding: 12px;
+    text-align: center;
+  }
+
+  .kevin-stat-value {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--sb-heading);
+    line-height: 1;
+  }
+
+  .kevin-stat-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sb-text-dimmer);
+    margin-top: 4px;
+  }
+
+  .kevin-current {
+    padding: 12px;
+    border: 1px solid var(--sb-amber-border);
+    background: var(--sb-amber-bg);
+  }
+
+  .kevin-current-item {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--sb-amber-text);
+    line-height: 1.5;
+    margin: 6px 0;
+  }
+
+  .kevin-time {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--sb-text-dimmer);
+    letter-spacing: 0.06em;
+  }
+
+  /* Log */
+  .ref-cell {
+    font-family: var(--font-mono);
+    color: var(--sb-accent-text) !important;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .date-cell {
+    white-space: nowrap;
+    color: var(--sb-text-dimmer) !important;
+    font-size: 11px;
+  }
+
+  .item-cell {
+    font-size: 12px;
+    color: var(--sb-text) !important;
+  }
+
+  @media (max-width: 900px) {
+    .kevin-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

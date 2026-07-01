@@ -1,0 +1,634 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+
+const products = [
+  {
+    code: 'SB-BIZ-001',
+    name: 'Secure Access',
+    description: 'Identity and access management for enterprise environments. All authentication events are logged and retained. Privileged access reviews are conducted monthly by Southbag.',
+    status: 'active' as const,
+    tier: 'enterprise' as const,
+    kevinStatus: 'reviewed' as const,
+  },
+  {
+    code: 'SB-BIZ-002',
+    name: 'VPN for Business',
+    description: 'Enterprise encrypted network access. Full packet inspection available to authorised administrators. Split-tunnelling is disabled by default and requires written approval.',
+    status: 'active' as const,
+    tier: 'business' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-BIZ-003',
+    name: 'MDM',
+    description: 'Mobile device management for enrolled corporate devices. Southbag reserves the right to remotely wipe enrolled devices. Wipe actions are logged but not reversible.',
+    status: 'active' as const,
+    tier: 'enterprise' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-BIZ-004',
+    name: 'CRM',
+    description: 'Customer relationship management platform. Data sovereignty is subject to Southbag data residency policy SB-DATA-2021. Export functionality requires 30 days notice.',
+    status: 'active' as const,
+    tier: 'business' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-BIZ-005',
+    name: 'Version Control',
+    description: 'Source code repository management. All commits are retained permanently. Repository access may be suspended during compliance reviews. Code is never fully deleted.',
+    status: 'active' as const,
+    tier: 'business' as const,
+    kevinStatus: 'reviewed' as const,
+  },
+  {
+    code: 'SB-BIZ-006',
+    name: 'Data Lake',
+    description: 'Managed data storage and processing infrastructure. Southbag may access stored data for operational, compliance, and quality assurance purposes without notice.',
+    status: 'active' as const,
+    tier: 'enterprise' as const,
+    kevinStatus: 'pending' as const,
+    kevinLabel: 'Approval pending',
+  },
+  {
+    code: 'SB-BIZ-007',
+    name: 'AI for Business',
+    description: 'Enterprise AI inference and model access. Prompts and outputs are logged for quality assurance and policy compliance. Do not submit trade secrets or regulated data.',
+    status: 'active' as const,
+    tier: 'enterprise' as const,
+    kevinStatus: 'reviewed' as const,
+  },
+  {
+    code: 'SB-BIZ-008',
+    name: 'Edge Compute',
+    description: 'Distributed computation infrastructure. Workload placement is determined by Southbag routing policies. Geographic preferences are advisory, not guaranteed.',
+    status: 'active' as const,
+    tier: 'enterprise' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-BIZ-009',
+    name: 'Analytics',
+    description: 'Business intelligence and reporting infrastructure. Southbag retains aggregate analytics across all accounts for internal benchmarking and product improvement.',
+    status: 'active' as const,
+    tier: 'business' as const,
+    kevinStatus: null,
+  },
+  {
+    code: 'SB-BIZ-010',
+    name: 'Ecommerce',
+    description: 'Managed storefront and transaction processing. All orders are subject to Southbag fulfilment policies. Southbag may reject transactions without explanation.',
+    status: 'active' as const,
+    tier: 'business' as const,
+    kevinStatus: null,
+  },
+];
+
+const businessCount = products.filter(p => p.tier === 'business').length;
+const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
+---
+
+<Layout title="Business Services" currentPage="business">
+
+  <!-- ── Page header ── -->
+  <div class="page-header">
+    <div class="sb-container page-header-inner">
+      <div class="breadcrumb sb-code">
+        <a href="/">SOUTHBAG</a>
+        <span>›</span>
+        <span>BUSINESS SERVICES</span>
+      </div>
+      <div class="page-header-body" data-reveal>
+        <div>
+          <h1 class="page-title">Southbag Business</h1>
+          <p class="page-desc">
+            Enterprise software infrastructure for regulated business environments.
+            All services require director-level account setup, verified beneficial
+            ownership, and ongoing compliance reporting. Kevin reviews escalations.
+          </p>
+        </div>
+        <div class="page-meta">
+          <div class="meta-stat">
+            <span class="meta-value">{products.length}</span>
+            <span class="meta-label">Total Services</span>
+          </div>
+          <div class="meta-stat">
+            <span class="meta-value">{businessCount}</span>
+            <span class="meta-label">Business</span>
+          </div>
+          <div class="meta-stat">
+            <span class="meta-value">{enterpriseCount}</span>
+            <span class="meta-label">Enterprise</span>
+          </div>
+          <div class="meta-status">
+            <span class="sb-badge sb-badge-active">Operational</span>
+            <span class="sb-kevin sb-kevin-reviewed">Reviewed by Kevin</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Enterprise requirements band ── -->
+  <div class="req-band">
+    <div class="sb-container req-band-inner">
+      <span class="sb-label" style="flex-shrink:0;">Onboarding Requirements</span>
+      <div class="req-items">
+        <span class="req-item">Director KYC</span>
+        <span class="req-sep">·</span>
+        <span class="req-item">Beneficial Ownership Filing</span>
+        <span class="req-sep">·</span>
+        <span class="req-item">Corporate Registry Extract</span>
+        <span class="req-sep">·</span>
+        <span class="req-item">Compliance Officer Designation</span>
+        <span class="req-sep">·</span>
+        <span class="req-item">Signed Data Processing Agreement</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Products grid ── -->
+  <section class="products-section">
+    <div class="sb-container">
+
+      <!-- Business tier -->
+      <div class="service-group" data-reveal>
+        <div class="service-group-header">
+          <div class="sb-section-label">Business Services</div>
+          <div class="group-header-right">
+            <span class="sb-code">Requires: Director KYC · Business Account</span>
+          </div>
+        </div>
+        <div class="product-grid">
+          {products.filter(p => p.tier === 'business').map((product, i) => (
+            <div data-delay={String((i % 4) + 1)} data-reveal>
+              <ProductCard {...product} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Enterprise tier -->
+      <div class="service-group" data-reveal>
+        <div class="service-group-header">
+          <div class="sb-section-label">Enterprise Services</div>
+          <div class="group-header-right">
+            <span class="sb-badge sb-badge-reviewing">Enterprise Agreement Required</span>
+          </div>
+        </div>
+        <div class="product-grid">
+          {products.filter(p => p.tier === 'enterprise').map((product, i) => (
+            <div data-delay={String((i % 4) + 1)} data-reveal>
+              <ProductCard {...product} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Compliance requirements ── -->
+  <section class="compliance-section">
+    <div class="sb-container">
+      <div class="section-head" data-reveal>
+        <div class="sb-section-label">Compliance Framework</div>
+        <h2 class="section-title">What is expected of you.</h2>
+      </div>
+
+      <div class="compliance-grid" data-reveal data-delay="1">
+
+        <div class="compliance-item">
+          <div class="compliance-num">01</div>
+          <h4 class="compliance-name">Annual Compliance Review</h4>
+          <p class="compliance-desc">
+            All business accounts are subject to an annual compliance review.
+            Failure to provide requested documentation within 14 days results
+            in account suspension.
+          </p>
+        </div>
+
+        <div class="compliance-item">
+          <div class="compliance-num">02</div>
+          <h4 class="compliance-name">Data Residency Declaration</h4>
+          <p class="compliance-desc">
+            You must declare the jurisdictions in which your data may be processed.
+            Southbag's data residency policies take precedence over your declaration.
+          </p>
+        </div>
+
+        <div class="compliance-item">
+          <div class="compliance-num">03</div>
+          <h4 class="compliance-name">Incident Reporting</h4>
+          <p class="compliance-desc">
+            Security incidents must be reported to Southbag within 4 hours of
+            detection. Southbag will determine whether the incident is reportable
+            to regulatory authorities.
+          </p>
+        </div>
+
+        <div class="compliance-item">
+          <div class="compliance-num">04</div>
+          <h4 class="compliance-name">Acceptable Use Policy</h4>
+          <p class="compliance-desc">
+            All usage of Southbag Business services must comply with the current
+            version of the Acceptable Use Policy. Policy updates are effective
+            immediately upon publication.
+          </p>
+        </div>
+
+        <div class="compliance-item">
+          <div class="compliance-num">05</div>
+          <h4 class="compliance-name">Executive Escalation</h4>
+          <p class="compliance-desc">
+            Disputes, policy exceptions, and compliance waivers escalate to Kevin.
+            His decisions are final. No further appeals process is available
+            for matters reviewed personally by Kevin.
+          </p>
+          <div style="margin-top:12px">
+            <span class="sb-kevin sb-kevin-reviewed">Reviewed by Kevin</span>
+          </div>
+        </div>
+
+        <div class="compliance-item">
+          <div class="compliance-num">06</div>
+          <h4 class="compliance-name">Termination and Offboarding</h4>
+          <p class="compliance-desc">
+            Account termination requires 90 days notice. Data export is available
+            for 30 days post-termination. After 30 days, data is archived and
+            not retrievable without a written executive request.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Enterprise contact ── -->
+  <div class="enterprise-cta sb-grid-bg">
+    <div class="sb-container enterprise-cta-inner" data-reveal>
+      <div>
+        <div class="sb-section-label">Enterprise Enquiries</div>
+        <h3 class="ent-title">Need something not listed here?</h3>
+        <p class="ent-desc">
+          Custom enterprise agreements, bespoke service configurations, and
+          specialised compliance frameworks are available. Engagements require
+          a minimum 12-month term. Kevin may be involved in final approval.
+        </p>
+      </div>
+      <div class="ent-actions">
+        <a href="#" class="sb-btn sb-btn-primary">Request Enterprise Consultation</a>
+        <p class="ent-note sb-code" style="color:var(--sb-text-dimmer);margin-top:10px;font-size:10px;">
+          Response time: 3–10 business days. Not guaranteed.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Regulatory footer ── -->
+  <div class="regulatory-footer">
+    <div class="sb-container regulatory-footer-inner">
+      <div class="reg-item">
+        <span class="sb-label">Framework</span>
+        <span class="reg-value">SB-BIZ-ENT-2024</span>
+      </div>
+      <div class="reg-item">
+        <span class="sb-label">Data Controller</span>
+        <span class="reg-value">Southbag Enterprise Services Ltd.</span>
+      </div>
+      <div class="reg-item">
+        <span class="sb-label">Beneficial Ownership</span>
+        <span class="reg-value">Mandatory under SB-ACT-2018 §14</span>
+      </div>
+      <div class="reg-item">
+        <span class="sb-label">Executive Review</span>
+        <span class="sb-kevin sb-kevin-reviewed">Reviewed by Kevin</span>
+      </div>
+    </div>
+  </div>
+
+</Layout>
+
+<style>
+  .page-header {
+    background: var(--sb-surface);
+    border-bottom: 1px solid var(--sb-border);
+    padding: 40px 0;
+  }
+
+  .page-header-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    color: var(--sb-text-dimmer);
+    letter-spacing: 0.1em;
+  }
+
+  .breadcrumb a {
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--sb-text);
+  }
+
+  .page-header-body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 300;
+    color: var(--sb-heading);
+    margin: 0 0 12px;
+    line-height: 1.05;
+  }
+
+  .page-desc {
+    font-size: 14px;
+    color: var(--sb-text-dim);
+    line-height: 1.65;
+    margin: 0;
+    max-width: 520px;
+  }
+
+  .page-meta {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    padding-top: 8px;
+  }
+
+  .meta-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .meta-value {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--sb-heading);
+    line-height: 1;
+  }
+
+  .meta-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sb-text-dimmer);
+    margin-top: 3px;
+  }
+
+  .meta-status {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  /* ── Requirements band ── */
+  .req-band {
+    background: var(--sb-surface);
+    border-bottom: 1px solid var(--sb-border);
+    padding: 10px 0;
+  }
+
+  .req-band-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .req-items {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+
+  .req-item {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    color: var(--sb-text-dim);
+  }
+
+  .req-sep {
+    color: var(--sb-border-hover);
+    font-family: var(--font-mono);
+  }
+
+  /* ── Products ── */
+  .products-section {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  .service-group {
+    margin-bottom: 56px;
+  }
+
+  .service-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .service-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--sb-border);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .group-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--sb-border);
+    border: 1px solid var(--sb-border);
+  }
+
+  .product-grid > div {
+    background: var(--sb-card);
+  }
+
+  /* ── Compliance ── */
+  .compliance-section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  .section-head {
+    margin-bottom: 40px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 300;
+    color: var(--sb-heading);
+    margin: 8px 0 0;
+    line-height: 1.15;
+  }
+
+  .compliance-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--sb-border);
+    border: 1px solid var(--sb-border);
+  }
+
+  .compliance-item {
+    background: var(--sb-card);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: background 0.2s ease;
+  }
+
+  .compliance-item:hover {
+    background: var(--sb-card-hover);
+  }
+
+  .compliance-num {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--sb-text-dimmer);
+  }
+
+  .compliance-name {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--sb-heading);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .compliance-desc {
+    font-size: 13px;
+    color: var(--sb-text-dim);
+    line-height: 1.65;
+    margin: 0;
+    flex: 1;
+  }
+
+  /* ── Enterprise CTA ── */
+  .enterprise-cta {
+    border-top: 1px solid var(--sb-border);
+    border-bottom: 1px solid var(--sb-border);
+    padding: 56px 0;
+  }
+
+  .enterprise-cta-inner {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .ent-title {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--sb-heading);
+    margin: 8px 0 14px;
+    line-height: 1.15;
+  }
+
+  .ent-desc {
+    font-size: 13px;
+    color: var(--sb-text-dim);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .ent-actions {
+    padding-top: 28px;
+  }
+
+  /* ── Regulatory footer ── */
+  .regulatory-footer {
+    background: var(--sb-surface);
+    border-top: 1px solid var(--sb-border);
+    padding: 20px 0;
+  }
+
+  .regulatory-footer-inner {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .reg-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .reg-value {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--sb-text-dim);
+  }
+
+  @media (max-width: 1100px) {
+    .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .compliance-grid,
+    .enterprise-cta-inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
