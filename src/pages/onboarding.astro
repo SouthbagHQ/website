@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { IDENTITY_DASHBOARD_URL } from "../lib/identity";
+import { PAGE_SEO } from "../lib/seo";
 
 if (Astro.locals.user) {
   return Astro.redirect(IDENTITY_DASHBOARD_URL);
@@ -8,9 +9,10 @@ if (Astro.locals.user) {
 ---
 
 <Layout
-  title="Onboarding"
-  description="Create your Southbag account."
+  title={PAGE_SEO.onboarding.title}
+  description={PAGE_SEO.onboarding.description}
   currentPage="onboarding"
+  noindex={PAGE_SEO.onboarding.noindex}
 >
   <section class="onboarding sb-grid-bg">
     <div class="onboarding-inner sb-container">

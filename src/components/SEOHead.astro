@@ -1,0 +1,85 @@
+---
+import {
+  SITE_NAME,
+  absoluteUrl,
+  canonicalUrl,
+  formatTitle,
+  DEFAULT_DESCRIPTION,
+  DEFAULT_OG_IMAGE,
+  organizationJsonLd,
+  webSiteJsonLd,
+  webPageJsonLd,
+  breadcrumbJsonLd,
+  type BreadcrumbItem,
+} from "../lib/seo";
+
+interface Props {
+  title?: string;
+  description?: string;
+  pathname: string;
+  noindex?: boolean;
+  ogImage?: string;
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const {
+  title,
+  description = DEFAULT_DESCRIPTION,
+  pathname,
+  noindex = false,
+  ogImage = DEFAULT_OG_IMAGE,
+  breadcrumbs,
+} = Astro.props;
+
+const pageTitle = formatTitle(title);
+const canonical = canonicalUrl(pathname);
+const imageUrl = absoluteUrl(ogImage);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    organizationJsonLd(),
+    webSiteJsonLd(),
+    webPageJsonLd({
+      title: pageTitle,
+      description,
+      url: canonical,
+    }),
+    ...(breadcrumbs?.length ? [breadcrumbJsonLd(breadcrumbs)] : []),
+  ],
+};
+---
+
+<meta name="description" content={description} />
+<meta name="author" content={SITE_NAME} />
+{noindex ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : (
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+)}
+<link rel="canonical" href={canonical} />
+<link rel="alternate" hreflang="en" href={canonical} />
+<link rel="alternate" hreflang="x-default" href={canonical} />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:alt" content={`${SITE_NAME} logo`} />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:image:alt" content={`${SITE_NAME} logo`} />
+
+<meta name="theme-color" content="#050608" />
+
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

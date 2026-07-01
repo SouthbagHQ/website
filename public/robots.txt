@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/
+Disallow: /onboarding
+
+Sitemap: https://southbag.cc/sitemap-index.xml

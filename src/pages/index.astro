@@ -1,9 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { IDENTITY_LOGIN_URL } from "../lib/identity";
+import { PAGE_SEO } from "../lib/seo";
 ---
 
-<Layout title="Southbag" currentPage="home">
+<Layout
+  title={PAGE_SEO.home.title}
+  description={PAGE_SEO.home.description}
+  currentPage="home"
+>
   <!-- ── Hero ── -->
   <section class="hero sb-grid-bg">
     <div class="hero-inner sb-container">

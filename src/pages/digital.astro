@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.astro";
+import { PAGE_SEO } from "../lib/seo";
 
 const products = [
   {
@@ -80,15 +81,24 @@ const products = [
 ];
 ---
 
-<Layout title="Digital Services" currentPage="digital">
+<Layout
+  title={PAGE_SEO.digital.title}
+  description={PAGE_SEO.digital.description}
+  currentPage="digital"
+  breadcrumbs={[
+    { name: "Southbag", path: "/" },
+    { name: "Digital Services", path: "/digital" },
+  ]}
+>
   <!-- ── Page header ── -->
   <div class="page-header">
     <div class="sb-container page-header-inner">
-      <div class="breadcrumb sb-code">
-        <a href="/">SOUTHBAG</a>
-        <span>›</span>
-        <span>DIGITAL SERVICES</span>
-      </div>
+      <nav class="breadcrumb sb-code" aria-label="Breadcrumb">
+        <ol class="breadcrumb-list">
+          <li><a href="/">SOUTHBAG</a></li>
+          <li aria-current="page">DIGITAL SERVICES</li>
+        </ol>
+      </nav>
       <div class="page-header-body">
         <div>
           <h1 class="page-title">Southbag Digital</h1>

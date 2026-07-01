@@ -82,6 +82,21 @@ a {
   text-decoration: none;
 }
 
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumb-list li:not(:last-child)::after {
+  content: "›";
+  margin-left: 8px;
+  color: var(--sb-text-dimmer);
+}
+
 /* ─── Grid texture ─── */
 .sb-grid-bg {
   background-image:

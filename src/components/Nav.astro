@@ -17,7 +17,7 @@ const navLinks = [
 ---
 
 <header class="sb-nav">
-  <nav class="sb-nav-bar">
+  <nav class="sb-nav-bar" aria-label="Main navigation">
     <div class="sb-nav-inner">
       <a href="/" class="sb-wordmark">
         <img
@@ -39,6 +39,7 @@ const navLinks = [
                   "sb-nav-link",
                   { "is-active": currentPage === link.key },
                 ]}
+                aria-current={currentPage === link.key ? "page" : undefined}
               >
                 {link.label}
               </a>
@@ -89,6 +90,7 @@ const navLinks = [
               "sb-mobile-link",
               { "is-active": currentPage === link.key },
             ]}
+            aria-current={currentPage === link.key ? "page" : undefined}
           >
             {link.label}
           </a>

@@ -1,26 +1,31 @@
 ---
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import SEOHead from "../components/SEOHead.astro";
+import { formatTitle } from "../lib/seo";
+import type { BreadcrumbItem } from "../lib/seo";
 import "../styles/global.css";
 
 interface Props {
   title?: string;
   description?: string;
   currentPage?: string;
+  noindex?: boolean;
+  ogImage?: string;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 const {
-  title = "Southbag",
-  description = "An ecosystem of services you do not fully control.",
+  title,
+  description,
   currentPage = "",
+  noindex = false,
+  ogImage,
+  breadcrumbs,
 } = Astro.props;
 
-const user = Astro.locals.user;
-
-const fullTitle =
-  title === "Southbag"
-    ? "Southbag — Institutional Services"
-    : `${title} — Southbag`;
+const pageTitle = formatTitle(title);
+const pathname = Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -28,9 +33,15 @@ const fullTitle =
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="description" content={description} />
-    <title>{fullTitle}</title>
+    <title>{pageTitle}</title>
+    <SEOHead
+      title={title}
+      description={description}
+      pathname={pathname}
+      noindex={noindex}
+      ogImage={ogImage}
+      breadcrumbs={breadcrumbs}
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -39,10 +50,31 @@ const fullTitle =
     />
   </head>
   <body>
-    <Nav currentPage={currentPage} user={user} />
-    <main>
+    <a class="sb-skip-link" href="#main-content">Skip to main content</a>
+    <Nav currentPage={currentPage} user={Astro.locals.user} />
+    <main id="main-content">
       <slot />
     </main>
     <Footer />
   </body>
 </html>
+
+<style is:global>
+  .sb-skip-link {
+    position: absolute;
+    top: -100%;
+    left: 16px;
+    z-index: 1000;
+    padding: 8px 12px;
+    background: var(--sb-accent-bg);
+    color: var(--sb-heading);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-decoration: none;
+    border: 1px solid var(--sb-accent-border);
+  }
+
+  .sb-skip-link:focus {
+    top: 16px;
+  }
+</style>

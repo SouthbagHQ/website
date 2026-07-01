@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.astro";
+import { PAGE_SEO } from "../lib/seo";
 
 const products = [
   {
@@ -100,15 +101,24 @@ const businessCount = products.filter((p) => p.tier === "business").length;
 const enterpriseCount = products.filter((p) => p.tier === "enterprise").length;
 ---
 
-<Layout title="Business Services" currentPage="business">
+<Layout
+  title={PAGE_SEO.business.title}
+  description={PAGE_SEO.business.description}
+  currentPage="business"
+  breadcrumbs={[
+    { name: "Southbag", path: "/" },
+    { name: "Business Services", path: "/business" },
+  ]}
+>
   <!-- ── Page header ── -->
   <div class="page-header">
     <div class="sb-container page-header-inner">
-      <div class="breadcrumb sb-code">
-        <a href="/">SOUTHBAG</a>
-        <span>›</span>
-        <span>BUSINESS SERVICES</span>
-      </div>
+      <nav class="breadcrumb sb-code" aria-label="Breadcrumb">
+        <ol class="breadcrumb-list">
+          <li><a href="/">SOUTHBAG</a></li>
+          <li aria-current="page">BUSINESS SERVICES</li>
+        </ol>
+      </nav>
       <div class="page-header-body">
         <div>
           <h1 class="page-title">Southbag Business</h1>
