@@ -20,7 +20,13 @@ const navLinks = [
   <nav class="sb-nav-bar">
     <div class="sb-nav-inner">
       <a href="/" class="sb-wordmark">
-        <span class="sb-wordmark-text">SOUTHBAG</span>
+        <img
+          src="/logo.png"
+          alt="Southbag"
+          class="sb-wordmark-img"
+          width="82"
+          height="28"
+        />
       </a>
 
       <ul class="sb-nav-links">
@@ -159,13 +165,10 @@ const navLinks = [
     flex-shrink: 0;
   }
 
-  .sb-wordmark-text {
-    font-family: var(--font-mono);
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0.25em;
-    color: var(--sb-heading);
-    line-height: 1;
+  .sb-wordmark-img {
+    display: block;
+    height: 28px;
+    width: auto;
   }
 
   /* ── Nav links ── */
