@@ -139,6 +139,15 @@ if (Astro.locals.user) {
 </Layout>
 
 <script>
+  import {
+    getEmailStepCopy,
+    getNameStepCopy,
+    getOnboardingValidationMessage,
+    getPasswordStepCopy,
+    isKevinEscalated,
+    type OnboardingField,
+  } from "../lib/onboarding-kevin";
+
   const steps = Array.from(document.querySelectorAll(".onboarding-step"));
   const stepCurrent = document.getElementById("stepCurrent");
   const progressFill = document.getElementById("progressFill");
@@ -150,12 +159,53 @@ if (Astro.locals.user) {
   ) as HTMLInputElement;
   const emailTitle = document.getElementById("emailTitle");
   const emailCopy = document.getElementById("emailCopy");
+  const nameTitle = document.querySelector(
+    '.onboarding-step[data-step="1"] .onboarding-title',
+  );
+  const nameCopy = document.querySelector(
+    '.onboarding-step[data-step="1"] .onboarding-copy',
+  );
+  const passwordTitle = document.querySelector(
+    '.onboarding-step[data-step="3"] .onboarding-title',
+  );
+  const passwordCopy = document.querySelector(
+    '.onboarding-step[data-step="3"] .onboarding-copy',
+  );
   const submitButton = document.getElementById("submitButton");
 
   const data = {
     name: "",
     email: "",
     password: "",
+  };
+
+  const defaultStepCopy = {
+    name: {
+      title: nameTitle?.textContent ?? "Your name",
+      copy:
+        nameCopy?.textContent ??
+        "Provide the name you would like us to use during this registration process.",
+    },
+    email: {
+      title: emailTitle?.textContent ?? "Your email",
+      copy:
+        emailCopy?.textContent ??
+        "Enter the email address associated with your Southbag account.",
+    },
+    password: {
+      title: passwordTitle?.textContent ?? "Set a password",
+      copy:
+        passwordCopy?.textContent ??
+        "Choose a password for your account. Minimum 8 characters.",
+    },
+  };
+
+  const validationFailures: Record<OnboardingField, number> = {
+    name: 0,
+    email: 0,
+    emailInvalid: 0,
+    password: 0,
+    passwordShort: 0,
   };
 
   let currentStep = 0;
@@ -165,12 +215,74 @@ if (Astro.locals.user) {
     if (!formError) return;
     formError.hidden = true;
     formError.textContent = "";
+    formError.classList.remove("onboarding-error--kevin");
   };
 
-  const showError = (message: string) => {
+  const showError = (message: string, kevin = false) => {
     if (!formError) return;
     formError.hidden = false;
     formError.textContent = message;
+    formError.classList.toggle("onboarding-error--kevin", kevin);
+  };
+
+  const recordValidationFailure = (field: OnboardingField) => {
+    validationFailures[field] += 1;
+    return validationFailures[field];
+  };
+
+  const resetValidationFailures = (...fields: OnboardingField[]) => {
+    for (const field of fields) {
+      validationFailures[field] = 0;
+    }
+  };
+
+  const applyStepEscalation = () => {
+    const nameEscalation = getNameStepCopy(validationFailures.name);
+    if (nameTitle && nameCopy) {
+      if (nameEscalation) {
+        nameTitle.textContent = nameEscalation.title;
+        nameCopy.textContent = nameEscalation.copy;
+      } else {
+        nameTitle.textContent = defaultStepCopy.name.title;
+        nameCopy.textContent = defaultStepCopy.name.copy;
+      }
+    }
+
+    const emailEscalation = getEmailStepCopy(
+      validationFailures.email + validationFailures.emailInvalid,
+      data.name,
+    );
+    if (emailTitle && emailCopy) {
+      if (emailEscalation) {
+        emailTitle.textContent = emailEscalation.title;
+        emailCopy.textContent = emailEscalation.copy;
+      } else {
+        personalizeEmailStep();
+      }
+    }
+
+    const passwordEscalation = getPasswordStepCopy(
+      validationFailures.password + validationFailures.passwordShort,
+    );
+    if (passwordTitle && passwordCopy) {
+      if (passwordEscalation) {
+        passwordTitle.textContent = passwordEscalation.title;
+        passwordCopy.textContent = passwordEscalation.copy;
+      } else {
+        passwordTitle.textContent = defaultStepCopy.password.title;
+        passwordCopy.textContent = defaultStepCopy.password.copy;
+      }
+    }
+  };
+
+  const failValidation = (field: OnboardingField) => {
+    const attempt = recordValidationFailure(field);
+    applyStepEscalation();
+    showError(
+      getOnboardingValidationMessage(field, attempt),
+      isKevinEscalated(attempt),
+    );
+    return false;
   };
 
   const updateStep = () => {
@@ -198,38 +310,36 @@ if (Astro.locals.user) {
     if (currentStep === 1) {
       data.name = nameInput?.value.trim() ?? "";
       if (!data.name) {
-        showError("Please enter your name.");
         nameInput?.focus();
-        return false;
+        return failValidation("name");
       }
+      resetValidationFailures("name");
     }
 
     if (currentStep === 2) {
       data.email = emailInput?.value.trim() ?? "";
       if (!data.email) {
-        showError("Please enter your email address.");
         emailInput?.focus();
-        return false;
+        return failValidation("email");
       }
       if (!emailInput?.checkValidity()) {
-        showError("Please enter a valid email address.");
         emailInput?.focus();
-        return false;
+        return failValidation("emailInvalid");
       }
+      resetValidationFailures("email", "emailInvalid");
     }
 
     if (currentStep === 3) {
       data.password = passwordInput?.value ?? "";
       if (!data.password) {
-        showError("Please enter a password.");
         passwordInput?.focus();
-        return false;
+        return failValidation("password");
       }
       if (data.password.length < 8) {
-        showError("Password must be at least 8 characters.");
         passwordInput?.focus();
-        return false;
+        return failValidation("passwordShort");
       }
+      resetValidationFailures("password", "passwordShort");
     }
 
     return true;
@@ -468,6 +578,12 @@ if (Astro.locals.user) {
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.04em;
+  }
+
+  .onboarding-error--kevin {
+    background: var(--sb-amber-bg);
+    border-color: var(--sb-amber-border);
+    color: var(--sb-amber-text);
   }
 
   .onboarding-footnote {
