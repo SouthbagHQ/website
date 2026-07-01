@@ -45,9 +45,9 @@
   --sb-orange-text: #8c4e1a;
 
   /* Typography */
-  --font-display: 'Cormorant Garamond', 'Georgia', serif;
-  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
-  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", "Georgia", serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
 
   /* Spacing */
   --nav-height: 52px;
@@ -85,14 +85,18 @@ a {
 /* ─── Grid texture ─── */
 .sb-grid-bg {
   background-image:
-    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
   background-size: 48px 48px;
   background-position: center center;
 }
 
 .sb-dot-bg {
-  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.06) 1px,
+    transparent 1px
+  );
   background-size: 24px 24px;
 }
 
@@ -141,7 +145,7 @@ a {
 }
 
 .sb-badge::before {
-  content: '';
+  content: "";
   display: block;
   width: 5px;
   height: 5px;
@@ -200,7 +204,7 @@ a {
 }
 
 .sb-badge-beta {
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   border-color: var(--sb-border);
   color: var(--sb-text-dim);
 }
@@ -292,7 +296,7 @@ a {
 }
 
 .sb-btn-ghost:hover {
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   border-color: var(--sb-border-active);
   color: var(--sb-text);
 }
@@ -312,7 +316,7 @@ a {
 }
 
 .sb-section-label::before {
-  content: '';
+  content: "";
   display: block;
   width: 16px;
   height: 1px;
@@ -332,7 +336,7 @@ a {
 }
 
 .sb-product-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -398,7 +402,7 @@ a {
 }
 
 .sb-ledger tr:hover td {
-  background: rgba(255,255,255,0.015);
+  background: rgba(255, 255, 255, 0.015);
   color: var(--sb-text);
 }
 

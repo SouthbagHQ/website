@@ -3,39 +3,68 @@ interface AuditEntry {
   ref: string;
   date: string;
   item: string;
-  status: 'cleared' | 'reviewed' | 'pending' | 'denied' | 'escalated';
+  status: "cleared" | "reviewed" | "pending" | "denied" | "escalated";
 }
 
 const auditLog: AuditEntry[] = [
-  { ref: 'CE-1847',   date: '28 Jun 2026', item: 'Compliance Exception — Crypto Withdrawal Limit', status: 'cleared' },
-  { ref: 'ACC-29301', date: '25 Jun 2026', item: 'Account Escalation — Commercial Entity Review',  status: 'reviewed' },
-  { ref: 'POL-014',   date: '22 Jun 2026', item: 'Policy Override Request — International Transfer', status: 'denied' },
-  { ref: 'CE-1845',   date: '18 Jun 2026', item: 'Compliance Exception — Tax Filing Extension',    status: 'cleared' },
-  { ref: 'INS-7201',  date: '15 Jun 2026', item: 'Insurance Claim Override — Commercial Property', status: 'escalated' },
-  { ref: 'ACC-29244', date: '10 Jun 2026', item: 'Account Escalation — AML Flag Review',           status: 'reviewed' },
+  {
+    ref: "CE-1847",
+    date: "28 Jun 2026",
+    item: "Compliance Exception — Crypto Withdrawal Limit",
+    status: "cleared",
+  },
+  {
+    ref: "ACC-29301",
+    date: "25 Jun 2026",
+    item: "Account Escalation — Commercial Entity Review",
+    status: "reviewed",
+  },
+  {
+    ref: "POL-014",
+    date: "22 Jun 2026",
+    item: "Policy Override Request — International Transfer",
+    status: "denied",
+  },
+  {
+    ref: "CE-1845",
+    date: "18 Jun 2026",
+    item: "Compliance Exception — Tax Filing Extension",
+    status: "cleared",
+  },
+  {
+    ref: "INS-7201",
+    date: "15 Jun 2026",
+    item: "Insurance Claim Override — Commercial Property",
+    status: "escalated",
+  },
+  {
+    ref: "ACC-29244",
+    date: "10 Jun 2026",
+    item: "Account Escalation — AML Flag Review",
+    status: "reviewed",
+  },
 ];
 
 const statusClass: Record<string, string> = {
-  cleared: 'sb-kevin-cleared',
-  reviewed: 'sb-kevin-reviewed',
-  pending: 'sb-kevin-pending',
-  denied: 'sb-kevin-denied',
-  escalated: 'sb-kevin-escalated',
+  cleared: "sb-kevin-cleared",
+  reviewed: "sb-kevin-reviewed",
+  pending: "sb-kevin-pending",
+  denied: "sb-kevin-denied",
+  escalated: "sb-kevin-escalated",
 };
 
 const statusLabel: Record<string, string> = {
-  cleared: 'Cleared',
-  reviewed: 'Reviewed',
-  pending: 'Pending',
-  denied: 'Denied',
-  escalated: 'Escalated',
+  cleared: "Cleared",
+  reviewed: "Reviewed",
+  pending: "Pending",
+  denied: "Denied",
+  escalated: "Escalated",
 };
 ---
 
 <section class="kevin-section">
   <div class="sb-container">
     <div class="kevin-grid">
-
       <div class="kevin-authority sb-panel">
         <div class="sb-panel-header">
           <span class="sb-label">Executive Authority</span>
@@ -65,8 +94,12 @@ const statusLabel: Record<string, string> = {
           </div>
           <div class="kevin-current">
             <span class="sb-label">Current Item</span>
-            <p class="kevin-current-item">"Compliance Exception #1847 — Crypto Withdrawal Limit Override"</p>
-            <span class="kevin-time">Since 08:42 UTC · Est. completion: unknown</span>
+            <p class="kevin-current-item">
+              "Compliance Exception #1847 — Crypto Withdrawal Limit Override"
+            </p>
+            <span class="kevin-time"
+              >Since 08:42 UTC · Est. completion: unknown</span
+            >
           </div>
         </div>
       </div>
@@ -74,7 +107,9 @@ const statusLabel: Record<string, string> = {
       <div class="kevin-log sb-panel">
         <div class="sb-panel-header">
           <span class="sb-label">Executive Decision Log</span>
-          <span class="sb-code" style="color:var(--sb-text-dimmer)">Last 30 days</span>
+          <span class="sb-code" style="color:var(--sb-text-dimmer)"
+            >Last 30 days</span
+          >
         </div>
         <table class="sb-ledger">
           <thead>
@@ -86,22 +121,23 @@ const statusLabel: Record<string, string> = {
             </tr>
           </thead>
           <tbody>
-            {auditLog.map(entry => (
-              <tr>
-                <td class="ref-cell">{entry.ref}</td>
-                <td class="date-cell">{entry.date}</td>
-                <td class="item-cell">{entry.item}</td>
-                <td>
-                  <span class:list={['sb-kevin', statusClass[entry.status]]}>
-                    {statusLabel[entry.status]}
-                  </span>
-                </td>
-              </tr>
-            ))}
+            {
+              auditLog.map((entry) => (
+                <tr>
+                  <td class="ref-cell">{entry.ref}</td>
+                  <td class="date-cell">{entry.date}</td>
+                  <td class="item-cell">{entry.item}</td>
+                  <td>
+                    <span class:list={["sb-kevin", statusClass[entry.status]]}>
+                      {statusLabel[entry.status]}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>
-
     </div>
   </div>
 </section>

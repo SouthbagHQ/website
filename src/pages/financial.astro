@@ -1,146 +1,161 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ProductCard from '../components/ProductCard.astro';
+import Layout from "../layouts/Layout.astro";
+import ProductCard from "../components/ProductCard.astro";
 
 const products = [
   {
-    code: 'SB-FIN-001',
-    name: 'Online Banking',
-    description: 'Deposit and withdrawal services. All transactions subject to a minimum 1–3 business day review period. Funds may be held pending AML verification.',
-    status: 'active' as const,
-    tier: 'personal' as const,
-    kevinStatus: 'cleared' as const,
+    code: "SB-FIN-001",
+    name: "Online Banking",
+    description:
+      "Deposit and withdrawal services. All transactions subject to a minimum 1–3 business day review period. Funds may be held pending AML verification.",
+    status: "active" as const,
+    tier: "personal" as const,
+    kevinStatus: "cleared" as const,
   },
   {
-    code: 'SB-FIN-002',
-    name: 'Invest',
-    description: 'Equity, fixed income, and managed portfolio products. Historical performance is not indicative of future results. Southbag assumes no liability for market conditions.',
-    status: 'active' as const,
-    tier: 'personal' as const,
+    code: "SB-FIN-002",
+    name: "Invest",
+    description:
+      "Equity, fixed income, and managed portfolio products. Historical performance is not indicative of future results. Southbag assumes no liability for market conditions.",
+    status: "active" as const,
+    tier: "personal" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-FIN-003',
-    name: 'Crypto Exchange',
-    description: 'Digital asset trading infrastructure. All transactions are irreversible. Enhanced monitoring applied to all accounts. Withdrawal limits enforced without warning.',
-    status: 'active' as const,
-    tier: 'personal' as const,
-    kevinStatus: 'denied' as const,
-    kevinLabel: 'Policy override denied',
+    code: "SB-FIN-003",
+    name: "Crypto Exchange",
+    description:
+      "Digital asset trading infrastructure. All transactions are irreversible. Enhanced monitoring applied to all accounts. Withdrawal limits enforced without warning.",
+    status: "active" as const,
+    tier: "personal" as const,
+    kevinStatus: "denied" as const,
+    kevinLabel: "Policy override denied",
   },
   {
-    code: 'SB-FIN-004',
-    name: 'Pay Later',
-    description: 'Deferred payment infrastructure. Creditworthiness assessed continuously and without notice. Terms subject to change. Default interest rates applied retroactively.',
-    status: 'active' as const,
-    tier: 'personal' as const,
+    code: "SB-FIN-004",
+    name: "Pay Later",
+    description:
+      "Deferred payment infrastructure. Creditworthiness assessed continuously and without notice. Terms subject to change. Default interest rates applied retroactively.",
+    status: "active" as const,
+    tier: "personal" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-FIN-005',
-    name: 'Tax',
-    description: 'Automated tax filing and preparation services. Southbag retains copies of all submissions for 10 years. Filing errors are the client\'s responsibility.',
-    status: 'active' as const,
-    tier: 'personal' as const,
+    code: "SB-FIN-005",
+    name: "Tax",
+    description:
+      "Automated tax filing and preparation services. Southbag retains copies of all submissions for 10 years. Filing errors are the client's responsibility.",
+    status: "active" as const,
+    tier: "personal" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-FIN-006',
-    name: 'Rewards',
-    description: 'Points-based recognition programme. Points have no cash value and expire at Southbag\'s discretion. Redemption categories may be modified without notice.',
-    status: 'active' as const,
-    tier: 'personal' as const,
+    code: "SB-FIN-006",
+    name: "Rewards",
+    description:
+      "Points-based recognition programme. Points have no cash value and expire at Southbag's discretion. Redemption categories may be modified without notice.",
+    status: "active" as const,
+    tier: "personal" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-FIN-007',
-    name: 'Insurance',
-    description: 'Coverage products underwritten by Southbag Insurance Partners Ltd. Claims subject to approval. Processing time: 30–90 days. Certain claims escalated to Kevin.',
-    status: 'active' as const,
-    tier: 'personal' as const,
-    kevinStatus: 'reviewed' as const,
+    code: "SB-FIN-007",
+    name: "Insurance",
+    description:
+      "Coverage products underwritten by Southbag Insurance Partners Ltd. Claims subject to approval. Processing time: 30–90 days. Certain claims escalated to Kevin.",
+    status: "active" as const,
+    tier: "personal" as const,
+    kevinStatus: "reviewed" as const,
   },
   {
-    code: 'SB-FIN-008',
-    name: 'International Transfer',
-    description: 'Cross-border payment services. Subject to sanctions screening, enhanced compliance review, and additional hold periods up to 14 days. All recipients are logged.',
-    status: 'active' as const,
-    tier: 'personal' as const,
+    code: "SB-FIN-008",
+    name: "International Transfer",
+    description:
+      "Cross-border payment services. Subject to sanctions screening, enhanced compliance review, and additional hold periods up to 14 days. All recipients are logged.",
+    status: "active" as const,
+    tier: "personal" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-FIN-009',
-    name: 'For Businesses',
-    description: 'Business account infrastructure. Director KYC required. Beneficial ownership reporting mandatory under SB-ACT-2018. Entity verification processing: 5–10 days.',
-    status: 'active' as const,
-    tier: 'business' as const,
+    code: "SB-FIN-009",
+    name: "For Businesses",
+    description:
+      "Business account infrastructure. Director KYC required. Beneficial ownership reporting mandatory under SB-ACT-2018. Entity verification processing: 5–10 days.",
+    status: "active" as const,
+    tier: "business" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-FIN-010',
-    name: 'PoS',
-    description: 'Physical and digital point-of-sale terminals. Transaction data retained indefinitely. Network connectivity SLA: 99.2%. Downtime compensation is not guaranteed.',
-    status: 'active' as const,
-    tier: 'business' as const,
+    code: "SB-FIN-010",
+    name: "PoS",
+    description:
+      "Physical and digital point-of-sale terminals. Transaction data retained indefinitely. Network connectivity SLA: 99.2%. Downtime compensation is not guaranteed.",
+    status: "active" as const,
+    tier: "business" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-FIN-011',
-    name: 'Compliance',
-    description: 'Regulatory adherence tools and reporting infrastructure. Usage of this product is itself subject to compliance review. Output reports are not legal opinions.',
-    status: 'active' as const,
-    tier: 'business' as const,
-    kevinStatus: 'reviewed' as const,
+    code: "SB-FIN-011",
+    name: "Compliance",
+    description:
+      "Regulatory adherence tools and reporting infrastructure. Usage of this product is itself subject to compliance review. Output reports are not legal opinions.",
+    status: "active" as const,
+    tier: "business" as const,
+    kevinStatus: "reviewed" as const,
   },
   {
-    code: 'SB-FIN-012',
-    name: 'Payroll',
-    description: 'Employee disbursement services. Worker data classification is the client\'s responsibility. Southbag assumes no liability for misclassification penalties.',
-    status: 'active' as const,
-    tier: 'business' as const,
+    code: "SB-FIN-012",
+    name: "Payroll",
+    description:
+      "Employee disbursement services. Worker data classification is the client's responsibility. Southbag assumes no liability for misclassification penalties.",
+    status: "active" as const,
+    tier: "business" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-FIN-013',
-    name: 'Invoicing',
-    description: 'Billing management and accounts receivable platform. Invoice data may be used for Southbag internal analytics and credit risk modelling.',
-    status: 'active' as const,
-    tier: 'business' as const,
+    code: "SB-FIN-013",
+    name: "Invoicing",
+    description:
+      "Billing management and accounts receivable platform. Invoice data may be used for Southbag internal analytics and credit risk modelling.",
+    status: "active" as const,
+    tier: "business" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-FIN-014',
-    name: 'API for Business',
-    description: 'Programmatic access to Southbag financial infrastructure. Rate limits enforced without warning. API keys may be revoked for compliance violations.',
-    status: 'active' as const,
-    tier: 'business' as const,
-    kevinStatus: 'pending' as const,
-    kevinLabel: 'Approval pending',
+    code: "SB-FIN-014",
+    name: "API for Business",
+    description:
+      "Programmatic access to Southbag financial infrastructure. Rate limits enforced without warning. API keys may be revoked for compliance violations.",
+    status: "active" as const,
+    tier: "business" as const,
+    kevinStatus: "pending" as const,
+    kevinLabel: "Approval pending",
   },
   {
-    code: 'SB-FIN-015',
-    name: 'Pay Later for Business',
-    description: 'Commercial deferred payment services. Director personal guarantees required above the $50,000 threshold. Terms assessed at account level.',
-    status: 'active' as const,
-    tier: 'business' as const,
+    code: "SB-FIN-015",
+    name: "Pay Later for Business",
+    description:
+      "Commercial deferred payment services. Director personal guarantees required above the $50,000 threshold. Terms assessed at account level.",
+    status: "active" as const,
+    tier: "business" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-FIN-016',
-    name: 'Slack Banking for Business',
-    description: 'Banking operations conducted via Slack integration. Message history is retained in full. Southbag cannot be held responsible for decisions made via chat.',
-    status: 'beta' as const,
-    tier: 'business' as const,
+    code: "SB-FIN-016",
+    name: "Slack Banking for Business",
+    description:
+      "Banking operations conducted via Slack integration. Message history is retained in full. Southbag cannot be held responsible for decisions made via chat.",
+    status: "beta" as const,
+    tier: "business" as const,
     kevinStatus: null,
   },
 ];
 
-const personalCount = products.filter(p => p.tier === 'personal').length;
-const businessCount = products.filter(p => p.tier === 'business').length;
+const personalCount = products.filter((p) => p.tier === "personal").length;
+const businessCount = products.filter((p) => p.tier === "business").length;
 ---
 
 <Layout title="Financial Services" currentPage="financial">
-
   <!-- ── Page header ── -->
   <div class="page-header">
     <div class="sb-container page-header-inner">
@@ -185,30 +200,40 @@ const businessCount = products.filter(p => p.tier === 'business').length;
     <div class="sb-container reg-band-inner">
       <span class="sb-label" style="flex-shrink:0;">Notice</span>
       <span class="reg-text">
-        Southbag Financial is a regulated financial institution. All products are subject to identity
-        verification, AML screening, and ongoing compliance monitoring. Access may be restricted,
-        suspended, or terminated at any time. Kevin reviews all policy exceptions.
+        Southbag Financial is a regulated financial institution. All products
+        are subject to identity verification, AML screening, and ongoing
+        compliance monitoring. Access may be restricted, suspended, or
+        terminated at any time. Kevin reviews all policy exceptions.
       </span>
-      <span class="sb-code" style="flex-shrink:0;color:var(--sb-text-dimmer);">REF: SB-REG-2018-14</span>
+      <span class="sb-code" style="flex-shrink:0;color:var(--sb-text-dimmer);"
+        >REF: SB-REG-2018-14</span
+      >
     </div>
   </div>
 
   <!-- ── Products grid ── -->
   <section class="products-section">
     <div class="sb-container">
-
       <!-- Personal services -->
       <div class="service-group">
         <div class="service-group-header">
           <div class="sb-section-label">Personal Financial Services</div>
-          <span class="sb-code">{personalCount} services · SB-FIN-001 to SB-FIN-00{personalCount}</span>
+          <span class="sb-code"
+            >{personalCount} services · SB-FIN-001 to SB-FIN-00{
+              personalCount
+            }</span
+          >
         </div>
         <div class="product-grid">
-          {products.filter(p => p.tier === 'personal').map((product, i) => (
-            <div>
-              <ProductCard {...product} />
-            </div>
-          ))}
+          {
+            products
+              .filter((p) => p.tier === "personal")
+              .map((product, i) => (
+                <div>
+                  <ProductCard {...product} />
+                </div>
+              ))
+          }
         </div>
       </div>
 
@@ -216,17 +241,22 @@ const businessCount = products.filter(p => p.tier === 'business').length;
       <div class="service-group">
         <div class="service-group-header">
           <div class="sb-section-label">Business Financial Services</div>
-          <span class="sb-code">{businessCount} services · Director verification required</span>
+          <span class="sb-code"
+            >{businessCount} services · Director verification required</span
+          >
         </div>
         <div class="product-grid">
-          {products.filter(p => p.tier === 'business').map((product, i) => (
-            <div>
-              <ProductCard {...product} />
-            </div>
-          ))}
+          {
+            products
+              .filter((p) => p.tier === "business")
+              .map((product, i) => (
+                <div>
+                  <ProductCard {...product} />
+                </div>
+              ))
+          }
         </div>
       </div>
-
     </div>
   </section>
 
@@ -251,7 +281,6 @@ const businessCount = products.filter(p => p.tier === 'business').length;
       </div>
     </div>
   </div>
-
 </Layout>
 
 <style>

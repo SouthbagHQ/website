@@ -1,97 +1,106 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ProductCard from '../components/ProductCard.astro';
+import Layout from "../layouts/Layout.astro";
+import ProductCard from "../components/ProductCard.astro";
 
 const products = [
   {
-    code: 'SB-BIZ-001',
-    name: 'Secure Access',
-    description: 'Identity and access management for enterprise environments. All authentication events are logged and retained. Privileged access reviews are conducted monthly by Southbag.',
-    status: 'active' as const,
-    tier: 'enterprise' as const,
-    kevinStatus: 'reviewed' as const,
+    code: "SB-BIZ-001",
+    name: "Secure Access",
+    description:
+      "Identity and access management for enterprise environments. All authentication events are logged and retained. Privileged access reviews are conducted monthly by Southbag.",
+    status: "active" as const,
+    tier: "enterprise" as const,
+    kevinStatus: "reviewed" as const,
   },
   {
-    code: 'SB-BIZ-002',
-    name: 'VPN for Business',
-    description: 'Enterprise encrypted network access. Full packet inspection available to authorised administrators. Split-tunnelling is disabled by default and requires written approval.',
-    status: 'active' as const,
-    tier: 'business' as const,
+    code: "SB-BIZ-002",
+    name: "VPN for Business",
+    description:
+      "Enterprise encrypted network access. Full packet inspection available to authorised administrators. Split-tunnelling is disabled by default and requires written approval.",
+    status: "active" as const,
+    tier: "business" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-BIZ-003',
-    name: 'MDM',
-    description: 'Mobile device management for enrolled corporate devices. Southbag reserves the right to remotely wipe enrolled devices. Wipe actions are logged but not reversible.',
-    status: 'active' as const,
-    tier: 'enterprise' as const,
+    code: "SB-BIZ-003",
+    name: "MDM",
+    description:
+      "Mobile device management for enrolled corporate devices. Southbag reserves the right to remotely wipe enrolled devices. Wipe actions are logged but not reversible.",
+    status: "active" as const,
+    tier: "enterprise" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-BIZ-004',
-    name: 'CRM',
-    description: 'Customer relationship management platform. Data sovereignty is subject to Southbag data residency policy SB-DATA-2021. Export functionality requires 30 days notice.',
-    status: 'active' as const,
-    tier: 'business' as const,
+    code: "SB-BIZ-004",
+    name: "CRM",
+    description:
+      "Customer relationship management platform. Data sovereignty is subject to Southbag data residency policy SB-DATA-2021. Export functionality requires 30 days notice.",
+    status: "active" as const,
+    tier: "business" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-BIZ-005',
-    name: 'Version Control',
-    description: 'Source code repository management. All commits are retained permanently. Repository access may be suspended during compliance reviews. Code is never fully deleted.',
-    status: 'active' as const,
-    tier: 'business' as const,
-    kevinStatus: 'reviewed' as const,
+    code: "SB-BIZ-005",
+    name: "Version Control",
+    description:
+      "Source code repository management. All commits are retained permanently. Repository access may be suspended during compliance reviews. Code is never fully deleted.",
+    status: "active" as const,
+    tier: "business" as const,
+    kevinStatus: "reviewed" as const,
   },
   {
-    code: 'SB-BIZ-006',
-    name: 'Data Lake',
-    description: 'Managed data storage and processing infrastructure. Southbag may access stored data for operational, compliance, and quality assurance purposes without notice.',
-    status: 'active' as const,
-    tier: 'enterprise' as const,
-    kevinStatus: 'pending' as const,
-    kevinLabel: 'Approval pending',
+    code: "SB-BIZ-006",
+    name: "Data Lake",
+    description:
+      "Managed data storage and processing infrastructure. Southbag may access stored data for operational, compliance, and quality assurance purposes without notice.",
+    status: "active" as const,
+    tier: "enterprise" as const,
+    kevinStatus: "pending" as const,
+    kevinLabel: "Approval pending",
   },
   {
-    code: 'SB-BIZ-007',
-    name: 'AI for Business',
-    description: 'Enterprise AI inference and model access. Prompts and outputs are logged for quality assurance and policy compliance. Do not submit trade secrets or regulated data.',
-    status: 'active' as const,
-    tier: 'enterprise' as const,
-    kevinStatus: 'reviewed' as const,
+    code: "SB-BIZ-007",
+    name: "AI for Business",
+    description:
+      "Enterprise AI inference and model access. Prompts and outputs are logged for quality assurance and policy compliance. Do not submit trade secrets or regulated data.",
+    status: "active" as const,
+    tier: "enterprise" as const,
+    kevinStatus: "reviewed" as const,
   },
   {
-    code: 'SB-BIZ-008',
-    name: 'Edge Compute',
-    description: 'Distributed computation infrastructure. Workload placement is determined by Southbag routing policies. Geographic preferences are advisory, not guaranteed.',
-    status: 'active' as const,
-    tier: 'enterprise' as const,
+    code: "SB-BIZ-008",
+    name: "Edge Compute",
+    description:
+      "Distributed computation infrastructure. Workload placement is determined by Southbag routing policies. Geographic preferences are advisory, not guaranteed.",
+    status: "active" as const,
+    tier: "enterprise" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-BIZ-009',
-    name: 'Analytics',
-    description: 'Business intelligence and reporting infrastructure. Southbag retains aggregate analytics across all accounts for internal benchmarking and product improvement.',
-    status: 'active' as const,
-    tier: 'business' as const,
+    code: "SB-BIZ-009",
+    name: "Analytics",
+    description:
+      "Business intelligence and reporting infrastructure. Southbag retains aggregate analytics across all accounts for internal benchmarking and product improvement.",
+    status: "active" as const,
+    tier: "business" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-BIZ-010',
-    name: 'Ecommerce',
-    description: 'Managed storefront and transaction processing. All orders are subject to Southbag fulfilment policies. Southbag may reject transactions without explanation.',
-    status: 'active' as const,
-    tier: 'business' as const,
+    code: "SB-BIZ-010",
+    name: "Ecommerce",
+    description:
+      "Managed storefront and transaction processing. All orders are subject to Southbag fulfilment policies. Southbag may reject transactions without explanation.",
+    status: "active" as const,
+    tier: "business" as const,
     kevinStatus: null,
   },
 ];
 
-const businessCount = products.filter(p => p.tier === 'business').length;
-const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
+const businessCount = products.filter((p) => p.tier === "business").length;
+const enterpriseCount = products.filter((p) => p.tier === "enterprise").length;
 ---
 
 <Layout title="Business Services" currentPage="business">
-
   <!-- ── Page header ── -->
   <div class="page-header">
     <div class="sb-container page-header-inner">
@@ -104,9 +113,10 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
         <div>
           <h1 class="page-title">Southbag Business</h1>
           <p class="page-desc">
-            Enterprise software infrastructure for regulated business environments.
-            All services require director-level account setup, verified beneficial
-            ownership, and ongoing compliance reporting. Kevin reviews escalations.
+            Enterprise software infrastructure for regulated business
+            environments. All services require director-level account setup,
+            verified beneficial ownership, and ongoing compliance reporting.
+            Kevin reviews escalations.
           </p>
         </div>
         <div class="page-meta">
@@ -134,7 +144,9 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
   <!-- ── Enterprise requirements band ── -->
   <div class="req-band">
     <div class="sb-container req-band-inner">
-      <span class="sb-label" style="flex-shrink:0;">Onboarding Requirements</span>
+      <span class="sb-label" style="flex-shrink:0;"
+        >Onboarding Requirements</span
+      >
       <div class="req-items">
         <span class="req-item">Director KYC</span>
         <span class="req-sep">·</span>
@@ -152,21 +164,26 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
   <!-- ── Products grid ── -->
   <section class="products-section">
     <div class="sb-container">
-
       <!-- Business tier -->
       <div class="service-group">
         <div class="service-group-header">
           <div class="sb-section-label">Business Services</div>
           <div class="group-header-right">
-            <span class="sb-code">Requires: Director KYC · Business Account</span>
+            <span class="sb-code"
+              >Requires: Director KYC · Business Account</span
+            >
           </div>
         </div>
         <div class="product-grid">
-          {products.filter(p => p.tier === 'business').map((product, i) => (
-            <div>
-              <ProductCard {...product} />
-            </div>
-          ))}
+          {
+            products
+              .filter((p) => p.tier === "business")
+              .map((product, i) => (
+                <div>
+                  <ProductCard {...product} />
+                </div>
+              ))
+          }
         </div>
       </div>
 
@@ -175,18 +192,23 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
         <div class="service-group-header">
           <div class="sb-section-label">Enterprise Services</div>
           <div class="group-header-right">
-            <span class="sb-badge sb-badge-reviewing">Enterprise Agreement Required</span>
+            <span class="sb-badge sb-badge-reviewing"
+              >Enterprise Agreement Required</span
+            >
           </div>
         </div>
         <div class="product-grid">
-          {products.filter(p => p.tier === 'enterprise').map((product, i) => (
-            <div>
-              <ProductCard {...product} />
-            </div>
-          ))}
+          {
+            products
+              .filter((p) => p.tier === "enterprise")
+              .map((product, i) => (
+                <div>
+                  <ProductCard {...product} />
+                </div>
+              ))
+          }
         </div>
       </div>
-
     </div>
   </section>
 
@@ -199,14 +221,13 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
       </div>
 
       <div class="compliance-grid">
-
         <div class="compliance-item">
           <div class="compliance-num">01</div>
           <h4 class="compliance-name">Annual Compliance Review</h4>
           <p class="compliance-desc">
             All business accounts are subject to an annual compliance review.
-            Failure to provide requested documentation within 14 days results
-            in account suspension.
+            Failure to provide requested documentation within 14 days results in
+            account suspension.
           </p>
         </div>
 
@@ -214,8 +235,9 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
           <div class="compliance-num">02</div>
           <h4 class="compliance-name">Data Residency Declaration</h4>
           <p class="compliance-desc">
-            You must declare the jurisdictions in which your data may be processed.
-            Southbag's data residency policies take precedence over your declaration.
+            You must declare the jurisdictions in which your data may be
+            processed. Southbag's data residency policies take precedence over
+            your declaration.
           </p>
         </div>
 
@@ -224,8 +246,8 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
           <h4 class="compliance-name">Incident Reporting</h4>
           <p class="compliance-desc">
             Security incidents must be reported to Southbag within 4 hours of
-            detection. Southbag will determine whether the incident is reportable
-            to regulatory authorities.
+            detection. Southbag will determine whether the incident is
+            reportable to regulatory authorities.
           </p>
         </div>
 
@@ -243,9 +265,9 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
           <div class="compliance-num">05</div>
           <h4 class="compliance-name">Executive Escalation</h4>
           <p class="compliance-desc">
-            Disputes, policy exceptions, and compliance waivers escalate to Kevin.
-            His decisions are final. No further appeals process is available
-            for matters reviewed personally by Kevin.
+            Disputes, policy exceptions, and compliance waivers escalate to
+            Kevin. His decisions are final. No further appeals process is
+            available for matters reviewed personally by Kevin.
           </p>
           <div style="margin-top:12px">
             <span class="sb-kevin sb-kevin-reviewed">Reviewed by Kevin</span>
@@ -256,12 +278,11 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
           <div class="compliance-num">06</div>
           <h4 class="compliance-name">Termination and Offboarding</h4>
           <p class="compliance-desc">
-            Account termination requires 90 days notice. Data export is available
-            for 30 days post-termination. After 30 days, data is archived and
-            not retrievable without a written executive request.
+            Account termination requires 90 days notice. Data export is
+            available for 30 days post-termination. After 30 days, data is
+            archived and not retrievable without a written executive request.
           </p>
         </div>
-
       </div>
     </div>
   </section>
@@ -274,13 +295,18 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
         <h3 class="ent-title">Need something not listed here?</h3>
         <p class="ent-desc">
           Custom enterprise agreements, bespoke service configurations, and
-          specialised compliance frameworks are available. Engagements require
-          a minimum 12-month term. Kevin may be involved in final approval.
+          specialised compliance frameworks are available. Engagements require a
+          minimum 12-month term. Kevin may be involved in final approval.
         </p>
       </div>
       <div class="ent-actions">
-        <a href="#" class="sb-btn sb-btn-primary">Request Enterprise Consultation</a>
-        <p class="ent-note sb-code" style="color:var(--sb-text-dimmer);margin-top:10px;font-size:10px;">
+        <a href="#" class="sb-btn sb-btn-primary"
+          >Request Enterprise Consultation</a
+        >
+        <p
+          class="ent-note sb-code"
+          style="color:var(--sb-text-dimmer);margin-top:10px;font-size:10px;"
+        >
           Response time: 3–10 business days. Not guaranteed.
         </p>
       </div>
@@ -308,7 +334,6 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
       </div>
     </div>
   </div>
-
 </Layout>
 
 <style>

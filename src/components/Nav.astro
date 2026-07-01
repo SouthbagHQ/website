@@ -2,15 +2,15 @@
 interface Props {
   currentPage?: string;
 }
-const { currentPage = '' } = Astro.props;
+const { currentPage = "" } = Astro.props;
 
 const navLinks = [
-  { label: 'Financial', href: '/financial', key: 'financial' },
-  { label: 'Digital', href: '/digital', key: 'digital' },
-  { label: 'Business', href: '/business', key: 'business' },
+  { label: "Financial", href: "/financial", key: "financial" },
+  { label: "Digital", href: "/digital", key: "digital" },
+  { label: "Business", href: "/business", key: "business" },
 ];
 
-const identityUrl = 'https://identity.southbag.cc';
+const identityUrl = "https://identity.southbag.cc";
 ---
 
 <header class="sb-nav">
@@ -21,24 +21,35 @@ const identityUrl = 'https://identity.southbag.cc';
       </a>
 
       <ul class="sb-nav-links">
-        {navLinks.map(link => (
-          <li>
-            <a
-              href={link.href}
-              class:list={['sb-nav-link', { 'is-active': currentPage === link.key }]}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class:list={[
+                  "sb-nav-link",
+                  { "is-active": currentPage === link.key },
+                ]}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
 
       <div class="sb-nav-right">
         <a href={identityUrl} class="sb-btn sb-btn-ghost sb-signin">Sign In</a>
-        <a href={identityUrl} class="sb-btn sb-btn-primary sb-signin">Get Started</a>
+        <a href={identityUrl} class="sb-btn sb-btn-primary sb-signin"
+          >Get Started</a
+        >
       </div>
 
-      <button class="sb-mobile-menu-btn" id="menuToggle" aria-label="Toggle navigation">
+      <button
+        class="sb-mobile-menu-btn"
+        id="menuToggle"
+        aria-label="Toggle navigation"
+      >
         <span></span>
         <span></span>
         <span></span>
@@ -46,26 +57,33 @@ const identityUrl = 'https://identity.southbag.cc';
     </div>
 
     <div class="sb-mobile-menu" id="mobileMenu">
-      {navLinks.map(link => (
-        <a
-          href={link.href}
-          class:list={['sb-mobile-link', { 'is-active': currentPage === link.key }]}
-        >
-          {link.label}
-        </a>
-      ))}
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "sb-mobile-link",
+              { "is-active": currentPage === link.key },
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
       <a href={identityUrl} class="sb-mobile-link sb-mobile-signin">Sign In</a>
-      <a href={identityUrl} class="sb-mobile-link sb-mobile-start">Get Started</a>
+      <a href={identityUrl} class="sb-mobile-link sb-mobile-start"
+        >Get Started</a
+      >
     </div>
   </nav>
 </header>
 
 <script>
-  const btn = document.getElementById('menuToggle');
-  const menu = document.getElementById('mobileMenu');
-  btn?.addEventListener('click', () => {
-    menu?.classList.toggle('is-open');
-    btn.classList.toggle('is-open');
+  const btn = document.getElementById("menuToggle");
+  const menu = document.getElementById("mobileMenu");
+  btn?.addEventListener("click", () => {
+    menu?.classList.toggle("is-open");
+    btn.classList.toggle("is-open");
   });
 </script>
 
@@ -141,12 +159,12 @@ const identityUrl = 'https://identity.southbag.cc';
 
   .sb-nav-link:hover {
     color: var(--sb-text);
-    background: rgba(255,255,255,0.02);
+    background: rgba(255, 255, 255, 0.02);
   }
 
   .sb-nav-link.is-active {
     color: var(--sb-heading);
-    background: rgba(255,255,255,0.03);
+    background: rgba(255, 255, 255, 0.03);
     border-bottom: 1px solid var(--sb-border-active);
   }
 
@@ -212,7 +230,7 @@ const identityUrl = 'https://identity.southbag.cc';
   .sb-mobile-link:hover,
   .sb-mobile-link.is-active {
     color: var(--sb-heading);
-    background: rgba(255,255,255,0.02);
+    background: rgba(255, 255, 255, 0.02);
   }
 
   .sb-mobile-signin {

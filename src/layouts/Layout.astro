@@ -1,6 +1,6 @@
 ---
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -10,14 +10,15 @@ interface Props {
 }
 
 const {
-  title = 'Southbag',
-  description = 'An ecosystem of services you do not fully control.',
-  currentPage = '',
+  title = "Southbag",
+  description = "An ecosystem of services you do not fully control.",
+  currentPage = "",
 } = Astro.props;
 
-const fullTitle = title === 'Southbag'
-  ? 'Southbag — Institutional Services'
-  : `${title} — Southbag`;
+const fullTitle =
+  title === "Southbag"
+    ? "Southbag — Institutional Services"
+    : `${title} — Southbag`;
 ---
 
 <!doctype html>

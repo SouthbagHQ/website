@@ -3,16 +3,14 @@ interface Props {
   code: string;
   name: string;
   description: string;
-  status?: 'active' | 'pending' | 'restricted' | 'beta' | 'reviewing';
-  tier?: 'personal' | 'business' | 'enterprise';
-  kevinStatus?: 'cleared' | 'reviewed' | 'pending' | 'denied' | 'escalated' | null;
+  status?: "active" | "pending" | "restricted" | "beta" | "reviewing";
+  tier?: "personal" | "business" | "enterprise";
+  kevinStatus?:
+    "cleared" | "reviewed" | "pending" | "denied" | "escalated" | null;
   kevinLabel?: string;
 }
 
-const {
-  name,
-  description,
-} = Astro.props;
+const { name, description } = Astro.props;
 ---
 
 <div class="sb-product-card">

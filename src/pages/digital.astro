@@ -1,79 +1,86 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ProductCard from '../components/ProductCard.astro';
+import Layout from "../layouts/Layout.astro";
+import ProductCard from "../components/ProductCard.astro";
 
 const products = [
   {
-    code: 'SB-DIG-001',
-    name: 'Broadband',
-    description: 'Fixed-line internet access infrastructure. Traffic monitoring enabled by default. Deep packet inspection is operational. Cannot be disabled without a written policy exception.',
-    status: 'active' as const,
-    tier: 'personal' as const,
+    code: "SB-DIG-001",
+    name: "Broadband",
+    description:
+      "Fixed-line internet access infrastructure. Traffic monitoring enabled by default. Deep packet inspection is operational. Cannot be disabled without a written policy exception.",
+    status: "active" as const,
+    tier: "personal" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-DIG-002',
-    name: 'Mobile',
-    description: 'Mobile network services. Location data collected at 15-minute intervals and retained for 36 months. Roaming subject to enhanced monitoring policy. Device IMEI logged.',
-    status: 'active' as const,
-    tier: 'personal' as const,
+    code: "SB-DIG-002",
+    name: "Mobile",
+    description:
+      "Mobile network services. Location data collected at 15-minute intervals and retained for 36 months. Roaming subject to enhanced monitoring policy. Device IMEI logged.",
+    status: "active" as const,
+    tier: "personal" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-DIG-003',
-    name: 'Firewall',
-    description: 'Network perimeter protection. Southbag Firewall policies take precedence over customer-defined rules. Rule changes subject to a 48-hour review period.',
-    status: 'active' as const,
-    tier: 'personal' as const,
+    code: "SB-DIG-003",
+    name: "Firewall",
+    description:
+      "Network perimeter protection. Southbag Firewall policies take precedence over customer-defined rules. Rule changes subject to a 48-hour review period.",
+    status: "active" as const,
+    tier: "personal" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-DIG-004',
-    name: 'VPN',
-    description: 'Encrypted network tunnelling. Connection logs retained for 36 months. Southbag may provide connection records to regulators upon request without client notification.',
-    status: 'active' as const,
-    tier: 'personal' as const,
+    code: "SB-DIG-004",
+    name: "VPN",
+    description:
+      "Encrypted network tunnelling. Connection logs retained for 36 months. Southbag may provide connection records to regulators upon request without client notification.",
+    status: "active" as const,
+    tier: "personal" as const,
     kevinStatus: null,
   },
   {
-    code: 'SB-DIG-005',
-    name: 'Code',
-    description: 'AI-assisted development environment. Generated code may be reviewed for policy compliance. All repository contents are accessible to Southbag infrastructure teams.',
-    status: 'active' as const,
-    tier: 'personal' as const,
-    kevinStatus: 'reviewed' as const,
+    code: "SB-DIG-005",
+    name: "Code",
+    description:
+      "AI-assisted development environment. Generated code may be reviewed for policy compliance. All repository contents are accessible to Southbag infrastructure teams.",
+    status: "active" as const,
+    tier: "personal" as const,
+    kevinStatus: "reviewed" as const,
   },
   {
-    code: 'SB-DIG-006',
-    name: 'AI',
-    description: 'General-purpose language model access. Inputs retained for 90 days. Outputs may be reviewed. Do not submit personal, regulated, or confidential data. Southbag is not liable for outputs.',
-    status: 'active' as const,
-    tier: 'personal' as const,
-    kevinStatus: 'escalated' as const,
-    kevinLabel: 'Account escalated',
+    code: "SB-DIG-006",
+    name: "AI",
+    description:
+      "General-purpose language model access. Inputs retained for 90 days. Outputs may be reviewed. Do not submit personal, regulated, or confidential data. Southbag is not liable for outputs.",
+    status: "active" as const,
+    tier: "personal" as const,
+    kevinStatus: "escalated" as const,
+    kevinLabel: "Account escalated",
   },
   {
-    code: 'SB-DIG-007',
-    name: 'DNS',
-    description: 'Domain name resolution services. Query logs retained indefinitely. Southbag reserves the right to block resolution of domains flagged under policy SB-DNS-POL-03.',
-    status: 'active' as const,
-    tier: 'personal' as const,
-    kevinStatus: 'cleared' as const,
-    kevinLabel: 'Cleared by Kevin',
+    code: "SB-DIG-007",
+    name: "DNS",
+    description:
+      "Domain name resolution services. Query logs retained indefinitely. Southbag reserves the right to block resolution of domains flagged under policy SB-DNS-POL-03.",
+    status: "active" as const,
+    tier: "personal" as const,
+    kevinStatus: "cleared" as const,
+    kevinLabel: "Cleared by Kevin",
   },
   {
-    code: 'SB-DIG-008',
-    name: 'CSS',
-    description: 'Managed stylesheet delivery and transformation services. Southbag may update your styles during scheduled maintenance windows. Brand compliance checks applied automatically.',
-    status: 'beta' as const,
-    tier: 'personal' as const,
-    kevinStatus: 'reviewed' as const,
+    code: "SB-DIG-008",
+    name: "CSS",
+    description:
+      "Managed stylesheet delivery and transformation services. Southbag may update your styles during scheduled maintenance windows. Brand compliance checks applied automatically.",
+    status: "beta" as const,
+    tier: "personal" as const,
+    kevinStatus: "reviewed" as const,
   },
 ];
 ---
 
 <Layout title="Digital Services" currentPage="digital">
-
   <!-- ── Page header ── -->
   <div class="page-header">
     <div class="sb-container page-header-inner">
@@ -88,7 +95,8 @@ const products = [
           <p class="page-desc">
             Broadband, mobile, security infrastructure, and developer tooling.
             All network traffic is subject to monitoring. Encryption does not
-            prevent compliance access. Traffic data is retained per policy SB-NET-2022.
+            prevent compliance access. Traffic data is retained per policy
+            SB-NET-2022.
           </p>
         </div>
         <div class="page-meta">
@@ -130,21 +138,41 @@ const products = [
           <span class="sb-badge sb-badge-pending">CSS CDN</span>
         </div>
       </div>
-      <span class="sb-code" style="flex-shrink:0;color:var(--sb-text-dimmer);">Last updated 2 min ago</span>
+      <span class="sb-code" style="flex-shrink:0;color:var(--sb-text-dimmer);"
+        >Last updated 2 min ago</span
+      >
     </div>
   </div>
 
   <!-- ── Monitoring notice ── -->
   <div class="monitoring-notice">
     <div class="sb-container monitoring-notice-inner">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:1px;">
-        <rect x="1" y="1" width="12" height="12" stroke="currentColor" stroke-width="1"/>
-        <path d="M7 4v4M7 10v.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 14 14"
+        fill="none"
+        style="flex-shrink:0;margin-top:1px;"
+      >
+        <rect
+          x="1"
+          y="1"
+          width="12"
+          height="12"
+          stroke="currentColor"
+          stroke-width="1"></rect>
+        <path
+          d="M7 4v4M7 10v.5"
+          stroke="currentColor"
+          stroke-width="1.2"
+          stroke-linecap="square"></path>
       </svg>
       <p class="monitoring-text">
-        All Southbag Digital services operate under continuous monitoring under policy SB-NET-2022.
-        Traffic analysis, device identification, and behavioural profiling are standard operating
-        procedures. Monitoring cannot be disabled. Contact your account manager for compliance documentation.
+        All Southbag Digital services operate under continuous monitoring under
+        policy SB-NET-2022. Traffic analysis, device identification, and
+        behavioural profiling are standard operating procedures. Monitoring
+        cannot be disabled. Contact your account manager for compliance
+        documentation.
       </p>
     </div>
   </div>
@@ -154,14 +182,20 @@ const products = [
     <div class="sb-container">
       <div class="service-group-header">
         <div class="sb-section-label">Digital Service Registry</div>
-        <span class="sb-code">{products.length} services · SB-DIG-001 to SB-DIG-00{products.length}</span>
+        <span class="sb-code"
+          >{products.length} services · SB-DIG-001 to SB-DIG-00{
+            products.length
+          }</span
+        >
       </div>
       <div class="product-grid">
-        {products.map((product, i) => (
-          <div>
-            <ProductCard {...product} />
-          </div>
-        ))}
+        {
+          products.map((product, i) => (
+            <div>
+              <ProductCard {...product} />
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -222,11 +256,15 @@ const products = [
             <span class="sb-label">Policy Exceptions</span>
             <span class="sb-badge sb-badge-pending">Requires Kevin</span>
           </div>
-          <div class="sb-panel-body" style="display:flex;flex-direction:column;gap:12px;">
+          <div
+            class="sb-panel-body"
+            style="display:flex;flex-direction:column;gap:12px;"
+          >
             <p class="exception-desc">
-              Exemptions from standard monitoring policies require written application,
-              director-level sign-off, and executive approval. Applications are reviewed
-              by Kevin and processed in the order they are received.
+              Exemptions from standard monitoring policies require written
+              application, director-level sign-off, and executive approval.
+              Applications are reviewed by Kevin and processed in the order they
+              are received.
             </p>
             <div class="exception-stats">
               <div class="exception-stat">
@@ -242,7 +280,11 @@ const products = [
                 <span class="ex-label">Denied or pending</span>
               </div>
             </div>
-            <a href="#" class="sb-btn sb-btn-ghost" style="width:fit-content;font-size:10px;padding:8px 14px;">
+            <a
+              href="#"
+              class="sb-btn sb-btn-ghost"
+              style="width:fit-content;font-size:10px;padding:8px 14px;"
+            >
               Submit Exception Request
             </a>
           </div>
@@ -268,7 +310,6 @@ const products = [
       </div>
     </div>
   </div>
-
 </Layout>
 
 <style>
@@ -387,7 +428,8 @@ const products = [
     flex: 1;
   }
 
-  .infra-item {}
+  .infra-item {
+  }
 
   /* ── Monitoring notice ── */
   .monitoring-notice {
