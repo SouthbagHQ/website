@@ -1,0 +1,491 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { IDENTITY_DASHBOARD_URL } from "../lib/identity";
+
+if (Astro.locals.user) {
+  return Astro.redirect(IDENTITY_DASHBOARD_URL);
+}
+---
+
+<Layout
+  title="Onboarding"
+  description="Create your Southbag account."
+  currentPage="onboarding"
+>
+  <section class="onboarding sb-grid-bg">
+    <div class="onboarding-inner sb-container">
+      <div class="onboarding-card">
+        <div class="onboarding-meta">
+          <span class="sb-section-label">Account Registration</span>
+          <p class="onboarding-progress">
+            Step <span id="stepCurrent">1</span> of <span id="stepTotal">4</span>
+          </p>
+        </div>
+
+        <div class="onboarding-progress-bar" aria-hidden="true">
+          <div class="onboarding-progress-fill" id="progressFill"></div>
+        </div>
+
+        <p class="onboarding-error" id="formError" hidden></p>
+
+        <div class="onboarding-step is-active" data-step="0">
+          <h1 class="onboarding-title sb-display">Welcome to Southbag</h1>
+          <p class="onboarding-copy">
+            You are beginning a registration process for institutional
+            services. Your account will be provisioned under standard Southbag
+            access policies. Continued enrollment constitutes acceptance.
+          </p>
+          <button type="button" class="sb-btn sb-btn-primary" data-action="next">
+            Continue
+          </button>
+        </div>
+
+        <div class="onboarding-step" data-step="1">
+          <h1 class="onboarding-title sb-display">Your name</h1>
+          <p class="onboarding-copy">
+            Provide the name you would like us to use during this registration
+            process.
+          </p>
+          <label class="onboarding-field">
+            <span class="onboarding-field-label">Full name</span>
+            <input
+              type="text"
+              name="name"
+              id="nameInput"
+              autocomplete="name"
+              placeholder="Enter your name"
+              required
+            />
+          </label>
+          <div class="onboarding-actions">
+            <button type="button" class="sb-btn sb-btn-ghost" data-action="back">
+              Back
+            </button>
+            <button type="button" class="sb-btn sb-btn-primary" data-action="next">
+              Continue
+            </button>
+          </div>
+        </div>
+
+        <div class="onboarding-step" data-step="2">
+          <h1 class="onboarding-title sb-display" id="emailTitle">
+            Your email
+          </h1>
+          <p class="onboarding-copy" id="emailCopy">
+            Enter the email address associated with your Southbag account.
+          </p>
+          <label class="onboarding-field">
+            <span class="onboarding-field-label">Email address</span>
+            <input
+              type="email"
+              name="email"
+              id="emailInput"
+              autocomplete="email"
+              placeholder="you@example.com"
+              required
+            />
+          </label>
+          <div class="onboarding-actions">
+            <button type="button" class="sb-btn sb-btn-ghost" data-action="back">
+              Back
+            </button>
+            <button type="button" class="sb-btn sb-btn-primary" data-action="next">
+              Continue
+            </button>
+          </div>
+        </div>
+
+        <div class="onboarding-step" data-step="3">
+          <h1 class="onboarding-title sb-display">Set a password</h1>
+          <p class="onboarding-copy">
+            Choose a password for your account. Minimum 8 characters.
+          </p>
+          <label class="onboarding-field">
+            <span class="onboarding-field-label">Password</span>
+            <input
+              type="password"
+              name="password"
+              id="passwordInput"
+              autocomplete="new-password"
+              placeholder="Enter password"
+              minlength="8"
+              required
+            />
+          </label>
+          <div class="onboarding-actions">
+            <button type="button" class="sb-btn sb-btn-ghost" data-action="back">
+              Back
+            </button>
+            <button
+              type="button"
+              class="sb-btn sb-btn-primary"
+              id="submitButton"
+              data-action="submit"
+            >
+              Create Account
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p class="onboarding-footnote sb-code">
+        By creating an account, you agree to all Southbag terms, policies, and
+        data retention schedules.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const steps = Array.from(document.querySelectorAll(".onboarding-step"));
+  const stepCurrent = document.getElementById("stepCurrent");
+  const progressFill = document.getElementById("progressFill");
+  const formError = document.getElementById("formError");
+  const nameInput = document.getElementById("nameInput") as HTMLInputElement;
+  const emailInput = document.getElementById("emailInput") as HTMLInputElement;
+  const passwordInput = document.getElementById(
+    "passwordInput",
+  ) as HTMLInputElement;
+  const emailTitle = document.getElementById("emailTitle");
+  const emailCopy = document.getElementById("emailCopy");
+  const submitButton = document.getElementById("submitButton");
+
+  const data = {
+    name: "",
+    email: "",
+    password: "",
+  };
+
+  let currentStep = 0;
+  let isSubmitting = false;
+
+  const hideError = () => {
+    if (!formError) return;
+    formError.hidden = true;
+    formError.textContent = "";
+  };
+
+  const showError = (message: string) => {
+    if (!formError) return;
+    formError.hidden = false;
+    formError.textContent = message;
+  };
+
+  const updateStep = () => {
+    steps.forEach((step, index) => {
+      step.classList.toggle("is-active", index === currentStep);
+    });
+
+    if (stepCurrent) {
+      stepCurrent.textContent = String(currentStep + 1);
+    }
+
+    if (progressFill) {
+      progressFill.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
+    }
+
+    hideError();
+
+    const activeInput = steps[currentStep]?.querySelector(
+      "input",
+    ) as HTMLInputElement | null;
+    activeInput?.focus();
+  };
+
+  const validateStep = () => {
+    if (currentStep === 1) {
+      data.name = nameInput?.value.trim() ?? "";
+      if (!data.name) {
+        showError("Please enter your name.");
+        nameInput?.focus();
+        return false;
+      }
+    }
+
+    if (currentStep === 2) {
+      data.email = emailInput?.value.trim() ?? "";
+      if (!data.email) {
+        showError("Please enter your email address.");
+        emailInput?.focus();
+        return false;
+      }
+      if (!emailInput?.checkValidity()) {
+        showError("Please enter a valid email address.");
+        emailInput?.focus();
+        return false;
+      }
+    }
+
+    if (currentStep === 3) {
+      data.password = passwordInput?.value ?? "";
+      if (!data.password) {
+        showError("Please enter a password.");
+        passwordInput?.focus();
+        return false;
+      }
+      if (data.password.length < 8) {
+        showError("Password must be at least 8 characters.");
+        passwordInput?.focus();
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  const personalizeEmailStep = () => {
+    if (!emailTitle || !emailCopy) return;
+
+    if (data.name) {
+      emailTitle.textContent = `Your email, ${data.name}`;
+      emailCopy.textContent =
+        "Enter the email address you would like associated with your Southbag account.";
+    } else {
+      emailTitle.textContent = "Your email";
+      emailCopy.textContent =
+        "Enter the email address associated with your Southbag account.";
+    }
+  };
+
+  const goNext = () => {
+    if (!validateStep()) return;
+
+    if (currentStep === 1) {
+      personalizeEmailStep();
+    }
+
+    if (currentStep < steps.length - 1) {
+      currentStep += 1;
+      updateStep();
+    }
+  };
+
+  const goBack = () => {
+    if (currentStep === 0) return;
+    currentStep -= 1;
+    updateStep();
+  };
+
+  const submitSignup = async () => {
+    if (isSubmitting || !validateStep()) return;
+
+    isSubmitting = true;
+    hideError();
+
+    if (submitButton) {
+      submitButton.textContent = "Creating Account...";
+      submitButton.setAttribute("disabled", "true");
+    }
+
+    try {
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
+      });
+
+      const payload = (await response.json().catch(() => null)) as {
+        redirect?: string;
+        error?: string;
+      } | null;
+
+      if (!response.ok) {
+        showError(payload?.error ?? "Account creation failed.");
+        return;
+      }
+
+      window.location.href = payload?.redirect ?? "https://identity.southbag.cc/home";
+    } catch {
+      showError("Unable to reach the registration service. Please try again.");
+    } finally {
+      isSubmitting = false;
+      if (submitButton) {
+        submitButton.textContent = "Create Account";
+        submitButton.removeAttribute("disabled");
+      }
+    }
+  };
+
+  document.querySelector(".onboarding-card")?.addEventListener("click", (event) => {
+    const target = event.target as HTMLElement;
+    const action = target.closest("[data-action]") as HTMLElement | null;
+    if (!action) return;
+
+    if (action.dataset.action === "next") {
+      goNext();
+    }
+
+    if (action.dataset.action === "back") {
+      goBack();
+    }
+
+    if (action.dataset.action === "submit") {
+      submitSignup();
+    }
+  });
+
+  document.querySelector(".onboarding-card")?.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+
+    const target = event.target as HTMLElement;
+    if (target.tagName !== "INPUT") return;
+
+    event.preventDefault();
+
+    if (currentStep === steps.length - 1) {
+      submitSignup();
+      return;
+    }
+
+    goNext();
+  });
+
+  updateStep();
+</script>
+
+<style>
+  .onboarding {
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    align-items: center;
+    padding: 48px 0 72px;
+  }
+
+  .onboarding-inner {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .onboarding-card {
+    background: var(--sb-card);
+    border: 1px solid var(--sb-border);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .onboarding-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .onboarding-progress {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sb-text-dimmer);
+  }
+
+  .onboarding-progress-bar {
+    height: 1px;
+    background: var(--sb-border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .onboarding-progress-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 25%;
+    background: var(--sb-accent-border);
+    transition: width 0.2s ease;
+  }
+
+  .onboarding-step {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .onboarding-step.is-active {
+    display: flex;
+  }
+
+  .onboarding-title {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+  }
+
+  .onboarding-copy {
+    margin: 0;
+    color: var(--sb-text-dim);
+    max-width: 46ch;
+  }
+
+  .onboarding-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .onboarding-field-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sb-text-dimmer);
+  }
+
+  .onboarding-field input {
+    width: 100%;
+    background: var(--sb-surface);
+    border: 1px solid var(--sb-border);
+    color: var(--sb-heading);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    padding: 12px 14px;
+    outline: none;
+  }
+
+  .onboarding-field input:focus {
+    border-color: var(--sb-border-active);
+  }
+
+  .onboarding-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .onboarding-error {
+    margin: 0;
+    padding: 12px 14px;
+    background: var(--sb-red-bg);
+    border: 1px solid var(--sb-red-border);
+    color: var(--sb-red-text);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  .onboarding-footnote {
+    margin: 16px 0 0;
+    color: var(--sb-text-dimmer);
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .onboarding {
+      padding: 32px 0 56px;
+    }
+
+    .onboarding-card {
+      padding: 24px 20px;
+    }
+
+    .onboarding-meta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

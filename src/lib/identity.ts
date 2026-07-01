@@ -2,6 +2,8 @@ export const IDENTITY_ORIGIN = "https://identity.southbag.cc";
 export const IDENTITY_LOGIN_URL = `${IDENTITY_ORIGIN}/login`;
 export const IDENTITY_DASHBOARD_URL = `${IDENTITY_ORIGIN}/home`;
 export const IDENTITY_SESSION_URL = `${IDENTITY_ORIGIN}/api/auth/get-session`;
+export const IDENTITY_SIGNUP_URL = `${IDENTITY_ORIGIN}/api/auth/sign-up/email`;
+export const IDENTITY_ACCOUNT_NAME = "Southbag Customer";
 
 export type IdentityUser = {
   id: string;
