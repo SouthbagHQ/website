@@ -10,89 +10,12 @@ interface Props {
 }
 
 const {
-  code,
   name,
   description,
-  status = 'active',
-  tier,
-  kevinStatus = null,
-  kevinLabel,
 } = Astro.props;
-
-const statusLabel: Record<string, string> = {
-  active: 'Active',
-  pending: 'Pending Review',
-  restricted: 'Restricted',
-  beta: 'Beta',
-  reviewing: 'Under Review',
-};
-
-const kevinLabels: Record<string, string> = {
-  cleared: 'Cleared by Kevin',
-  reviewed: 'Reviewed by Kevin',
-  pending: 'Approval pending',
-  denied: 'Policy override denied',
-  escalated: 'Account escalated',
-};
-
-const tierLabel: Record<string, string> = {
-  personal: 'Personal',
-  business: 'Business',
-  enterprise: 'Enterprise',
-};
 ---
 
 <div class="sb-product-card" data-reveal>
-  <div class="sb-card-header">
-    <span class="sb-code">{code}</span>
-    <div class="card-meta">
-      {tier && (
-        <span class="tier-badge">{tierLabel[tier]}</span>
-      )}
-      <span class:list={['sb-badge', `sb-badge-${status}`]}>
-        {statusLabel[status]}
-      </span>
-    </div>
-  </div>
-
   <h3 class="sb-card-name">{name}</h3>
   <p class="sb-card-desc">{description}</p>
-
-  <div class="sb-card-footer">
-    {kevinStatus ? (
-      <span class:list={['sb-kevin', `sb-kevin-${kevinStatus}`]}>
-        {kevinLabel ?? kevinLabels[kevinStatus]}
-      </span>
-    ) : (
-      <span></span>
-    )}
-    <span class="sb-learn-more">
-      Learn more
-      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-        <path d="M2 5h6M5 2l3 3-3 3" stroke="currentColor" stroke-width="1" stroke-linecap="square"/>
-      </svg>
-    </span>
-  </div>
 </div>
-
-<style>
-  .card-meta {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-
-  .tier-badge {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--sb-text-dimmer);
-    padding: 2px 5px;
-    border: 1px solid var(--sb-border);
-    background: transparent;
-  }
-</style>

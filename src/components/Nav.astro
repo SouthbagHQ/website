@@ -9,41 +9,15 @@ const navLinks = [
   { label: 'Digital', href: '/digital', key: 'digital' },
   { label: 'Business', href: '/business', key: 'business' },
 ];
+
+const identityUrl = 'https://identity.southbag.cc';
 ---
 
 <header class="sb-nav">
-  <div class="sb-ticker">
-    <div class="sb-ticker-track">
-      <span>SYSTEM: OPERATIONAL</span>
-      <span class="sep">·</span>
-      <span>KEVIN: REVIEWING</span>
-      <span class="sep">·</span>
-      <span>4,287,331 ACTIVE ACCOUNTS</span>
-      <span class="sep">·</span>
-      <span>COMPLIANCE QUEUE: 47 ITEMS</span>
-      <span class="sep">·</span>
-      <span>AML MONITORING: ACTIVE</span>
-      <span class="sep">·</span>
-      <span>POLICY VERSION 14.7.2</span>
-      <span class="sep">·</span>
-      <span>KEVIN: REVIEWING</span>
-      <span class="sep">·</span>
-      <span>SYSTEM: OPERATIONAL</span>
-      <span class="sep">·</span>
-      <span>4,287,331 ACTIVE ACCOUNTS</span>
-      <span class="sep">·</span>
-      <span>COMPLIANCE QUEUE: 47 ITEMS</span>
-      <span class="sep">·</span>
-      <span>AML MONITORING: ACTIVE</span>
-      <span class="sep">·</span>
-    </div>
-  </div>
-
   <nav class="sb-nav-bar">
     <div class="sb-nav-inner">
       <a href="/" class="sb-wordmark">
         <span class="sb-wordmark-text">SOUTHBAG</span>
-        <span class="sb-wordmark-tag">Institutional Services</span>
       </a>
 
       <ul class="sb-nav-links">
@@ -60,11 +34,8 @@ const navLinks = [
       </ul>
 
       <div class="sb-nav-right">
-        <div class="kevin-indicator">
-          <span class="kevin-dot"></span>
-          <span class="kevin-text">Kevin: Reviewing</span>
-        </div>
-        <a href="#" class="sb-btn sb-btn-ghost sb-signin">Sign In</a>
+        <a href={identityUrl} class="sb-btn sb-btn-ghost sb-signin">Sign In</a>
+        <a href={identityUrl} class="sb-btn sb-btn-primary sb-signin">Get Started</a>
       </div>
 
       <button class="sb-mobile-menu-btn" id="menuToggle" aria-label="Toggle navigation">
@@ -83,7 +54,8 @@ const navLinks = [
           {link.label}
         </a>
       ))}
-      <a href="#" class="sb-mobile-link sb-mobile-signin">Sign In</a>
+      <a href={identityUrl} class="sb-mobile-link sb-mobile-signin">Sign In</a>
+      <a href={identityUrl} class="sb-mobile-link sb-mobile-start">Get Started</a>
     </div>
   </nav>
 </header>
@@ -106,38 +78,6 @@ const navLinks = [
     border-bottom: 1px solid var(--sb-border);
   }
 
-  /* ── Ticker ── */
-  .sb-ticker {
-    height: var(--ticker-height);
-    overflow: hidden;
-    border-bottom: 1px solid var(--sb-border);
-    background: var(--sb-bg);
-  }
-
-  .sb-ticker-track {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    height: 100%;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    color: var(--sb-text-dimmer);
-    white-space: nowrap;
-    animation: ticker 40s linear infinite;
-    padding-left: 100%;
-  }
-
-  .sb-ticker-track .sep {
-    color: var(--sb-border-hover);
-  }
-
-  @keyframes ticker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
   /* ── Nav bar ── */
   .sb-nav-bar {
     background: var(--sb-surface);
@@ -155,9 +95,7 @@ const navLinks = [
 
   /* ── Wordmark ── */
   .sb-wordmark {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
+    display: block;
     text-decoration: none;
     flex-shrink: 0;
   }
@@ -168,15 +106,6 @@ const navLinks = [
     font-weight: 500;
     letter-spacing: 0.25em;
     color: var(--sb-heading);
-    line-height: 1;
-  }
-
-  .sb-wordmark-tag {
-    font-family: var(--font-mono);
-    font-size: 8.5px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--sb-text-dimmer);
     line-height: 1;
   }
 
@@ -228,29 +157,6 @@ const navLinks = [
     align-items: center;
     gap: 16px;
     margin-left: auto;
-  }
-
-  .kevin-indicator {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    color: var(--sb-text-dimmer);
-  }
-
-  .kevin-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50% !important;
-    background: var(--sb-amber-text);
-    animation: badge-pulse 2.5s ease-in-out infinite;
-    flex-shrink: 0;
-  }
-
-  .kevin-text {
-    text-transform: uppercase;
   }
 
   .sb-signin {
@@ -320,6 +226,12 @@ const navLinks = [
 
   .sb-mobile-signin {
     color: var(--sb-accent-text);
+  }
+
+  .sb-mobile-start {
+    color: #c0d4f0;
+    background: var(--sb-accent-bg);
+    border-color: var(--sb-accent-border);
   }
 
   @media (max-width: 768px) {

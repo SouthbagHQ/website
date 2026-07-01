@@ -51,7 +51,6 @@
 
   /* Spacing */
   --nav-height: 52px;
-  --ticker-height: 30px;
 }
 
 /* ─── Reset ─── */
@@ -401,13 +400,6 @@ a {
   opacity: 1;
 }
 
-.sb-card-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-
 .sb-card-name {
   font-family: var(--font-display);
   font-size: 22px;
@@ -422,32 +414,6 @@ a {
   color: var(--sb-text-dim);
   line-height: 1.6;
   flex: 1;
-}
-
-.sb-card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 10px;
-  border-top: 1px solid var(--sb-border);
-  margin-top: auto;
-}
-
-.sb-learn-more {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--sb-text-dimmer);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  transition: color 0.15s ease;
-}
-
-.sb-product-card:hover .sb-learn-more {
-  color: var(--sb-accent-text);
 }
 
 /* ─── Ledger table ─── */

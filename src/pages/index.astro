@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import KevinPanel from '../components/KevinPanel.astro';
 ---
 
 <Layout title="Southbag" currentPage="home">
@@ -8,12 +7,6 @@ import KevinPanel from '../components/KevinPanel.astro';
   <!-- ── Hero ── -->
   <section class="hero sb-grid-bg">
     <div class="hero-inner sb-container">
-      <div class="hero-eyebrow" data-reveal>
-        <span class="sb-badge sb-badge-active">Operational</span>
-        <span class="hero-sep">·</span>
-        <span class="sb-code">EST. 2009 · INCORPORATED BERMUDA · REGULATED UNDER SB-ACT-2018</span>
-      </div>
-
       <h1 class="hero-headline" data-reveal data-delay="1">
         An ecosystem of services<br>
         <em>you do not fully control.</em>
@@ -33,30 +26,8 @@ import KevinPanel from '../components/KevinPanel.astro';
             <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="square"/>
           </svg>
         </a>
-        <a href="#services" class="sb-btn sb-btn-ghost">View Services Registry</a>
       </div>
 
-      <div class="hero-stats" data-reveal data-delay="4">
-        <div class="hero-stat">
-          <span class="hero-stat-value">4.2M</span>
-          <span class="hero-stat-label">Registered Accounts</span>
-        </div>
-        <div class="hero-stat-div"></div>
-        <div class="hero-stat">
-          <span class="hero-stat-value">34</span>
-          <span class="hero-stat-label">Active Services</span>
-        </div>
-        <div class="hero-stat-div"></div>
-        <div class="hero-stat">
-          <span class="hero-stat-value">62</span>
-          <span class="hero-stat-label">Jurisdictions</span>
-        </div>
-        <div class="hero-stat-div"></div>
-        <div class="hero-stat">
-          <span class="hero-stat-value">1</span>
-          <span class="hero-stat-label">Kevin</span>
-        </div>
-      </div>
     </div>
 
     <div class="hero-scroll-indicator">
@@ -64,22 +35,6 @@ import KevinPanel from '../components/KevinPanel.astro';
       <div class="scroll-line"></div>
     </div>
   </section>
-
-  <!-- ── Notice band ── -->
-  <div class="notice-band">
-    <div class="sb-container notice-band-inner">
-      <span class="sb-label">Regulatory Notice</span>
-      <p class="notice-text">
-        Southbag is a regulated multi-service institution. Use of any Southbag
-        service is subject to identity verification, compliance screening, and
-        ongoing monitoring. Southbag may suspend, restrict, or terminate services
-        at its discretion without prior notice.
-      </p>
-      <a href="#" class="notice-link sb-mono" style="font-size:11px;color:var(--sb-text-dimmer);">
-        Full Terms →
-      </a>
-    </div>
-  </div>
 
   <!-- ── Services registry ── -->
   <section class="pillars-section" id="services">
@@ -99,10 +54,6 @@ import KevinPanel from '../components/KevinPanel.astro';
         <!-- Financial -->
         <a href="/financial" class="pillar-card" data-reveal data-delay="1">
           <div class="pillar-card-top">
-            <div class="pillar-header">
-              <span class="pillar-code">SB-FIN</span>
-              <span class="sb-badge sb-badge-active">16 Services</span>
-            </div>
             <h3 class="pillar-name">Financial</h3>
             <p class="pillar-desc">
               Deposit banking, investment infrastructure, payment systems, compliance
@@ -120,19 +71,11 @@ import KevinPanel from '../components/KevinPanel.astro';
             <span>Payroll</span>
             <span class="pillar-more">+9 more</span>
           </div>
-          <div class="pillar-footer">
-            <span class="sb-kevin sb-kevin-reviewed">Reviewed by Kevin</span>
-            <span class="pillar-arrow">→</span>
-          </div>
         </a>
 
         <!-- Digital -->
         <a href="/digital" class="pillar-card" data-reveal data-delay="2">
           <div class="pillar-card-top">
-            <div class="pillar-header">
-              <span class="pillar-code">SB-DIG</span>
-              <span class="sb-badge sb-badge-active">8 Services</span>
-            </div>
             <h3 class="pillar-name">Digital</h3>
             <p class="pillar-desc">
               Broadband and mobile networks, security infrastructure, AI development
@@ -150,19 +93,11 @@ import KevinPanel from '../components/KevinPanel.astro';
             <span>DNS</span>
             <span>CSS</span>
           </div>
-          <div class="pillar-footer">
-            <span class="sb-kevin sb-kevin-pending">Approval pending</span>
-            <span class="pillar-arrow">→</span>
-          </div>
         </a>
 
         <!-- Business -->
         <a href="/business" class="pillar-card" data-reveal data-delay="3">
           <div class="pillar-card-top">
-            <div class="pillar-header">
-              <span class="pillar-code">SB-BIZ</span>
-              <span class="sb-badge sb-badge-active">10 Services</span>
-            </div>
             <h3 class="pillar-name">Business</h3>
             <p class="pillar-desc">
               Identity management, device control, version control, data infrastructure,
@@ -180,18 +115,11 @@ import KevinPanel from '../components/KevinPanel.astro';
             <span>Edge Compute</span>
             <span class="pillar-more">+3 more</span>
           </div>
-          <div class="pillar-footer">
-            <span class="sb-kevin sb-kevin-reviewed">Reviewed by Kevin</span>
-            <span class="pillar-arrow">→</span>
-          </div>
         </a>
 
       </div>
     </div>
   </section>
-
-  <!-- ── Kevin Panel ── -->
-  <KevinPanel />
 
   <!-- ── Institutional features ── -->
   <section class="features-section">
@@ -283,9 +211,6 @@ import KevinPanel from '../components/KevinPanel.astro';
             All policy exceptions, compliance waivers, and service escalations are
             reviewed personally by Kevin. Response times are not guaranteed.
           </p>
-          <div style="margin-top: 8px;">
-            <span class="sb-kevin sb-kevin-reviewed">Reviewed by Kevin</span>
-          </div>
         </div>
       </div>
     </div>
@@ -299,9 +224,8 @@ import KevinPanel from '../components/KevinPanel.astro';
           <div class="sb-section-label">Account Registration</div>
           <h2 class="cta-headline">Ready to begin?</h2>
           <p class="cta-desc">
-            Account registration requires valid government-issued identification,
-            proof of address, and acceptance of all applicable Southbag terms.
-            Processing time is 3–14 business days. Kevin may request additional documentation.
+            You can instantly sign up for an account and begin using Southbag
+            services from a single registration flow.
           </p>
         </div>
         <div class="cta-actions">
@@ -341,18 +265,6 @@ import KevinPanel from '../components/KevinPanel.astro';
     max-width: 820px;
   }
 
-  .hero-eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .hero-sep {
-    color: var(--sb-text-dimmer);
-    font-family: var(--font-mono);
-  }
-
   .hero-headline {
     font-family: var(--font-display);
     font-size: clamp(48px, 7vw, 88px);
@@ -381,48 +293,6 @@ import KevinPanel from '../components/KevinPanel.astro';
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
-  }
-
-  .hero-stats {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    flex-wrap: wrap;
-    margin-top: 12px;
-    border: 1px solid var(--sb-border);
-    width: fit-content;
-  }
-
-  .hero-stat {
-    display: flex;
-    flex-direction: column;
-    padding: 16px 28px;
-    border-right: 1px solid var(--sb-border);
-  }
-
-  .hero-stat:last-child {
-    border-right: none;
-  }
-
-  .hero-stat-div {
-    display: none;
-  }
-
-  .hero-stat-value {
-    font-family: var(--font-display);
-    font-size: 32px;
-    font-weight: 300;
-    color: var(--sb-heading);
-    line-height: 1;
-  }
-
-  .hero-stat-label {
-    font-family: var(--font-mono);
-    font-size: 9.5px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--sb-text-dimmer);
-    margin-top: 4px;
   }
 
   .hero-scroll-indicator {
@@ -457,40 +327,6 @@ import KevinPanel from '../components/KevinPanel.astro';
   @keyframes scrollDown {
     0% { top: -100%; }
     100% { top: 100%; }
-  }
-
-  /* ── Notice band ── */
-  .notice-band {
-    background: var(--sb-amber-bg);
-    border-bottom: 1px solid var(--sb-amber-border);
-    padding: 14px 0;
-  }
-
-  .notice-band-inner {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .notice-text {
-    flex: 1;
-    font-size: 12px;
-    color: var(--sb-amber-text);
-    line-height: 1.6;
-    margin: 0;
-    min-width: 200px;
-  }
-
-  .notice-link {
-    white-space: nowrap;
-    text-decoration: none;
-    transition: color 0.15s;
-    color: var(--sb-amber-text) !important;
-  }
-
-  .notice-link:hover {
-    color: var(--sb-text-dim) !important;
   }
 
   /* ── Services / Pillars ── */
@@ -550,19 +386,6 @@ import KevinPanel from '../components/KevinPanel.astro';
     flex: 1;
   }
 
-  .pillar-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .pillar-code {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    color: var(--sb-text-dimmer);
-  }
-
   .pillar-name {
     font-family: var(--font-display);
     font-size: 32px;
@@ -606,25 +429,6 @@ import KevinPanel from '../components/KevinPanel.astro';
   .pillar-more {
     border-color: transparent !important;
     color: var(--sb-accent-text) !important;
-  }
-
-  .pillar-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .pillar-arrow {
-    font-family: var(--font-mono);
-    font-size: 16px;
-    color: var(--sb-text-dimmer);
-    transition: color 0.15s ease, transform 0.15s ease;
-    display: inline-block;
-  }
-
-  .pillar-card:hover .pillar-arrow {
-    color: var(--sb-text);
-    transform: translateX(4px);
   }
 
   /* ── Features ── */
@@ -733,23 +537,6 @@ import KevinPanel from '../components/KevinPanel.astro';
       gap: 28px;
     }
 
-    .hero-stats {
-      flex-direction: column;
-      width: 100%;
-    }
-
-    .hero-stat {
-      border-right: none;
-      border-bottom: 1px solid var(--sb-border);
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 20px;
-    }
-
-    .hero-stat:last-child {
-      border-bottom: none;
-    }
   }
 
   @media (max-width: 640px) {
