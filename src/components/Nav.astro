@@ -7,7 +7,7 @@ interface Props {
   user?: IdentityUser | null;
 }
 const { currentPage = "", user = null } = Astro.props;
-const displayName = user?.name || user?.email;
+const displayName = user?.email;
 
 const navLinks = [
   { label: "Financial", href: "/financial", key: "financial" },
@@ -91,7 +91,9 @@ const navLinks = [
       {
         user ? (
           <>
-            <span class="sb-mobile-link sb-mobile-auth-name">{displayName}</span>
+            <span class="sb-mobile-link sb-mobile-auth-name">
+              {displayName}
+            </span>
             <a
               href={IDENTITY_DASHBOARD_URL}
               class="sb-mobile-link sb-mobile-start"
@@ -101,7 +103,10 @@ const navLinks = [
           </>
         ) : (
           <>
-            <a href={IDENTITY_LOGIN_URL} class="sb-mobile-link sb-mobile-signin">
+            <a
+              href={IDENTITY_LOGIN_URL}
+              class="sb-mobile-link sb-mobile-signin"
+            >
               Sign In
             </a>
             <a href={IDENTITY_LOGIN_URL} class="sb-mobile-link sb-mobile-start">
