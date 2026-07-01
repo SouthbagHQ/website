@@ -82,7 +82,7 @@ const products = [
         <span>›</span>
         <span>DIGITAL SERVICES</span>
       </div>
-      <div class="page-header-body" data-reveal>
+      <div class="page-header-body">
         <div>
           <h1 class="page-title">Southbag Digital</h1>
           <p class="page-desc">
@@ -152,13 +152,13 @@ const products = [
   <!-- ── Products grid ── -->
   <section class="products-section">
     <div class="sb-container">
-      <div class="service-group-header" data-reveal>
+      <div class="service-group-header">
         <div class="sb-section-label">Digital Service Registry</div>
         <span class="sb-code">{products.length} services · SB-DIG-001 to SB-DIG-00{products.length}</span>
       </div>
       <div class="product-grid">
         {products.map((product, i) => (
-          <div data-delay={String((i % 4) + 1)} data-reveal>
+          <div>
             <ProductCard {...product} />
           </div>
         ))}
@@ -169,7 +169,7 @@ const products = [
   <!-- ── Monitoring details ── -->
   <section class="monitoring-section">
     <div class="sb-container">
-      <div class="monitoring-grid" data-reveal>
+      <div class="monitoring-grid">
         <div class="mon-panel sb-panel">
           <div class="sb-panel-header">
             <span class="sb-label">Data Retention Schedule</span>
@@ -295,7 +295,6 @@ const products = [
 
   .breadcrumb a {
     text-decoration: none;
-    transition: color 0.15s;
   }
 
   .breadcrumb a:hover {

@@ -7,19 +7,19 @@ import Layout from '../layouts/Layout.astro';
   <!-- ── Hero ── -->
   <section class="hero sb-grid-bg">
     <div class="hero-inner sb-container">
-      <h1 class="hero-headline" data-reveal data-delay="1">
+      <h1 class="hero-headline">
         An ecosystem of services<br>
         <em>you do not fully control.</em>
       </h1>
 
-      <p class="hero-subtext" data-reveal data-delay="2">
+      <p class="hero-subtext">
         Southbag provides integrated financial infrastructure, digital network services,
         and enterprise business software to 4.2 million registered accounts across
         62 jurisdictions. Access to services is conditional. Your usage is monitored.
         Continued use constitutes acceptance.
       </p>
 
-      <div class="hero-actions" data-reveal data-delay="3">
+      <div class="hero-actions">
         <a href="/financial" class="sb-btn sb-btn-primary">
           Get Started
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -39,7 +39,7 @@ import Layout from '../layouts/Layout.astro';
   <!-- ── Services registry ── -->
   <section class="pillars-section" id="services">
     <div class="sb-container">
-      <div class="section-head" data-reveal>
+      <div class="section-head">
         <div class="sb-section-label">Services Registry</div>
         <h2 class="section-title">Three divisions. One institution.</h2>
         <p class="section-desc">
@@ -52,7 +52,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="pillars-grid">
 
         <!-- Financial -->
-        <a href="/financial" class="pillar-card" data-reveal data-delay="1">
+        <a href="/financial" class="pillar-card">
           <div class="pillar-card-top">
             <h3 class="pillar-name">Financial</h3>
             <p class="pillar-desc">
@@ -74,7 +74,7 @@ import Layout from '../layouts/Layout.astro';
         </a>
 
         <!-- Digital -->
-        <a href="/digital" class="pillar-card" data-reveal data-delay="2">
+        <a href="/digital" class="pillar-card">
           <div class="pillar-card-top">
             <h3 class="pillar-name">Digital</h3>
             <p class="pillar-desc">
@@ -96,7 +96,7 @@ import Layout from '../layouts/Layout.astro';
         </a>
 
         <!-- Business -->
-        <a href="/business" class="pillar-card" data-reveal data-delay="3">
+        <a href="/business" class="pillar-card">
           <div class="pillar-card-top">
             <h3 class="pillar-name">Business</h3>
             <p class="pillar-desc">
@@ -124,13 +124,13 @@ import Layout from '../layouts/Layout.astro';
   <!-- ── Institutional features ── -->
   <section class="features-section">
     <div class="sb-container">
-      <div class="section-head" data-reveal>
+      <div class="section-head">
         <div class="sb-section-label">Why Southbag</div>
         <h2 class="section-title">Built for institutions. Imposed on everyone else.</h2>
       </div>
 
       <div class="features-grid">
-        <div class="feature-card" data-reveal data-delay="1">
+        <div class="feature-card">
           <div class="feature-icon">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <rect x="2" y="2" width="16" height="16" stroke="currentColor" stroke-width="1"/>
@@ -144,7 +144,7 @@ import Layout from '../layouts/Layout.astro';
           </p>
         </div>
 
-        <div class="feature-card" data-reveal data-delay="2">
+        <div class="feature-card">
           <div class="feature-icon">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <rect x="3" y="7" width="14" height="10" stroke="currentColor" stroke-width="1"/>
@@ -158,7 +158,7 @@ import Layout from '../layouts/Layout.astro';
           </p>
         </div>
 
-        <div class="feature-card" data-reveal data-delay="3">
+        <div class="feature-card">
           <div class="feature-icon">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M10 2L3 6v4c0 4.4 3 8.5 7 9.5C17 18.5 20 14.4 20 10V6l-7-4H10z" stroke="currentColor" stroke-width="1"/>
@@ -171,7 +171,7 @@ import Layout from '../layouts/Layout.astro';
           </p>
         </div>
 
-        <div class="feature-card" data-reveal data-delay="4">
+        <div class="feature-card">
           <div class="feature-icon">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1"/>
@@ -185,7 +185,7 @@ import Layout from '../layouts/Layout.astro';
           </p>
         </div>
 
-        <div class="feature-card" data-reveal data-delay="5">
+        <div class="feature-card">
           <div class="feature-icon">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <rect x="2" y="4" width="16" height="12" stroke="currentColor" stroke-width="1"/>
@@ -200,7 +200,7 @@ import Layout from '../layouts/Layout.astro';
           </p>
         </div>
 
-        <div class="feature-card" data-reveal data-delay="6">
+        <div class="feature-card">
           <div class="feature-icon">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M4 4h12v8H4zM7 16h6" stroke="currentColor" stroke-width="1" stroke-linecap="square"/>
@@ -219,7 +219,7 @@ import Layout from '../layouts/Layout.astro';
   <!-- ── Bottom CTA ── -->
   <section class="cta-section">
     <div class="sb-container">
-      <div class="cta-inner sb-grid-bg" data-reveal>
+      <div class="cta-inner sb-grid-bg">
         <div class="cta-content">
           <div class="sb-section-label">Account Registration</div>
           <h2 class="cta-headline">Ready to begin?</h2>
@@ -313,22 +313,6 @@ import Layout from '../layouts/Layout.astro';
     overflow: hidden;
   }
 
-  .scroll-line::after {
-    content: '';
-    position: absolute;
-    top: -100%;
-    left: 0;
-    width: 1px;
-    height: 100%;
-    background: var(--sb-border-active);
-    animation: scrollDown 2s ease-in-out infinite;
-  }
-
-  @keyframes scrollDown {
-    0% { top: -100%; }
-    100% { top: 100%; }
-  }
-
   /* ── Services / Pillars ── */
   .pillars-section {
     padding: 72px 0;
@@ -371,7 +355,6 @@ import Layout from '../layouts/Layout.astro';
     flex-direction: column;
     gap: 20px;
     text-decoration: none;
-    transition: background 0.2s ease;
     cursor: pointer;
   }
 
@@ -418,7 +401,6 @@ import Layout from '../layouts/Layout.astro';
     color: var(--sb-text-dimmer);
     padding: 3px 7px;
     border: 1px solid var(--sb-border);
-    transition: border-color 0.15s ease, color 0.15s ease;
   }
 
   .pillar-card:hover .pillar-services span {
@@ -452,7 +434,6 @@ import Layout from '../layouts/Layout.astro';
     display: flex;
     flex-direction: column;
     gap: 12px;
-    transition: background 0.2s ease;
   }
 
   .feature-card:hover {
@@ -461,7 +442,6 @@ import Layout from '../layouts/Layout.astro';
 
   .feature-icon {
     color: var(--sb-text-dimmer);
-    transition: color 0.15s ease;
   }
 
   .feature-card:hover .feature-icon {

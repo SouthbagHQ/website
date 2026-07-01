@@ -149,7 +149,7 @@ const businessCount = products.filter(p => p.tier === 'business').length;
         <span>›</span>
         <span>FINANCIAL SERVICES</span>
       </div>
-      <div class="page-header-body" data-reveal>
+      <div class="page-header-body">
         <div>
           <h1 class="page-title">Southbag Financial</h1>
           <p class="page-desc">
@@ -198,14 +198,14 @@ const businessCount = products.filter(p => p.tier === 'business').length;
     <div class="sb-container">
 
       <!-- Personal services -->
-      <div class="service-group" data-reveal>
+      <div class="service-group">
         <div class="service-group-header">
           <div class="sb-section-label">Personal Financial Services</div>
           <span class="sb-code">{personalCount} services · SB-FIN-001 to SB-FIN-00{personalCount}</span>
         </div>
         <div class="product-grid">
           {products.filter(p => p.tier === 'personal').map((product, i) => (
-            <div data-delay={String((i % 4) + 1)}>
+            <div>
               <ProductCard {...product} />
             </div>
           ))}
@@ -213,14 +213,14 @@ const businessCount = products.filter(p => p.tier === 'business').length;
       </div>
 
       <!-- Business services -->
-      <div class="service-group" data-reveal>
+      <div class="service-group">
         <div class="service-group-header">
           <div class="sb-section-label">Business Financial Services</div>
           <span class="sb-code">{businessCount} services · Director verification required</span>
         </div>
         <div class="product-grid">
           {products.filter(p => p.tier === 'business').map((product, i) => (
-            <div data-delay={String((i % 4) + 1)}>
+            <div>
               <ProductCard {...product} />
             </div>
           ))}
@@ -278,7 +278,6 @@ const businessCount = products.filter(p => p.tier === 'business').length;
 
   .breadcrumb a {
     text-decoration: none;
-    transition: color 0.15s;
   }
 
   .breadcrumb a:hover {

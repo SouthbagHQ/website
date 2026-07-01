@@ -132,7 +132,6 @@ const identityUrl = 'https://identity.southbag.cc';
     height: var(--nav-height);
     line-height: var(--nav-height);
     border-right: 1px solid var(--sb-border);
-    transition: color 0.15s ease, background 0.15s ease;
     text-decoration: none;
   }
 
@@ -181,17 +180,10 @@ const identityUrl = 'https://identity.southbag.cc';
     width: 20px;
     height: 1px;
     background: var(--sb-text-dim);
-    transition: transform 0.2s ease, opacity 0.2s ease;
   }
 
-  .sb-mobile-menu-btn.is-open span:nth-child(1) {
-    transform: translateY(5px) rotate(45deg);
-  }
   .sb-mobile-menu-btn.is-open span:nth-child(2) {
     opacity: 0;
-  }
-  .sb-mobile-menu-btn.is-open span:nth-child(3) {
-    transform: translateY(-5px) rotate(-45deg);
   }
 
   /* ── Mobile menu ── */
@@ -215,7 +207,6 @@ const identityUrl = 'https://identity.southbag.cc';
     color: var(--sb-text-dim);
     border-bottom: 1px solid var(--sb-border);
     text-decoration: none;
-    transition: color 0.15s ease, background 0.15s ease;
   }
 
   .sb-mobile-link:hover,

@@ -100,7 +100,7 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
         <span>›</span>
         <span>BUSINESS SERVICES</span>
       </div>
-      <div class="page-header-body" data-reveal>
+      <div class="page-header-body">
         <div>
           <h1 class="page-title">Southbag Business</h1>
           <p class="page-desc">
@@ -154,7 +154,7 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
     <div class="sb-container">
 
       <!-- Business tier -->
-      <div class="service-group" data-reveal>
+      <div class="service-group">
         <div class="service-group-header">
           <div class="sb-section-label">Business Services</div>
           <div class="group-header-right">
@@ -163,7 +163,7 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
         </div>
         <div class="product-grid">
           {products.filter(p => p.tier === 'business').map((product, i) => (
-            <div data-delay={String((i % 4) + 1)} data-reveal>
+            <div>
               <ProductCard {...product} />
             </div>
           ))}
@@ -171,7 +171,7 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
       </div>
 
       <!-- Enterprise tier -->
-      <div class="service-group" data-reveal>
+      <div class="service-group">
         <div class="service-group-header">
           <div class="sb-section-label">Enterprise Services</div>
           <div class="group-header-right">
@@ -180,7 +180,7 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
         </div>
         <div class="product-grid">
           {products.filter(p => p.tier === 'enterprise').map((product, i) => (
-            <div data-delay={String((i % 4) + 1)} data-reveal>
+            <div>
               <ProductCard {...product} />
             </div>
           ))}
@@ -193,12 +193,12 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
   <!-- ── Compliance requirements ── -->
   <section class="compliance-section">
     <div class="sb-container">
-      <div class="section-head" data-reveal>
+      <div class="section-head">
         <div class="sb-section-label">Compliance Framework</div>
         <h2 class="section-title">What is expected of you.</h2>
       </div>
 
-      <div class="compliance-grid" data-reveal data-delay="1">
+      <div class="compliance-grid">
 
         <div class="compliance-item">
           <div class="compliance-num">01</div>
@@ -268,7 +268,7 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
 
   <!-- ── Enterprise contact ── -->
   <div class="enterprise-cta sb-grid-bg">
-    <div class="sb-container enterprise-cta-inner" data-reveal>
+    <div class="sb-container enterprise-cta-inner">
       <div>
         <div class="sb-section-label">Enterprise Enquiries</div>
         <h3 class="ent-title">Need something not listed here?</h3>
@@ -335,7 +335,6 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
 
   .breadcrumb a {
     text-decoration: none;
-    transition: color 0.15s;
   }
 
   .breadcrumb a:hover {
@@ -516,7 +515,6 @@ const enterpriseCount = products.filter(p => p.tier === 'enterprise').length;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    transition: background 0.2s ease;
   }
 
   .compliance-item:hover {
