@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { IDENTITY_LOGIN_URL } from "../lib/identity";
 ---
 
 <Layout title="Southbag" currentPage="home">
@@ -19,7 +20,7 @@ import Layout from "../layouts/Layout.astro";
       </p>
 
       <div class="hero-actions">
-        <a href="https://identity.southbag.cc" class="sb-btn sb-btn-primary">
+        <a href={IDENTITY_LOGIN_URL} class="sb-btn sb-btn-primary">
           Get Started
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
             <path
@@ -278,7 +279,7 @@ import Layout from "../layouts/Layout.astro";
           </p>
         </div>
         <div class="cta-actions">
-          <a href="https://identity.southbag.cc" class="sb-btn sb-btn-primary">
+          <a href={IDENTITY_LOGIN_URL} class="sb-btn sb-btn-primary">
             Begin Registration
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
               <path

@@ -15,6 +15,8 @@ const {
   currentPage = "",
 } = Astro.props;
 
+const user = Astro.locals.user;
+
 const fullTitle =
   title === "Southbag"
     ? "Southbag — Institutional Services"
@@ -37,7 +39,7 @@ const fullTitle =
     />
   </head>
   <body>
-    <Nav currentPage={currentPage} />
+    <Nav currentPage={currentPage} user={user} />
     <main>
       <slot />
     </main>

@@ -1,16 +1,19 @@
 ---
+import type { IdentityUser } from "../lib/identity";
+import { IDENTITY_DASHBOARD_URL, IDENTITY_LOGIN_URL } from "../lib/identity";
+
 interface Props {
   currentPage?: string;
+  user?: IdentityUser | null;
 }
-const { currentPage = "" } = Astro.props;
+const { currentPage = "", user = null } = Astro.props;
+const displayName = user?.name || user?.email;
 
 const navLinks = [
   { label: "Financial", href: "/financial", key: "financial" },
   { label: "Digital", href: "/digital", key: "digital" },
   { label: "Business", href: "/business", key: "business" },
 ];
-
-const identityUrl = "https://identity.southbag.cc";
 ---
 
 <header class="sb-nav">
@@ -39,10 +42,25 @@ const identityUrl = "https://identity.southbag.cc";
       </ul>
 
       <div class="sb-nav-right">
-        <a href={identityUrl} class="sb-btn sb-btn-ghost sb-signin">Sign In</a>
-        <a href={identityUrl} class="sb-btn sb-btn-primary sb-signin"
-          >Get Started</a
-        >
+        {
+          user ? (
+            <div class="sb-auth-user">
+              <span class="sb-auth-name">{displayName}</span>
+              <a href={IDENTITY_DASHBOARD_URL} class="sb-btn sb-btn-primary">
+                Dashboard
+              </a>
+            </div>
+          ) : (
+            <div class="sb-auth-guest">
+              <a href={IDENTITY_LOGIN_URL} class="sb-btn sb-btn-ghost">
+                Sign In
+              </a>
+              <a href={IDENTITY_LOGIN_URL} class="sb-btn sb-btn-primary">
+                Get Started
+              </a>
+            </div>
+          )
+        }
       </div>
 
       <button
@@ -70,10 +88,28 @@ const identityUrl = "https://identity.southbag.cc";
           </a>
         ))
       }
-      <a href={identityUrl} class="sb-mobile-link sb-mobile-signin">Sign In</a>
-      <a href={identityUrl} class="sb-mobile-link sb-mobile-start"
-        >Get Started</a
-      >
+      {
+        user ? (
+          <>
+            <span class="sb-mobile-link sb-mobile-auth-name">{displayName}</span>
+            <a
+              href={IDENTITY_DASHBOARD_URL}
+              class="sb-mobile-link sb-mobile-start"
+            >
+              Dashboard
+            </a>
+          </>
+        ) : (
+          <>
+            <a href={IDENTITY_LOGIN_URL} class="sb-mobile-link sb-mobile-signin">
+              Sign In
+            </a>
+            <a href={IDENTITY_LOGIN_URL} class="sb-mobile-link sb-mobile-start">
+              Get Started
+            </a>
+          </>
+        )
+      }
     </div>
   </nav>
 </header>
@@ -176,7 +212,26 @@ const identityUrl = "https://identity.southbag.cc";
     margin-left: auto;
   }
 
-  .sb-signin {
+  .sb-auth-guest,
+  .sb-auth-user {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .sb-auth-name {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sb-text-dim);
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .sb-nav-right .sb-btn {
     font-size: 10px;
     padding: 6px 14px;
   }
@@ -231,6 +286,11 @@ const identityUrl = "https://identity.southbag.cc";
   .sb-mobile-link.is-active {
     color: var(--sb-heading);
     background: rgba(255, 255, 255, 0.02);
+  }
+
+  .sb-mobile-auth-name {
+    color: var(--sb-text);
+    cursor: default;
   }
 
   .sb-mobile-signin {
