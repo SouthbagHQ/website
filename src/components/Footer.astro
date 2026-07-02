@@ -79,6 +79,14 @@ const currentYear = new Date().getFullYear();
       </div>
     </div>
 
+    <div class="sb-footer-disclaimer">
+      <p>
+        Disclaimer: This website is a work of satire. Southbag is not a real
+        company, and none of the services, products, or policies described here
+        exist.
+      </p>
+    </div>
+
     <div class="sb-footer-bottom">
       <div class="sb-footer-bottom-left">
         <span>© {currentYear} Southbag Institutional Services Ltd.</span>
@@ -167,6 +175,21 @@ const currentYear = new Date().getFullYear();
 
   .sb-footer-links a:hover {
     color: var(--sb-text);
+  }
+
+  .sb-footer-disclaimer {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  .sb-footer-disclaimer p {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    color: var(--sb-text-dimmer);
+    max-width: 720px;
   }
 
   .sb-footer-bottom {
