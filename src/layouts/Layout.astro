@@ -5,6 +5,7 @@ import SEOHead from "../components/SEOHead.astro";
 import { formatTitle } from "../lib/seo";
 import type { BreadcrumbItem } from "../lib/seo";
 import "../styles/global.css";
+import Palantir from "../components/Palantir.astro";
 
 interface Props {
   title?: string;
@@ -48,6 +49,7 @@ const pathname = Astro.url.pathname;
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
+    <Palantir />
   </head>
   <body>
     <a class="sb-skip-link" href="#main-content">Skip to main content</a>
