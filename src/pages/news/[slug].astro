@@ -1,0 +1,151 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { absoluteUrl } from "../../lib/seo";
+
+export const prerender = true;
+
+interface Props {
+  post: CollectionEntry<"news">;
+}
+
+export async function getStaticPaths() {
+  const posts = await getCollection(
+    "news",
+    ({ data }: CollectionEntry<"news">) => !data.draft,
+  );
+  return posts.map((post: CollectionEntry<"news">) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props as Props;
+const { Content } = await render(post);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
+const breadcrumbs = [
+  { name: "News", path: "/news" },
+  { name: post.data.title, path: `/news/${post.id}` },
+];
+---
+
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  currentPage="news"
+  breadcrumbs={breadcrumbs}
+>
+  <article class="post-article">
+    <header class="post-header sb-grid-bg">
+      <div class="sb-container">
+        <a href="/news" class="post-back sb-code">← All news</a>
+        <div class="post-meta">
+          <time datetime={post.data.pubDate.toISOString()}>
+            {formatDate(post.data.pubDate)}
+          </time>
+          <span class="post-meta-sep">·</span>
+          <span>Kevin</span>
+        </div>
+        <h1 class="post-title">{post.data.title}</h1>
+        <p class="post-description">{post.data.description}</p>
+      </div>
+    </header>
+
+    <div class="post-body">
+      <div class="sb-container">
+        <div class="sb-prose">
+          <Content />
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      headline: post.data.title,
+      description: post.data.description,
+      datePublished: post.data.pubDate.toISOString(),
+      author: {
+        "@type": "Organization",
+        name: "Kevin",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Southbag Institutional Services Ltd.",
+        logo: {
+          "@type": "ImageObject",
+          url: absoluteUrl("/logo.png"),
+        },
+      },
+      mainEntityOfPage: absoluteUrl(`/news/${post.id}`),
+    })}
+  />
+</Layout>
+
+<style>
+  .post-header {
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  .post-back {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sb-accent-text);
+    text-decoration: none;
+    margin-bottom: 24px;
+  }
+
+  .post-back:hover {
+    color: #c0d4f0;
+  }
+
+  .post-meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sb-text-dimmer);
+    margin-bottom: 16px;
+  }
+
+  .post-meta-sep {
+    margin: 0 8px;
+    color: var(--sb-border-hover);
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 300;
+    color: var(--sb-heading);
+    margin: 0 0 16px;
+    line-height: 1.1;
+    max-width: 800px;
+  }
+
+  .post-description {
+    font-size: 15px;
+    color: var(--sb-text-dim);
+    line-height: 1.7;
+    margin: 0;
+    max-width: 640px;
+  }
+
+  .post-body {
+    padding: 48px 0 72px;
+  }
+</style>

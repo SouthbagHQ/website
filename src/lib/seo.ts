@@ -118,4 +118,9 @@ export const PAGE_SEO = {
     description: "Create your Southbag account to access financial, digital, and business services.",
     noindex: true,
   },
+  news: {
+    title: "News",
+    description:
+      "Official statements, policy updates, and service advisories from Southbag Institutional Services.",
+  },
 } as const;

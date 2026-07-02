@@ -1,0 +1,174 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { PAGE_SEO } from "../../lib/seo";
+
+export const prerender = true;
+
+const posts = (
+  await getCollection(
+    "news",
+    ({ data }: CollectionEntry<"news">) => !data.draft,
+  )
+).sort(
+  (a: CollectionEntry<"news">, b: CollectionEntry<"news">) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+---
+
+<Layout
+  title={PAGE_SEO.news.title}
+  description={PAGE_SEO.news.description}
+  currentPage="news"
+  breadcrumbs={[{ name: "News", path: "/news" }]}
+>
+  <section class="news-hero sb-grid-bg">
+    <div class="sb-container">
+      <div class="sb-section-label">Institutional Communications</div>
+      <h1 class="news-headline">News</h1>
+      <p class="news-intro">
+        Official statements, policy updates, and service advisories from
+        Southbag. All content is subject to review. Publication does not imply
+        accuracy.
+      </p>
+    </div>
+  </section>
+
+  <section class="news-list-section">
+    <div class="sb-container">
+      {
+        posts.length === 0 ? (
+          <p class="news-empty">No articles published at this time.</p>
+        ) : (
+          <ul class="news-list">
+            {posts.map((post) => (
+              <li>
+                <article class="news-card">
+                  <a href={`/news/${post.id}`} class="news-card-link">
+                    <div class="news-card-meta">
+                      <time
+                        class="news-date sb-code"
+                        datetime={post.data.pubDate.toISOString()}
+                      >
+                        {formatDate(post.data.pubDate)}
+                      </time>
+                      <span class="news-author sb-code">Kevin</span>
+                    </div>
+                    <h2 class="news-card-title">{post.data.title}</h2>
+                    <p class="news-card-desc">{post.data.description}</p>
+                    <span class="news-read-more sb-code">Read article →</span>
+                  </a>
+                </article>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .news-hero {
+    padding: 72px 0 48px;
+    border-bottom: 1px solid var(--sb-border);
+  }
+
+  .news-headline {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 300;
+    color: var(--sb-heading);
+    margin: 0 0 16px;
+    line-height: 1.05;
+  }
+
+  .news-intro {
+    font-size: 14px;
+    color: var(--sb-text-dim);
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0;
+  }
+
+  .news-list-section {
+    padding: 48px 0 72px;
+  }
+
+  .news-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--sb-border);
+    border: 1px solid var(--sb-border);
+  }
+
+  .news-card {
+    background: var(--sb-card);
+  }
+
+  .news-card:hover {
+    background: var(--sb-card-hover);
+  }
+
+  .news-card-link {
+    display: block;
+    padding: 28px;
+    text-decoration: none;
+  }
+
+  .news-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .news-date,
+  .news-author {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .news-card-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--sb-heading);
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+
+  .news-card-desc {
+    font-size: 13px;
+    color: var(--sb-text-dim);
+    line-height: 1.65;
+    margin: 0 0 16px;
+    max-width: 640px;
+  }
+
+  .news-read-more {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sb-accent-text);
+  }
+
+  .news-empty {
+    font-size: 14px;
+    color: var(--sb-text-dim);
+    margin: 0;
+  }
+</style>
