@@ -6,7 +6,7 @@ export const SITE_NAME = "Southbag";
 export const DEFAULT_TITLE = "Southbag — Institutional Services";
 
 export const DEFAULT_DESCRIPTION =
-  "Southbag provides integrated financial infrastructure, digital network services, and enterprise business software across 62 jurisdictions.";
+  "Southbag provides integrated financial infrastructure, digital network services, and enterprise business software across jurisdictions.";
 
 export const DEFAULT_OG_IMAGE = "/logo.png";
 
