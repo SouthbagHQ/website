@@ -123,4 +123,10 @@ export const PAGE_SEO = {
     description:
       "Official statements, policy updates, and service advisories from Southbag Institutional Services.",
   },
+  notFound: {
+    title: "Withheld",
+    description:
+      "This path is withheld. Your request has been logged. Kevin has been notified. He does not need to respond.",
+    noindex: true,
+  },
 } as const;

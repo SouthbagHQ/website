@@ -1,0 +1,267 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { PAGE_SEO } from "../lib/seo";
+
+Astro.response.status = 404;
+
+const requestedPath = Astro.url.pathname || "/";
+const observedAt = new Date().toISOString().replace("T", " ").replace("Z", " UTC");
+---
+
+<Layout
+  title={PAGE_SEO.notFound.title}
+  description={PAGE_SEO.notFound.description}
+  noindex={PAGE_SEO.notFound.noindex}
+  hideFooter
+>
+  <section class="not-found">
+    <div class="not-found-vignette" aria-hidden="true"></div>
+    <div class="not-found-inner sb-container">
+      <div class="not-found-banner">
+        <span class="not-found-class">Classification: withheld</span>
+        <span class="sb-code">REF: SB-ERR-404</span>
+      </div>
+
+      <p class="not-found-code">404</p>
+      <h1 class="not-found-title sb-display">Kevin has closed this path.</h1>
+      <p class="not-found-copy">
+        The address you requested is not in the public registry. It may have been
+        redacted, never filed, or reserved for officers. This attempt is on
+        record. Kevin was already watching. He does not need to respond.
+      </p>
+
+      <dl class="not-found-ledger">
+        <div>
+          <dt>Path</dt>
+          <dd class="sb-mono">{requestedPath}</dd>
+        </div>
+        <div>
+          <dt>Observed</dt>
+          <dd class="sb-mono">{observedAt}</dd>
+        </div>
+        <div>
+          <dt>Decision</dt>
+          <dd>
+            <span class="sb-kevin sb-kevin-denied">Access denied</span>
+          </dd>
+        </div>
+        <div>
+          <dt>Officer</dt>
+          <dd class="sb-mono">KEVIN</dd>
+        </div>
+        <div>
+          <dt>Hold</dt>
+          <dd class="sb-mono">Indefinite</dd>
+        </div>
+        <div>
+          <dt>Fee</dt>
+          <dd class="sb-mono">$12.00 — Policy curiosity</dd>
+        </div>
+      </dl>
+
+      <div class="not-found-redactions" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <p class="not-found-watch sb-code">He is already here.</p>
+
+      <div class="not-found-actions">
+        <a href="/" class="sb-btn sb-btn-ghost">Leave the registry</a>
+      </div>
+
+      <p class="not-found-footnote sb-code">
+        Do not request this path again. The Pile does not forget.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .not-found {
+    position: relative;
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    align-items: center;
+    background: #020305;
+    overflow: hidden;
+    padding: 72px 0;
+  }
+
+  .not-found-vignette {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.55) 70%, #000 100%),
+      linear-gradient(rgba(140, 36, 36, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(140, 36, 36, 0.04) 1px, transparent 1px);
+    background-size: auto, 48px 48px, 48px 48px;
+  }
+
+  .not-found-inner {
+    position: relative;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .not-found-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--sb-red-border);
+  }
+
+  .not-found-class {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sb-red-text);
+  }
+
+  .not-found-code {
+    font-family: var(--font-display);
+    font-size: clamp(80px, 16vw, 140px);
+    font-weight: 300;
+    color: #3a1010;
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    margin: 12px 0 0;
+    text-shadow: 0 0 40px rgba(140, 36, 36, 0.18);
+  }
+
+  .not-found-title {
+    font-size: clamp(28px, 4.2vw, 42px);
+    color: var(--sb-heading);
+    margin: 0;
+  }
+
+  .not-found-copy {
+    font-size: 14px;
+    color: var(--sb-text-dim);
+    line-height: 1.75;
+    margin: 0;
+    max-width: 500px;
+  }
+
+  .not-found-ledger {
+    margin: 8px 0 0;
+    padding: 0;
+    border: 1px solid var(--sb-red-border);
+    background: rgba(26, 7, 7, 0.55);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .not-found-ledger > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--sb-red-border);
+  }
+
+  .not-found-ledger > div:nth-child(odd) {
+    border-right: 1px solid var(--sb-red-border);
+  }
+
+  .not-found-ledger > div:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+
+  .not-found-ledger dt {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sb-text-dimmer);
+  }
+
+  .not-found-ledger dd {
+    margin: 0;
+    font-size: 12px;
+    color: var(--sb-text);
+    word-break: break-all;
+  }
+
+  .not-found-redactions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .not-found-redactions span {
+    display: block;
+    height: 11px;
+    background: #0a0404;
+    border: 1px solid #1a0707;
+  }
+
+  .not-found-redactions span:nth-child(1) {
+    width: 92%;
+  }
+
+  .not-found-redactions span:nth-child(2) {
+    width: 64%;
+  }
+
+  .not-found-redactions span:nth-child(3) {
+    width: 78%;
+  }
+
+  .not-found-watch {
+    margin: 4px 0 0;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sb-red-text);
+  }
+
+  .not-found-actions {
+    margin-top: 8px;
+  }
+
+  .not-found-actions .sb-btn-ghost {
+    border-color: var(--sb-red-border);
+    color: var(--sb-red-text);
+  }
+
+  .not-found-actions .sb-btn-ghost:hover {
+    background: var(--sb-red-bg);
+    border-color: var(--sb-red-text);
+    color: #c07070;
+  }
+
+  .not-found-footnote {
+    margin: 4px 0 0;
+    font-size: 10.5px;
+    color: var(--sb-text-dimmer);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 640px) {
+    .not-found-ledger {
+      grid-template-columns: 1fr;
+    }
+
+    .not-found-ledger > div:nth-child(odd) {
+      border-right: none;
+    }
+
+    .not-found-ledger > div:nth-last-child(-n + 2) {
+      border-bottom: 1px solid var(--sb-red-border);
+    }
+
+    .not-found-ledger > div:last-child {
+      border-bottom: none;
+    }
+  }
+</style>

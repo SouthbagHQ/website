@@ -14,6 +14,7 @@ interface Props {
   noindex?: boolean;
   ogImage?: string;
   breadcrumbs?: BreadcrumbItem[];
+  hideFooter?: boolean;
 }
 
 const {
@@ -23,6 +24,7 @@ const {
   noindex = false,
   ogImage,
   breadcrumbs,
+  hideFooter = false,
 } = Astro.props;
 
 const pageTitle = formatTitle(title);
@@ -57,7 +59,7 @@ const pathname = Astro.url.pathname;
     <main id="main-content">
       <slot />
     </main>
-    <Footer />
+    {!hideFooter && <Footer />}
   </body>
 </html>
 
