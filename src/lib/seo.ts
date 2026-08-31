@@ -123,4 +123,10 @@ export const PAGE_SEO = {
     description:
       "Official statements, policy updates, and service advisories from Southbag Institutional Services.",
   },
+  notFound: {
+    title: "Record Not Found",
+    description:
+      "The requested path does not exist in the Southbag registry. This incident has been logged.",
+    noindex: true,
+  },
 } as const;

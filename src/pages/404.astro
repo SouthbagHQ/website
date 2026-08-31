@@ -1,0 +1,111 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { PAGE_SEO } from "../lib/seo";
+
+Astro.response.status = 404;
+---
+
+<Layout
+  title={PAGE_SEO.notFound.title}
+  description={PAGE_SEO.notFound.description}
+  noindex={PAGE_SEO.notFound.noindex}
+>
+  <section class="not-found sb-grid-bg">
+    <div class="not-found-inner sb-container">
+      <div class="not-found-meta">
+        <span class="sb-section-label">Registry Exception</span>
+        <span class="sb-code">REF: SB-ERR-404</span>
+      </div>
+
+      <p class="not-found-code">404</p>
+      <h1 class="not-found-title sb-display">This path is not in the registry.</h1>
+      <p class="not-found-copy">
+        The record you requested does not exist, has been withheld, or was never
+        approved for public access. Your request has been logged. Kevin has been
+        notified. He has not responded.
+      </p>
+
+      <div class="not-found-status">
+        <span class="sb-kevin sb-kevin-denied">Access denied</span>
+        <span class="sb-kevin sb-kevin-pending">Review pending</span>
+      </div>
+
+      <div class="not-found-actions">
+        <a href="/" class="sb-btn sb-btn-primary">Return to Southbag</a>
+        <a href="/onboarding" class="sb-btn sb-btn-ghost">Begin registration</a>
+      </div>
+
+      <p class="not-found-footnote sb-code">
+        Continued probing of unlisted paths constitutes a policy curiosity.
+        Fees may apply.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .not-found {
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--sb-border);
+    padding: 80px 0;
+  }
+
+  .not-found-inner {
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .not-found-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .not-found-code {
+    font-family: var(--font-display);
+    font-size: clamp(72px, 14vw, 128px);
+    font-weight: 300;
+    color: var(--sb-heading);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    margin: 8px 0 0;
+  }
+
+  .not-found-title {
+    font-size: clamp(28px, 4vw, 40px);
+    margin: 0;
+  }
+
+  .not-found-copy {
+    font-size: 14px;
+    color: var(--sb-text-dim);
+    line-height: 1.7;
+    margin: 0;
+    max-width: 520px;
+  }
+
+  .not-found-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .not-found-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .not-found-footnote {
+    margin: 8px 0 0;
+    font-size: 10.5px;
+    color: var(--sb-text-dimmer);
+    line-height: 1.6;
+  }
+</style>

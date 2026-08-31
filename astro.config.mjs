@@ -13,7 +13,10 @@ export default defineConfig({
   adapter: cloudflare(),
   integrations: [
     sitemap({
-      filter: (page) => !page.includes("/onboarding") && !page.includes("/api/"),
+      filter: (page) =>
+        !page.includes("/onboarding") &&
+        !page.includes("/api/") &&
+        !page.includes("/404"),
     }),
   ],
   vite: {
