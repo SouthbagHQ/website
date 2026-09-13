@@ -139,6 +139,7 @@ if (Astro.locals.user) {
 </Layout>
 
 <script>
+  import { IDENTITY_DASHBOARD_URL, IDENTITY_SIGNUP_URL } from "../lib/identity";
   import {
     getEmailStepCopy,
     getNameStepCopy,
@@ -390,27 +391,28 @@ if (Astro.locals.user) {
     }
 
     try {
-      const response = await fetch("/api/signup", {
+      // Identity sets the session cookie on `.southbag.cc`, so the browser
+      // can talk to it directly; `include` is what lets that cookie land.
+      const response = await fetch(IDENTITY_SIGNUP_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "same-origin",
+        credentials: "include",
         body: JSON.stringify({
+          name: data.name,
           email: data.email,
           password: data.password,
         }),
       });
 
-      const payload = (await response.json().catch(() => null)) as {
-        redirect?: string;
-        error?: string;
-      } | null;
-
       if (!response.ok) {
-        showError(payload?.error ?? "Account creation failed.");
+        const payload = (await response.json().catch(() => null)) as {
+          message?: string;
+        } | null;
+        showError(payload?.message ?? "Account creation failed.");
         return;
       }
 
-      window.location.href = payload?.redirect ?? "https://identity.southbag.cc/home";
+      window.location.href = IDENTITY_DASHBOARD_URL;
     } catch {
       showError("Unable to reach the registration service. Please try again.");
     } finally {
