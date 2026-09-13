@@ -1,11 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { IDENTITY_DASHBOARD_URL } from "../lib/identity";
+import { parseOnboardingFlow } from "../lib/onboarding-flows";
 import { PAGE_SEO } from "../lib/seo";
 
-if (Astro.locals.user) {
-  return Astro.redirect(IDENTITY_DASHBOARD_URL);
-}
+// Signed-in visitors are redirected by the middleware before we get here.
+const flow = parseOnboardingFlow(Astro.url.searchParams.get("flow"));
+const isSlackBanking = flow === "slack-banking";
 ---
 
 <Layout
@@ -16,11 +16,14 @@ if (Astro.locals.user) {
 >
   <section class="onboarding sb-grid-bg">
     <div class="onboarding-inner sb-container">
-      <div class="onboarding-card">
+      <div class="onboarding-card" data-flow={flow}>
         <div class="onboarding-meta">
-          <span class="sb-section-label">Account Registration</span>
+          <span class="sb-section-label">
+            {isSlackBanking ? "Slack Account Linking" : "Account Registration"}
+          </span>
           <p class="onboarding-progress">
-            Step <span id="stepCurrent">1</span> of <span id="stepTotal">4</span>
+            Step <span id="stepCurrent">1</span> of <span id="stepTotal">4</span
+            >
           </p>
         </div>
 
@@ -30,19 +33,95 @@ if (Astro.locals.user) {
 
         <p class="onboarding-error" id="formError" hidden></p>
 
-        <div class="onboarding-step is-active" data-step="0">
+        <div class="onboarding-step" data-step="account">
+          <h1 class="onboarding-title sb-display">Link Slack to Southbag</h1>
+          <p class="onboarding-copy">
+            Banking has requested access to your Slack identity. Before the
+            handshake can proceed, Kevin needs to know whether you are already
+            on file. Do you already have a Southbag account?
+          </p>
+          <div class="onboarding-actions">
+            <button
+              type="button"
+              class="sb-btn sb-btn-primary"
+              data-action="has-account"
+            >
+              Yes, sign me in
+            </button>
+            <button
+              type="button"
+              class="sb-btn sb-btn-ghost"
+              data-action="no-account"
+            >
+              No, create one
+            </button>
+          </div>
+        </div>
+
+        <div class="onboarding-step" data-step="signin">
+          <h1 class="onboarding-title sb-display">Sign in</h1>
+          <p class="onboarding-copy">
+            Enter your Southbag Identity credentials. You will be handed to
+            Banking, then to Slack. Kevin will be copied on all of it.
+          </p>
+          <label class="onboarding-field">
+            <span class="onboarding-field-label">Email address</span>
+            <input
+              type="email"
+              name="email"
+              id="signinEmailInput"
+              autocomplete="username"
+              placeholder="you@example.com"
+              required
+            />
+          </label>
+          <label class="onboarding-field">
+            <span class="onboarding-field-label">Password</span>
+            <input
+              type="password"
+              name="password"
+              id="signinPasswordInput"
+              autocomplete="current-password"
+              placeholder="Enter password"
+              required
+            />
+          </label>
+          <div class="onboarding-actions">
+            <button
+              type="button"
+              class="sb-btn sb-btn-ghost"
+              data-action="back"
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              class="sb-btn sb-btn-primary"
+              id="signinButton"
+              data-action="signin"
+            >
+              Sign In &amp; Continue to Slack
+            </button>
+          </div>
+        </div>
+
+        <div class="onboarding-step" data-step="welcome">
           <h1 class="onboarding-title sb-display">Welcome to Southbag</h1>
           <p class="onboarding-copy">
-            You are beginning a registration process for institutional
-            services. Your account will be provisioned under standard Southbag
-            access policies. Continued enrollment constitutes acceptance.
+            You are beginning a registration process for institutional services.
+            Your account will be provisioned under standard Southbag access
+            policies. Continued enrollment constitutes acceptance.
           </p>
-          <button type="button" class="sb-btn sb-btn-primary" data-action="next">
+          <button
+            type="button"
+            class="sb-btn sb-btn-primary"
+            data-action="next"
+          >
             Continue
           </button>
         </div>
 
-        <div class="onboarding-step" data-step="1">
+        <div class="onboarding-step" data-step="name">
           <h1 class="onboarding-title sb-display">Your name</h1>
           <p class="onboarding-copy">
             Provide the name you would like us to use during this registration
@@ -60,16 +139,24 @@ if (Astro.locals.user) {
             />
           </label>
           <div class="onboarding-actions">
-            <button type="button" class="sb-btn sb-btn-ghost" data-action="back">
+            <button
+              type="button"
+              class="sb-btn sb-btn-ghost"
+              data-action="back"
+            >
               Back
             </button>
-            <button type="button" class="sb-btn sb-btn-primary" data-action="next">
+            <button
+              type="button"
+              class="sb-btn sb-btn-primary"
+              data-action="next"
+            >
               Continue
             </button>
           </div>
         </div>
 
-        <div class="onboarding-step" data-step="2">
+        <div class="onboarding-step" data-step="email">
           <h1 class="onboarding-title sb-display" id="emailTitle">
             Your email
           </h1>
@@ -88,16 +175,24 @@ if (Astro.locals.user) {
             />
           </label>
           <div class="onboarding-actions">
-            <button type="button" class="sb-btn sb-btn-ghost" data-action="back">
+            <button
+              type="button"
+              class="sb-btn sb-btn-ghost"
+              data-action="back"
+            >
               Back
             </button>
-            <button type="button" class="sb-btn sb-btn-primary" data-action="next">
+            <button
+              type="button"
+              class="sb-btn sb-btn-primary"
+              data-action="next"
+            >
               Continue
             </button>
           </div>
         </div>
 
-        <div class="onboarding-step" data-step="3">
+        <div class="onboarding-step" data-step="password">
           <h1 class="onboarding-title sb-display">Set a password</h1>
           <p class="onboarding-copy">
             Choose a password for your account. Minimum 8 characters.
@@ -115,7 +210,11 @@ if (Astro.locals.user) {
             />
           </label>
           <div class="onboarding-actions">
-            <button type="button" class="sb-btn sb-btn-ghost" data-action="back">
+            <button
+              type="button"
+              class="sb-btn sb-btn-ghost"
+              data-action="back"
+            >
               Back
             </button>
             <button
@@ -131,15 +230,18 @@ if (Astro.locals.user) {
       </div>
 
       <p class="onboarding-footnote sb-code">
-        By creating an account, you agree to all Southbag terms, policies, and
-        data retention schedules.
+        {
+          isSlackBanking
+            ? "By linking Slack, you agree that everything the Slack bot remembers about you may overwrite your Banking record. Kevin has already agreed on your behalf."
+            : "By creating an account, you agree to all Southbag terms, policies, and data retention schedules."
+        }
       </p>
     </div>
   </section>
 </Layout>
 
 <script>
-  import { IDENTITY_DASHBOARD_URL, IDENTITY_SIGNUP_URL } from "../lib/identity";
+  import { IDENTITY_SIGNIN_URL, IDENTITY_SIGNUP_URL } from "../lib/identity";
   import {
     getEmailStepCopy,
     getNameStepCopy,
@@ -148,9 +250,43 @@ if (Astro.locals.user) {
     isKevinEscalated,
     type OnboardingField,
   } from "../lib/onboarding-kevin";
+  import {
+    getOnboardingDestination,
+    parseOnboardingFlow,
+  } from "../lib/onboarding-flows";
 
-  const steps = Array.from(document.querySelectorAll(".onboarding-step"));
+  type StepName =
+    "account" | "signin" | "welcome" | "name" | "email" | "password";
+
+  const card = document.querySelector<HTMLElement>(".onboarding-card");
+  const flow = parseOnboardingFlow(card?.dataset.flow ?? null);
+  const destination = getOnboardingDestination(flow);
+
+  // Which panels show, and in what order, depends on the flow. The Slack flow
+  // opens with a fork ("do you already have an account?") and only settles on
+  // its full sequence once the visitor picks a branch.
+  const REGISTER_STEPS: StepName[] = ["name", "email", "password"];
+  const SEQUENCES = {
+    default: ["welcome", ...REGISTER_STEPS] as StepName[],
+    slackChoice: ["account"] as StepName[],
+    slackSignIn: ["account", "signin"] as StepName[],
+    slackRegister: ["account", ...REGISTER_STEPS] as StepName[],
+  };
+
+  let sequence: StepName[] =
+    flow === "slack-banking" ? SEQUENCES.slackChoice : SEQUENCES.default;
+  let currentIndex = 0;
+  let isSubmitting = false;
+
+  const stepPanels = new Map<StepName, HTMLElement>();
+  for (const panel of document.querySelectorAll<HTMLElement>(
+    ".onboarding-step",
+  )) {
+    stepPanels.set(panel.dataset.step as StepName, panel);
+  }
+
   const stepCurrent = document.getElementById("stepCurrent");
+  const stepTotal = document.getElementById("stepTotal");
   const progressFill = document.getElementById("progressFill");
   const formError = document.getElementById("formError");
   const nameInput = document.getElementById("nameInput") as HTMLInputElement;
@@ -158,21 +294,28 @@ if (Astro.locals.user) {
   const passwordInput = document.getElementById(
     "passwordInput",
   ) as HTMLInputElement;
+  const signinEmailInput = document.getElementById(
+    "signinEmailInput",
+  ) as HTMLInputElement;
+  const signinPasswordInput = document.getElementById(
+    "signinPasswordInput",
+  ) as HTMLInputElement;
   const emailTitle = document.getElementById("emailTitle");
   const emailCopy = document.getElementById("emailCopy");
   const nameTitle = document.querySelector(
-    '.onboarding-step[data-step="1"] .onboarding-title',
+    '.onboarding-step[data-step="name"] .onboarding-title',
   );
   const nameCopy = document.querySelector(
-    '.onboarding-step[data-step="1"] .onboarding-copy',
+    '.onboarding-step[data-step="name"] .onboarding-copy',
   );
   const passwordTitle = document.querySelector(
-    '.onboarding-step[data-step="3"] .onboarding-title',
+    '.onboarding-step[data-step="password"] .onboarding-title',
   );
   const passwordCopy = document.querySelector(
-    '.onboarding-step[data-step="3"] .onboarding-copy',
+    '.onboarding-step[data-step="password"] .onboarding-copy',
   );
   const submitButton = document.getElementById("submitButton");
+  const signinButton = document.getElementById("signinButton");
 
   const data = {
     name: "",
@@ -209,8 +352,7 @@ if (Astro.locals.user) {
     passwordShort: 0,
   };
 
-  let currentStep = 0;
-  let isSubmitting = false;
+  const currentStep = (): StepName => sequence[currentIndex];
 
   const hideError = () => {
     if (!formError) return;
@@ -287,28 +429,54 @@ if (Astro.locals.user) {
   };
 
   const updateStep = () => {
-    steps.forEach((step, index) => {
-      step.classList.toggle("is-active", index === currentStep);
-    });
+    const active = currentStep();
+    for (const [name, panel] of stepPanels) {
+      panel.classList.toggle("is-active", name === active);
+    }
 
     if (stepCurrent) {
-      stepCurrent.textContent = String(currentStep + 1);
+      stepCurrent.textContent = String(currentIndex + 1);
+    }
+
+    // The fork step does not know its total yet; assume the longer branch.
+    const total =
+      sequence === SEQUENCES.slackChoice
+        ? SEQUENCES.slackRegister.length
+        : sequence.length;
+    if (stepTotal) {
+      stepTotal.textContent = String(total);
     }
 
     if (progressFill) {
-      progressFill.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
+      progressFill.style.width = `${((currentIndex + 1) / total) * 100}%`;
     }
 
     hideError();
 
-    const activeInput = steps[currentStep]?.querySelector(
-      "input",
-    ) as HTMLInputElement | null;
+    const activeInput = stepPanels
+      .get(active)
+      ?.querySelector("input") as HTMLInputElement | null;
     activeInput?.focus();
   };
 
+  const validateEmailField = (input: HTMLInputElement) => {
+    const value = input.value.trim();
+    if (!value) {
+      input.focus();
+      return failValidation("email");
+    }
+    if (!input.checkValidity()) {
+      input.focus();
+      return failValidation("emailInvalid");
+    }
+    resetValidationFailures("email", "emailInvalid");
+    return true;
+  };
+
   const validateStep = () => {
-    if (currentStep === 1) {
+    const step = currentStep();
+
+    if (step === "name") {
       data.name = nameInput?.value.trim() ?? "";
       if (!data.name) {
         nameInput?.focus();
@@ -317,20 +485,12 @@ if (Astro.locals.user) {
       resetValidationFailures("name");
     }
 
-    if (currentStep === 2) {
-      data.email = emailInput?.value.trim() ?? "";
-      if (!data.email) {
-        emailInput?.focus();
-        return failValidation("email");
-      }
-      if (!emailInput?.checkValidity()) {
-        emailInput?.focus();
-        return failValidation("emailInvalid");
-      }
-      resetValidationFailures("email", "emailInvalid");
+    if (step === "email") {
+      if (!validateEmailField(emailInput)) return false;
+      data.email = emailInput.value.trim();
     }
 
-    if (currentStep === 3) {
+    if (step === "password") {
       data.password = passwordInput?.value ?? "";
       if (!data.password) {
         passwordInput?.focus();
@@ -341,6 +501,15 @@ if (Astro.locals.user) {
         return failValidation("passwordShort");
       }
       resetValidationFailures("password", "passwordShort");
+    }
+
+    if (step === "signin") {
+      if (!validateEmailField(signinEmailInput)) return false;
+      if (!signinPasswordInput?.value) {
+        signinPasswordInput?.focus();
+        return failValidation("password");
+      }
+      resetValidationFailures("password");
     }
 
     return true;
@@ -363,20 +532,50 @@ if (Astro.locals.user) {
   const goNext = () => {
     if (!validateStep()) return;
 
-    if (currentStep === 1) {
+    if (currentStep() === "name") {
       personalizeEmailStep();
     }
 
-    if (currentStep < steps.length - 1) {
-      currentStep += 1;
+    if (currentIndex < sequence.length - 1) {
+      currentIndex += 1;
       updateStep();
     }
   };
 
   const goBack = () => {
-    if (currentStep === 0) return;
-    currentStep -= 1;
+    if (currentIndex === 0) return;
+    currentIndex -= 1;
+    // Stepping back to the fork re-opens the choice.
+    if (currentStep() === "account") {
+      sequence = SEQUENCES.slackChoice;
+    }
     updateStep();
+  };
+
+  const chooseBranch = (branch: "signin" | "register") => {
+    sequence =
+      branch === "signin" ? SEQUENCES.slackSignIn : SEQUENCES.slackRegister;
+    currentIndex = 1;
+    updateStep();
+  };
+
+  const setBusy = (button: HTMLElement | null, label: string | null) => {
+    if (!button) return;
+    if (label) {
+      button.dataset.idleLabel ??= button.textContent ?? "";
+      button.textContent = label;
+      button.setAttribute("disabled", "true");
+    } else {
+      button.textContent = button.dataset.idleLabel ?? button.textContent;
+      button.removeAttribute("disabled");
+    }
+  };
+
+  const readErrorMessage = async (response: Response) => {
+    const payload = (await response.json().catch(() => null)) as {
+      message?: string;
+    } | null;
+    return payload?.message;
   };
 
   const submitSignup = async () => {
@@ -384,11 +583,7 @@ if (Astro.locals.user) {
 
     isSubmitting = true;
     hideError();
-
-    if (submitButton) {
-      submitButton.textContent = "Creating Account...";
-      submitButton.setAttribute("disabled", "true");
-    }
+    setBusy(submitButton, "Creating Account...");
 
     try {
       // Identity sets the session cookie on `.southbag.cc`, so the browser
@@ -405,57 +600,106 @@ if (Astro.locals.user) {
       });
 
       if (!response.ok) {
-        const payload = (await response.json().catch(() => null)) as {
-          message?: string;
-        } | null;
-        showError(payload?.message ?? "Account creation failed.");
+        showError(
+          (await readErrorMessage(response)) ?? "Account creation failed.",
+        );
         return;
       }
 
-      window.location.href = IDENTITY_DASHBOARD_URL;
+      // Default flow lands on the Identity dashboard; the Slack flow hands the
+      // fresh session to Banking, which then starts the Slack handshake.
+      window.location.href = destination;
     } catch {
       showError("Unable to reach the registration service. Please try again.");
     } finally {
       isSubmitting = false;
-      if (submitButton) {
-        submitButton.textContent = "Create Account";
-        submitButton.removeAttribute("disabled");
-      }
+      setBusy(submitButton, null);
     }
   };
 
-  document.querySelector(".onboarding-card")?.addEventListener("click", (event) => {
+  const submitSignin = async () => {
+    if (isSubmitting || !validateStep()) return;
+
+    isSubmitting = true;
+    hideError();
+    setBusy(signinButton, "Signing In...");
+
+    try {
+      const response = await fetch(IDENTITY_SIGNIN_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          email: signinEmailInput.value.trim(),
+          password: signinPasswordInput.value,
+        }),
+      });
+
+      if (!response.ok) {
+        showError(
+          (await readErrorMessage(response)) ??
+            "Sign in failed. Kevin noted it.",
+        );
+        return;
+      }
+
+      // Accounts with 2FA get a partial session here; Banking's Identity login
+      // hop finishes the challenge on identity.southbag.cc before continuing.
+      window.location.href = destination;
+    } catch {
+      showError("Unable to reach the identity service. Please try again.");
+    } finally {
+      isSubmitting = false;
+      setBusy(signinButton, null);
+    }
+  };
+
+  const submitCurrentStep = () => {
+    const step = currentStep();
+    if (step === "signin") {
+      submitSignin();
+    } else if (step === "password") {
+      submitSignup();
+    } else {
+      goNext();
+    }
+  };
+
+  card?.addEventListener("click", (event) => {
     const target = event.target as HTMLElement;
     const action = target.closest("[data-action]") as HTMLElement | null;
     if (!action) return;
 
-    if (action.dataset.action === "next") {
-      goNext();
-    }
-
-    if (action.dataset.action === "back") {
-      goBack();
-    }
-
-    if (action.dataset.action === "submit") {
-      submitSignup();
+    switch (action.dataset.action) {
+      case "next":
+        goNext();
+        break;
+      case "back":
+        goBack();
+        break;
+      case "submit":
+        submitSignup();
+        break;
+      case "signin":
+        submitSignin();
+        break;
+      case "has-account":
+        chooseBranch("signin");
+        break;
+      case "no-account":
+        chooseBranch("register");
+        break;
     }
   });
 
-  document.querySelector(".onboarding-card")?.addEventListener("keydown", (event) => {
+  card?.addEventListener("keydown", (event) => {
     if (event.key !== "Enter") return;
 
     const target = event.target as HTMLElement;
     if (target.tagName !== "INPUT") return;
 
     event.preventDefault();
-
-    if (currentStep === steps.length - 1) {
-      submitSignup();
-      return;
-    }
-
-    goNext();
+    submitCurrentStep();
   });
 
   updateStep();

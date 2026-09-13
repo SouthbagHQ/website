@@ -3,6 +3,7 @@ export const IDENTITY_LOGIN_URL = `${IDENTITY_ORIGIN}/login`;
 export const IDENTITY_DASHBOARD_URL = `${IDENTITY_ORIGIN}/home`;
 export const IDENTITY_SESSION_URL = `${IDENTITY_ORIGIN}/api/auth/get-session`;
 export const IDENTITY_SIGNUP_URL = `${IDENTITY_ORIGIN}/api/auth/sign-up/email`;
+export const IDENTITY_SIGNIN_URL = `${IDENTITY_ORIGIN}/api/auth/sign-in/email`;
 
 export type IdentityUser = {
   id: string;
