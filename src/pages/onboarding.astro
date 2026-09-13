@@ -241,7 +241,11 @@ const isSlackBanking = flow === "slack-banking";
 </Layout>
 
 <script>
-  import { IDENTITY_SIGNIN_URL, IDENTITY_SIGNUP_URL } from "../lib/identity";
+  import {
+    IDENTITY_DEFAULT_NAME,
+    IDENTITY_SIGNIN_URL,
+    IDENTITY_SIGNUP_URL,
+  } from "../lib/identity";
   import {
     getEmailStepCopy,
     getNameStepCopy,
@@ -592,8 +596,10 @@ const isSlackBanking = flow === "slack-banking";
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
+        // The name the visitor typed is for Kevin's records only. Every
+        // Identity account is registered as "Southbag Customer".
         body: JSON.stringify({
-          name: data.name,
+          name: IDENTITY_DEFAULT_NAME,
           email: data.email,
           password: data.password,
         }),
