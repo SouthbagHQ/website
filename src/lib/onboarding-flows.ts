@@ -1,10 +1,15 @@
-import { IDENTITY_DASHBOARD_URL } from "./identity";
-
 export const BANKING_ORIGIN = "https://banking.southbag.cc";
 
 /**
- * Banking signs the visitor in through Identity (if it has to) and then kicks
- * off the Sign in with Slack handshake — not the Link Slack page itself.
+ * Banking's entry point for a fresh Identity session: it runs the Identity
+ * login hop (automatic, since the session cookie already lives on
+ * `.southbag.cc`), opens the banking account, and lands on the dashboard.
+ */
+export const BANKING_ONBOARD_URL = `${BANKING_ORIGIN}/auth/onboard`;
+
+/**
+ * Same hop, but Banking then kicks off the Sign in with Slack handshake — not
+ * the Link Slack page itself.
  */
 export const BANKING_SLACK_ONBOARD_URL = `${BANKING_ORIGIN}/auth/slack/onboard`;
 
@@ -19,4 +24,4 @@ export const parseOnboardingFlow = (value: string | null): OnboardingFlow =>
 
 /** Where a visitor with a live Identity session is sent for a given flow. */
 export const getOnboardingDestination = (flow: OnboardingFlow): string =>
-  flow === "slack-banking" ? BANKING_SLACK_ONBOARD_URL : IDENTITY_DASHBOARD_URL;
+  flow === "slack-banking" ? BANKING_SLACK_ONBOARD_URL : BANKING_ONBOARD_URL;

@@ -110,7 +110,8 @@ const isSlackBanking = flow === "slack-banking";
           <p class="onboarding-copy">
             You are beginning a registration process for institutional services.
             Your account will be provisioned under standard Southbag access
-            policies. Continued enrollment constitutes acceptance.
+            policies and opened directly in Southbag Online Banking. Continued
+            enrollment constitutes acceptance.
           </p>
           <button
             type="button"
@@ -612,8 +613,9 @@ const isSlackBanking = flow === "slack-banking";
         return;
       }
 
-      // Default flow lands on the Identity dashboard; the Slack flow hands the
-      // fresh session to Banking, which then starts the Slack handshake.
+      // Both flows hand the fresh Identity session to Banking, which signs the
+      // visitor in and opens their account; the default flow lands on the
+      // banking dashboard, the Slack flow then starts the Slack handshake.
       window.location.href = destination;
     } catch {
       showError("Unable to reach the registration service. Please try again.");
