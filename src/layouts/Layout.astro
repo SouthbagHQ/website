@@ -53,7 +53,7 @@ const pathname = Astro.url.pathname;
     />
     <Palantir />
   </head>
-  <body>
+  <body data-page={currentPage}>
     <a class="sb-skip-link" href="#main-content">Skip to main content</a>
     <Nav currentPage={currentPage} user={Astro.locals.user} />
     <main id="main-content">
@@ -62,6 +62,90 @@ const pathname = Astro.url.pathname;
     {!hideFooter && <Footer />}
   </body>
 </html>
+
+<script>
+  // Site-wide click tracking for Palantir (PostHog). Autocapture already
+  // records raw clicks; these events add the parts a raw click loses: which
+  // area of the page the link sat in, which Southbag product it points at,
+  // and whether it left the site.
+  type Props = Record<string, unknown>;
+
+  const capture = (event: string, props: Props) => {
+    // Links navigate away immediately, so the event is sent straight away
+    // (beacon) rather than sitting in the batch queue.
+    window.posthog?.capture(event, props, { send_instantly: true });
+  };
+
+  const areaOf = (el: Element) => {
+    if (el.closest(".sb-nav")) return "nav";
+    if (el.closest("footer")) return "footer";
+    if (el.closest(".breadcrumb")) return "breadcrumb";
+    if (el.closest(".onboarding")) return "onboarding";
+    if (el.closest(".hero, .sb-hero")) return "hero";
+    if (el.closest(".pillars-section")) return "pillars";
+    if (el.closest(".news-card")) return "news";
+    if (el.closest(".kevin-panel, .sb-kevin")) return "kevin";
+    return "main";
+  };
+
+  const productOf = (url: URL) => {
+    const host = url.hostname;
+    if (host === "southbag.cc" || host === "www.southbag.cc" || host === location.hostname) return null;
+    if (host.endsWith(".southbag.cc")) return host.replace(".southbag.cc", "");
+    return null;
+  };
+
+  document.addEventListener("click", (event) => {
+    const target = event.target as Element | null;
+    const link = target?.closest("a[href]") as HTMLAnchorElement | null;
+    if (!link) return;
+
+    let url: URL;
+    try {
+      url = new URL(link.href, location.href);
+    } catch {
+      return;
+    }
+
+    const props: Props = {
+      href: link.getAttribute("href"),
+      text: (link.textContent ?? "").trim().slice(0, 80),
+      area: areaOf(link),
+      external: url.origin !== location.origin,
+      product: productOf(url),
+      is_button: link.classList.contains("sb-btn"),
+    };
+
+    if (link.classList.contains("pillar-card")) {
+      capture("website_pillar_click", { ...props, pillar: url.pathname.replace("/", "") });
+    } else if (link.classList.contains("news-card-link")) {
+      capture("website_news_post_opened", { ...props, slug: url.pathname.split("/").pop() });
+    } else if (link.getAttribute("href") === "/onboarding") {
+      capture("website_get_started_click", props);
+    } else if (url.hostname === "identity.southbag.cc") {
+      capture(
+        url.pathname.startsWith("/login") ? "website_sign_in_click" : "website_dashboard_click",
+        props,
+      );
+    } else if (link.getAttribute("href") === "#") {
+      capture("website_dead_link_click", props);
+    }
+    capture("website_link_click", props);
+  });
+
+  document.addEventListener("click", (event) => {
+    const card = (event.target as Element | null)?.closest(".sb-product-card");
+    if (!card) return;
+    capture("website_product_card_click", {
+      product: card.querySelector(".sb-card-name")?.textContent?.trim(),
+      page: location.pathname,
+    });
+  });
+
+  if (document.body.dataset.page === "404") {
+    window.posthog?.capture("website_404_viewed", { path: location.pathname, referrer: document.referrer });
+  }
+</script>
 
 <style is:global>
   .sb-skip-link {

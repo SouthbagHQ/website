@@ -134,6 +134,9 @@ const navLinks = [
   btn?.addEventListener("click", () => {
     menu?.classList.toggle("is-open");
     btn.classList.toggle("is-open");
+    window.palantir?.capture("website_mobile_menu_toggle", {
+      open: menu?.classList.contains("is-open") ?? false,
+    });
   });
 </script>
 

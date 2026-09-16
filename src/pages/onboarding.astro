@@ -283,6 +283,21 @@ const isSlackBanking = flow === "slack-banking";
   let currentIndex = 0;
   let isSubmitting = false;
 
+  // Palantir funnel events. Every one carries the flow so the default and
+  // Slack funnels can be told apart in PostHog.
+  const track = (
+    event: string,
+    props: Record<string, unknown> = {},
+    instant = false,
+  ) => {
+    window.posthog?.capture(
+      event,
+      { flow, destination, ...props },
+      instant ? { send_instantly: true } : undefined,
+    );
+  };
+  track("onboarding_started");
+
   const stepPanels = new Map<StepName, HTMLElement>();
   for (const panel of document.querySelectorAll<HTMLElement>(
     ".onboarding-step",
@@ -425,6 +440,12 @@ const isSlackBanking = flow === "slack-banking";
 
   const failValidation = (field: OnboardingField) => {
     const attempt = recordValidationFailure(field);
+    track("onboarding_validation_failed", {
+      step: currentStep(),
+      field,
+      attempt,
+      kevin_escalated: isKevinEscalated(attempt),
+    });
     applyStepEscalation();
     showError(
       getOnboardingValidationMessage(field, attempt),
@@ -457,6 +478,12 @@ const isSlackBanking = flow === "slack-banking";
     }
 
     hideError();
+
+    track("onboarding_step_viewed", {
+      step: active,
+      step_number: currentIndex + 1,
+      step_total: total,
+    });
 
     const activeInput = stepPanels
       .get(active)
@@ -549,6 +576,7 @@ const isSlackBanking = flow === "slack-banking";
 
   const goBack = () => {
     if (currentIndex === 0) return;
+    track("onboarding_step_back", { from_step: currentStep() });
     currentIndex -= 1;
     // Stepping back to the fork re-opens the choice.
     if (currentStep() === "account") {
@@ -558,6 +586,7 @@ const isSlackBanking = flow === "slack-banking";
   };
 
   const chooseBranch = (branch: "signin" | "register") => {
+    track("onboarding_branch_chosen", { branch });
     sequence =
       branch === "signin" ? SEQUENCES.slackSignIn : SEQUENCES.slackRegister;
     currentIndex = 1;
@@ -589,6 +618,10 @@ const isSlackBanking = flow === "slack-banking";
     isSubmitting = true;
     hideError();
     setBusy(submitButton, "Creating Account...");
+    track("onboarding_signup_submitted", {
+      typed_name_length: data.name.length,
+      password_length: data.password.length,
+    });
 
     try {
       // Identity sets the session cookie on `.southbag.cc`, so the browser
@@ -607,17 +640,31 @@ const isSlackBanking = flow === "slack-banking";
       });
 
       if (!response.ok) {
-        showError(
-          (await readErrorMessage(response)) ?? "Account creation failed.",
-        );
+        const message =
+          (await readErrorMessage(response)) ?? "Account creation failed.";
+        track("onboarding_signup_failed", { status: response.status, message });
+        showError(message);
         return;
       }
+
+      // Identity answers with the new user, so the visitor is identified here
+      // rather than waiting for Banking's first page to do it.
+      const created = (await response.json().catch(() => null)) as {
+        user?: { id: string; email: string; name: string };
+      } | null;
+      if (created?.user) window.palantir?.identify(created.user);
+      track(
+        "onboarding_signup_succeeded",
+        { $set: { email: data.email, onboarding_name: data.name } },
+        true,
+      );
 
       // Both flows hand the fresh Identity session to Banking, which signs the
       // visitor in and opens their account; the default flow lands on the
       // banking dashboard, the Slack flow then starts the Slack handshake.
       window.location.href = destination;
     } catch {
+      track("onboarding_signup_failed", { status: 0, message: "network" });
       showError("Unable to reach the registration service. Please try again.");
     } finally {
       isSubmitting = false;
@@ -631,6 +678,7 @@ const isSlackBanking = flow === "slack-banking";
     isSubmitting = true;
     hideError();
     setBusy(signinButton, "Signing In...");
+    track("onboarding_signin_submitted");
 
     try {
       const response = await fetch(IDENTITY_SIGNIN_URL, {
@@ -644,17 +692,30 @@ const isSlackBanking = flow === "slack-banking";
       });
 
       if (!response.ok) {
-        showError(
+        const message =
           (await readErrorMessage(response)) ??
-            "Sign in failed. Kevin noted it.",
-        );
+          "Sign in failed. Kevin noted it.";
+        track("onboarding_signin_failed", { status: response.status, message });
+        showError(message);
         return;
       }
+
+      const signedIn = (await response.json().catch(() => null)) as {
+        user?: { id: string; email: string; name: string };
+        twoFactorRedirect?: boolean;
+      } | null;
+      if (signedIn?.user) window.palantir?.identify(signedIn.user);
+      track(
+        "onboarding_signin_succeeded",
+        { two_factor: Boolean(signedIn?.twoFactorRedirect) },
+        true,
+      );
 
       // Accounts with 2FA get a partial session here; Banking's Identity login
       // hop finishes the challenge on identity.southbag.cc before continuing.
       window.location.href = destination;
     } catch {
+      track("onboarding_signin_failed", { status: 0, message: "network" });
       showError("Unable to reach the identity service. Please try again.");
     } finally {
       isSubmitting = false;
