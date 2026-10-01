@@ -4,36 +4,36 @@ description: "Southbag launches its social network for account holders. Posts ar
 pubDate: 2026-10-01
 ---
 
-Southbag Institutional Services Ltd. announces **Southbag Social**, a social network for Southbag account holders. It is available now at social.southbag.cc. Sign-in is handled by Southbag Identity. An existing Southbag account is all that is required. You already have one.
+Southbag Institutional Services Ltd. announces **Southbag Social**, a social network for Southbag account holders. It is available now at social.southbag.cc. Sign in with Southbag Identity. You already have an account.
 
-## One network
+## Your feed
 
-Southbag Social brings together the services account holders previously had to find elsewhere: posts, photos, videos, shorts and stories; groups, communities and servers; events, podcasts and music; jobs, a marketplace, boards and a wiki. Messages are available to signed-in account holders. Dating is also available to signed-in account holders.
+Southbag Social opens on a feed of posts from the people you follow. Stories sit at the top. Post text, photos, videos and polls, then react, reply, repost and bookmark what others share. Every account has a profile, a wall and a pinned post.
 
-The interface follows the Southbag design standard. Every control is labelled in words. Help is available from three places in the sidebar. Two of them are called Support.
+## Everything else
 
-## Permanence
+The sidebar holds the rest of Southbag Social: photos, videos and shorts; groups, communities and servers; events, podcasts and music; jobs, the marketplace, boards and the wiki. Signed-in account holders also have messages, dating, notifications and friends.
 
-Content published on Southbag Social cannot be deleted. This applies to posts, comments, messages, listings, boards, wiki pages and servers. Delete buttons remain in place as a courtesy.
+## Kept
 
-Community moderators may hide posts and comments from public view. Hidden content remains visible to moderators and to its author. It is not deleted.
+Everything you share on Southbag Social is kept. Posts, comments, messages, photos, listings, boards and wiki pages remain on Southbag Social. In communities, moderators can hide posts and comments from public view.
 
-Account holders may review what Southbag Social keeps at any time from the Your data page, and their own actions from the Activity log. The count of deleted items is zero.
+Your data shows what Southbag Social holds about you. The Activity log lists everything you have done, newest first.
 
-## Payments
+## Send money
 
-Southbag Social is integrated with Southbag Online Banking. Account holders may send money to one another from a profile, a conversation or the Payments page. Transfers are processed by Southbag Online Banking at its standard rates, which are applied to the sender. Payments are final.
+Southbag Social is connected to Southbag Online Banking. Choose **Send money** on a profile or in a conversation, enter an amount and a note, and the money is on its way. The payment appears in your conversation for both of you to see. Your Southbag Online Banking balance is shown in the sidebar.
 
-Account holders without a Southbag Online Banking account will have one opened for them.
+Transfers are processed by Southbag Online Banking at its standard rates, paid by the sender. Payments are final. Account holders without a Southbag Online Banking account will have one opened for them.
 
 ## Southbag Verified
 
-Southbag Verified places the word "Verified" beside an account holder's name. It costs $8.00 every 30 days, taken directly from the account holder's Southbag Online Banking account. There is no confirmation step. Subscribing is the confirmation.
+Southbag Verified places the word "Verified" beside your name on your profile, posts and comments. It costs $8.00 every 30 days, taken directly from your Southbag Online Banking account.
 
 ## Account standing
 
-Every account holder may view their account standing from the sidebar. At launch, every account exists.
+Account standing is available from the sidebar. It confirms that your account exists.
 
 ## Availability
 
-Southbag Social is available now at [social.southbag.cc](https://social.southbag.cc/). Questions may be directed to Kevin, or to either Support. Response times are not guaranteed. Kevin is watching.
+Southbag Social is available now at [social.southbag.cc](https://social.southbag.cc/). Questions may be directed to Kevin. Response times are not guaranteed. Kevin is watching.
