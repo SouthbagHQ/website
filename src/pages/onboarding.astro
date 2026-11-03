@@ -630,10 +630,11 @@ const isSlackBanking = flow === "slack-banking";
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        // The name the visitor typed is for Kevin's records only. Every
-        // Identity account is registered as "Southbag Customer".
+        // The name the visitor typed follows them into Identity and every
+        // Southbag service behind it. Skipping the name step still earns the
+        // standard issue "Southbag Customer".
         body: JSON.stringify({
-          name: IDENTITY_DEFAULT_NAME,
+          name: data.name || IDENTITY_DEFAULT_NAME,
           email: data.email,
           password: data.password,
         }),
