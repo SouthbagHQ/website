@@ -4,7 +4,7 @@ export const IDENTITY_DASHBOARD_URL = `${IDENTITY_ORIGIN}/home`;
 export const IDENTITY_SESSION_URL = `${IDENTITY_ORIGIN}/api/auth/get-session`;
 export const IDENTITY_SIGNUP_URL = `${IDENTITY_ORIGIN}/api/auth/sign-up/email`;
 export const IDENTITY_SIGNIN_URL = `${IDENTITY_ORIGIN}/api/auth/sign-in/email`;
-/** Every account is registered under this name, matching Identity's own signup. */
+/** Fallback name when an account is registered without one of its own. */
 export const IDENTITY_DEFAULT_NAME = "Southbag Customer";
 
 export type IdentityUser = {
