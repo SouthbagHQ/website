@@ -1,0 +1,188 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {
+  getOnboardingDestination,
+  parseOnboardingFlow,
+} from "../../lib/onboarding-flows";
+import { IDENTITY_ORIGIN } from "../../lib/identity";
+import { PAGE_SEO } from "../../lib/seo";
+
+// Rendered by the middleware (via rewrite) when a signed-in visitor lands on
+// /onboarding. Identity sign-up requires a signed-out session, so instead of
+// the old silent redirect into Banking we say what is going on and offer
+// both doors: continue to the flow's destination, or sign out to register.
+const user = Astro.locals.user;
+if (!user) {
+  // Direct visit without a session: nothing to explain, back to registration.
+  return Astro.redirect("/onboarding");
+}
+
+const flow = parseOnboardingFlow(Astro.url.searchParams.get("flow"));
+const isSlackBanking = flow === "slack-banking";
+const continueUrl = getOnboardingDestination(flow);
+const signOutUrl = `${IDENTITY_ORIGIN}/api/auth/sign-out`;
+---
+
+<Layout
+  title="Already Signed In"
+  description={PAGE_SEO.onboarding.description}
+  currentPage="onboarding"
+  noindex={true}
+>
+  <section class="onboarding sb-grid-bg">
+    <div class="onboarding-inner sb-container">
+      <div class="onboarding-card" data-flow={flow}>
+        <div class="onboarding-meta">
+          <span class="sb-section-label">
+            {isSlackBanking ? "Slack Account Linking" : "Account Registration"}
+          </span>
+        </div>
+
+        <div class="onboarding-step is-active">
+          <h1 class="onboarding-title sb-display">You Are Already Signed In</h1>
+          <p class="onboarding-copy">
+            Our records show an active Southbag Identity session for{" "}
+            <strong>{user.name}</strong> ({user.email}). Account registration
+            is unavailable while signed in. Kevin insists on knowing exactly
+            who is registering, and when.
+          </p>
+          <p class="onboarding-copy">
+            {
+              isSlackBanking
+                ? "You can continue straight to the Slack linking handshake, or sign out first if you meant to register a different account."
+                : "You can continue to Online Banking, where your account has been waiting for you, or sign out to register an additional account. Additional accounts are permitted, but frowned upon."
+            }
+          </p>
+          <p class="onboarding-error" id="signOutError" hidden></p>
+          <div class="onboarding-actions">
+            <a class="sb-btn sb-btn-primary" href={continueUrl}>
+              {
+                isSlackBanking
+                  ? "Continue to Slack Linking"
+                  : "Continue to Online Banking"
+              }
+            </a>
+            <button
+              class="sb-btn sb-btn-ghost"
+              id="signOutButton"
+              type="button"
+            >
+              Sign Out &amp; Register
+            </button>
+          </div>
+        </div>
+
+        <p class="onboarding-footnote sb-code">
+          Your session is monitored for quality assurance purposes. Kevin has
+          already agreed on your behalf.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script define:vars={{ signOutUrl }}>
+  const button = document.getElementById("signOutButton");
+  const errorBox = document.getElementById("signOutError");
+
+  button?.addEventListener("click", async () => {
+    button.setAttribute("disabled", "");
+    try {
+      const response = await fetch(signOutUrl, {
+        method: "POST",
+        credentials: "include",
+      });
+      if (!response.ok) throw new Error(`sign-out failed: ${response.status}`);
+      window.location.reload();
+    } catch {
+      button.removeAttribute("disabled");
+      if (errorBox) {
+        errorBox.textContent =
+          "Sign-out could not be completed. Your session remains active, and Kevin has been notified.";
+        errorBox.hidden = false;
+      }
+    }
+  });
+</script>
+
+<style>
+  /* Scoped copy of the onboarding card styles from src/pages/onboarding.astro. */
+  .onboarding {
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    align-items: center;
+    padding: 48px 0 72px;
+  }
+
+  .onboarding-inner {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .onboarding-card {
+    background: var(--sb-card);
+    border: 1px solid var(--sb-border);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .onboarding-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .onboarding-step {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .onboarding-title {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+  }
+
+  .onboarding-copy {
+    margin: 0;
+    color: var(--sb-text-dim);
+    max-width: 46ch;
+  }
+
+  .onboarding-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .onboarding-error {
+    margin: 0;
+    padding: 12px 14px;
+    background: var(--sb-red-bg);
+    border: 1px solid var(--sb-red-border);
+    color: var(--sb-red-text);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  .onboarding-footnote {
+    margin: 16px 0 0;
+    color: var(--sb-text-dimmer);
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .onboarding {
+      padding: 32px 0 56px;
+    }
+
+    .onboarding-card {
+      padding: 24px 20px;
+    }
+  }
+</style>
