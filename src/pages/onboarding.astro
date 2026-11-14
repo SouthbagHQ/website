@@ -3,7 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import { parseOnboardingFlow } from "../lib/onboarding-flows";
 import { PAGE_SEO } from "../lib/seo";
 
-// Signed-in visitors are redirected by the middleware before we get here.
+// Signed-in visitors are rewritten to /onboarding/session by the middleware
+// before we get here.
 const flow = parseOnboardingFlow(Astro.url.searchParams.get("flow"));
 const isSlackBanking = flow === "slack-banking";
 ---
