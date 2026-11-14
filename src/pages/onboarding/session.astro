@@ -21,6 +21,9 @@ if (!user) {
 const isSlackBanking = flow === "slack-banking";
 const continueUrl = getOnboardingDestination(flow);
 const signOutUrl = `${IDENTITY_ORIGIN}/api/auth/sign-out`;
+
+// This page names the signed-in user: never let any shared cache store it.
+Astro.response.headers.set("Cache-Control", "private, no-store");
 ---
 
 <Layout

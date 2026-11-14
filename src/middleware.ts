@@ -13,7 +13,10 @@ export const onRequest = defineMiddleware(async (context, next) => {
   // `?flow=slack-banking`) or sign out to register another account.
   if (context.url.pathname === "/onboarding" && context.locals.user) {
     const flow = parseOnboardingFlow(context.url.searchParams.get("flow"));
-    return context.rewrite(`/onboarding/session?flow=${flow}`);
+    // Personalized response: never let any shared cache store it.
+    const response = await context.rewrite(`/onboarding/session?flow=${flow}`);
+    response.headers.set("Cache-Control", "private, no-store");
+    return response;
   }
 
   return next();
