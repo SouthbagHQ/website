@@ -91,6 +91,8 @@ const signOutUrl = `${IDENTITY_ORIGIN}/api/auth/sign-out`;
       const response = await fetch(signOutUrl, {
         method: "POST",
         credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: "{}",
       });
       if (!response.ok) throw new Error(`sign-out failed: ${response.status}`);
       window.location.reload();
