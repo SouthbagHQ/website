@@ -12,12 +12,12 @@ import { PAGE_SEO } from "../../lib/seo";
 // the old silent redirect into Banking we say what is going on and offer
 // both doors: continue to the flow's destination, or sign out to register.
 const user = Astro.locals.user;
+const flow = parseOnboardingFlow(Astro.url.searchParams.get("flow"));
 if (!user) {
   // Direct visit without a session: nothing to explain, back to registration.
-  return Astro.redirect("/onboarding");
+  const suffix = flow === "slack-banking" ? "?flow=slack-banking" : "";
+  return Astro.redirect(`/onboarding${suffix}`);
 }
-
-const flow = parseOnboardingFlow(Astro.url.searchParams.get("flow"));
 const isSlackBanking = flow === "slack-banking";
 const continueUrl = getOnboardingDestination(flow);
 const signOutUrl = `${IDENTITY_ORIGIN}/api/auth/sign-out`;
