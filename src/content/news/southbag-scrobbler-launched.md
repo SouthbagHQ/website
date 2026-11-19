@@ -1,18 +1,18 @@
 ---
 title: "Southbag Scrobbler: Every Track, Itemised"
-description: "Southbag launches its listening record. A fee is collected for every track you play. Kevin gets His cut."
+description: "last.fm put its API behind a paywall. Southbag recognised the business opportunity and launched Scrobbler. A fee for every track. Kevin gets His cut."
 pubDate: 2026-11-19
 ---
 
-Southbag Institutional Services Ltd. announces **Southbag Scrobbler**, the listening record of the Southbag Global Enterprise Network. It is available now at scrobbler.southbag.cc. Sign in with Southbag Identity. You already have an account.
+Southbag Institutional Services Ltd. announces **Southbag Scrobbler**, the listening record of the Southbag Global Enterprise Network. The listening site last.fm recently began charging for access to its API. Southbag reviewed the decision and recognised it for what it was: a business opportunity. Southbag Scrobbler is available now at scrobbler.southbag.cc. Sign in with Southbag Identity. You already have an account.
 
 ## Your record
 
-Every track you play is itemised and filed, permanently. Your dashboard shows your full listening history, your top artists and tracks of all time, and what is playing now. Nothing is removed. Deletion isn't available.
+Every track you play is itemised and filed, permanently. Your dashboard shows your full listening history, your top artists and tracks of all time, and what is playing now. Listening is charted by day. Nothing is removed. Deletion isn't available.
 
-## The fee
+## The fees
 
-A fee of $0.05 is collected for every track filed, directly from your Southbag Online Banking account. Fees are collected before the listen is recorded. Fees are final. Kevin gets His cut.
+A fee of $0.05 is collected for every track filed, directly from your Southbag Online Banking account, before the listen is recorded. Reading your own record back over the API costs $0.01 per request. Charts cost $0.10. Your username is free the first time and $1.00 to change. Fees are final. Kevin gets His cut.
 
 ## Your clients
 
